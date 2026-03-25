@@ -4,30 +4,30 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout title="Request Received" description="Your quote request has been received. We'll be in touch within 24 hours.">
 
-  <section class="min-h-[70vh] flex items-center justify-center px-6 py-20">
-    <div class="text-center max-w-lg">
-      <div class="w-20 h-20 rounded-full bg-[#00e5cc]/15 flex items-center justify-center mx-auto mb-8 text-4xl">
+  <section style="min-height:70vh; display:flex; align-items:center; justify-content:center; padding:4rem 1.5rem;">
+    <div style="text-align:center; max-width:36rem;">
+      <div style="width:5rem; height:5rem; border-radius:50%; background:rgba(59,154,225,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; font-size:2.5rem; color:#3B9AE1;">
         ✓
       </div>
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Request Received</p>
-      <h1 class="font-display text-4xl md:text-5xl text-gray-900 mb-4">
+      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3B9AE1; margin-bottom:0.75rem;">Request Received</p>
+      <h1 class="font-display" style="font-size:clamp(2.5rem,6vw,4rem); color:#eaeaea; margin-bottom:1rem;">
         We've got it!
       </h1>
-      <p class="text-gray-500 text-sm leading-relaxed mb-3">
+      <p style="font-size:1rem; color:#7a8090; line-height:1.65; margin-bottom:0.75rem;">
         Your quote request has been submitted. We'll review the details and get back
         to you within 24 hours with a custom quote.
       </p>
-      <p id="ref-display" class="text-xs text-gray-400 mb-10 font-mono"></p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <p id="ref-display" style="font-size:0.8rem; color:#3a3a55; font-family:monospace; margin-bottom:2.5rem;"></p>
+      <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
         <a
           href="/"
-          class="bg-gray-900 text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-gray-700 transition-colors"
+          style="background:#3B9AE1; color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2rem; border-radius:8px; text-decoration:none;"
         >
           BACK TO HOME
         </a>
         <a
           href="/shop"
-          class="border-2 border-gray-200 text-gray-900 font-bold px-8 py-4 rounded-xl text-sm hover:border-gray-400 transition-colors"
+          style="border:2px solid #1e1e35; color:#7a8090; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2rem; border-radius:8px; text-decoration:none;"
         >
           BROWSE THE SHOP
         </a>

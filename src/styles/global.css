@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
-.font-display {
-  font-family: 'Archivo Black', sans-serif;
+@theme {
+  --font-sans:    "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", "Barlow Condensed", sans-serif;
+
+  --color-bg-0:      #0a0a0f;
+  --color-bg-1:      #0f0f1a;
+  --color-bg-2:      #151525;
+  --color-border-1:  #1e1e35;
+  --color-border-2:  #2a2a48;
+
+  --color-blue:      #3B9AE1;
+  --color-red:       #E84020;
+  --color-yellow:    #FFE600;
+
+  --color-fg:        #eaeaea;
+  --color-muted:     #7a8090;
+  --color-faint:     #3a3a55;
 }
+
+.font-display { font-family: var(--font-display); }

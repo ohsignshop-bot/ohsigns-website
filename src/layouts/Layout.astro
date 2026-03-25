@@ -8,7 +8,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Custom signs, banners, vehicle wraps & more — crafted for your business in South Florida.' } = Astro.props;
+const { title, description = 'Custom signs, banners, vehicle wraps & more — handcrafted for your business in Winston-Salem, NC.' } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,10 +20,10 @@ const { title, description = 'Custom signs, banners, vehicle wraps & more — cr
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{title} — OH! Signs</title>
   </head>
-  <body class="bg-white text-gray-900 font-['Inter',sans-serif] antialiased">
+  <body style="background-color:#0a0a0f; color:#eaeaea; font-family:'Barlow Condensed',sans-serif; background-image:radial-gradient(circle,#1c1c2e 1.2px,transparent 1.2px); background-size:24px 24px;">
     <Nav />
     <main>
       <slot />

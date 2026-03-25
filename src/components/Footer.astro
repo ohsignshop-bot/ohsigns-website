@@ -2,45 +2,45 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-950 text-gray-400 mt-24">
+<footer style="background:#0a0a0f; border-top:1px solid #1e1e35; color:#7a8090; margin-top:6rem;">
   <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
     <!-- Brand -->
     <div>
-      <div class="font-display text-xl text-white mb-3">
-        <span class="text-[#00e5cc]">OH!</span> SIGNS
+      <div class="font-display text-2xl mb-3">
+        <span style="color:#3B9AE1">OH!</span> <span style="color:#E84020">SIGNS</span>
       </div>
-      <p class="text-sm leading-relaxed">
-        Custom signs, banners, vehicle wraps & more — made with care for businesses that want to stand out.
+      <p style="font-size:0.9rem; line-height:1.6;">
+        Custom signs, banners, vehicle wraps &amp; more — made with care for businesses that want to stand out.
       </p>
     </div>
 
     <!-- Links -->
     <div>
-      <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Pages</div>
-      <ul class="space-y-2 text-sm">
-        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
-        <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
-        <li><a href="/shop" class="hover:text-white transition-colors">Shop</a></li>
-        <li><a href="/quote" class="hover:text-white transition-colors">Get a Quote</a></li>
+      <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#3a3a55; margin-bottom:1rem;">Pages</div>
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
+        <li><a href="/" style="color:#7a8090; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">Home</a></li>
+        <li><a href="/about" style="color:#7a8090; text-decoration:none;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">About</a></li>
+        <li><a href="/shop" style="color:#7a8090; text-decoration:none;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">Shop</a></li>
+        <li><a href="/quote" style="color:#7a8090; text-decoration:none;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">Get a Quote</a></li>
       </ul>
     </div>
 
     <!-- Contact -->
     <div>
-      <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Contact</div>
-      <ul class="space-y-2 text-sm">
+      <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#3a3a55; margin-bottom:1rem;">Contact</div>
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
         <li>
-          <a href="mailto:info@ohsigns.shop" class="hover:text-white transition-colors">
+          <a href="mailto:info@ohsigns.shop" style="color:#7a8090; text-decoration:none;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">
             info@ohsigns.shop
           </a>
         </li>
-        <li class="text-gray-500">South Florida</li>
+        <li style="color:#3a3a55;">Winston-Salem, NC</li>
       </ul>
     </div>
   </div>
 
-  <div class="border-t border-gray-800 max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-600">
+  <div style="border-top:1px solid #1e1e35; max-width:72rem; margin:0 auto; padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; font-size:0.75rem; color:#3a3a55;">
     <span>&copy; {year} OH! Signs LLC. All rights reserved.</span>
-    <a href="/quote" class="text-[#00e5cc] hover:underline font-medium">Get a Free Quote →</a>
+    <a href="/quote" style="color:#3B9AE1; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Get a Free Quote →</a>
   </div>
 </footer>

@@ -5,70 +5,72 @@ const values = [
   { icon: '🤝', title: 'We Keep It Personal', desc: 'You work directly with us — no call centers, no middlemen. Your project gets our full attention.' },
   { icon: '⚡', title: 'Fast Without Cutting Corners', desc: 'We know your deadline matters. We move fast and deliver quality every time.' },
   { icon: '🎨', title: 'Design Is Part of the Deal', desc: 'No designer? No problem. We help bring your vision to life from concept to final product.' },
-  { icon: '📍', title: 'Rooted in the Community', desc: 'We\'re a local South Florida business serving local businesses. When you win, we win.' },
+  { icon: '📍', title: 'Rooted in the Community', desc: "We're a local Winston-Salem business serving local businesses. When you win, we win." },
 ];
 ---
 
-<Layout title="About" description="Family-owned sign shop in South Florida. Custom signs, banners, wraps & more.">
+<Layout title="About" description="Family-owned sign shop in Winston-Salem, NC. Custom signs, banners, wraps & more.">
 
   <!-- Hero -->
-  <section class="bg-gray-950 text-white py-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Our Story</p>
-      <h1 class="font-display text-5xl md:text-7xl leading-tight">
+  <section style="background:#0f0f1a; border-bottom:1px solid #1e1e35; padding:5rem 1.5rem;">
+    <div class="max-w-6xl mx-auto">
+      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3B9AE1; margin-bottom:0.75rem;">Our Story</p>
+      <h1 class="font-display" style="font-size:clamp(3rem,8vw,6rem); line-height:1; color:#eaeaea;">
         Built by makers,<br />
-        <span class="text-[#00e5cc]">for businesses.</span>
+        <span style="color:#3B9AE1;">for businesses.</span>
       </h1>
     </div>
   </section>
 
   <!-- Story -->
-  <section class="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-    <div>
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Who We Are</p>
-      <h2 class="font-display text-3xl text-gray-900 mb-6">
-        OH! Signs LLC
-      </h2>
-      <!-- PLACEHOLDER — replace with your actual story -->
-      <div class="space-y-4 text-gray-500 leading-relaxed">
-        <p>
-          OH! Signs was born from a simple idea: every business deserves great signage,
-          and getting it shouldn't be complicated or overpriced.
-        </p>
-        <p>
-          We're a family-owned shop based in South Florida, and we've been helping local
-          businesses make their mark with custom signs, wraps, banners, and more.
-        </p>
-        <p>
-          From a small window decal to a full vehicle fleet wrap — we handle it all
-          with the same attention to detail and personal service.
-        </p>
+  <section style="padding:5rem 1.5rem;">
+    <div class="max-w-6xl mx-auto" style="display:grid; grid-template-columns:1fr; gap:3rem;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; align-items:center;">
+        <div>
+          <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">Who We Are</p>
+          <h2 class="font-display" style="font-size:2.5rem; color:#eaeaea; margin-bottom:1.5rem;">OH! Signs LLC</h2>
+          <!-- Replace with your actual story -->
+          <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.95rem; color:#7a8090; line-height:1.65;">
+            <p>
+              OH! Signs was born from a simple idea: every business deserves great signage,
+              and getting it shouldn't be complicated or overpriced.
+            </p>
+            <p>
+              We're a family-owned shop based in Winston-Salem, NC, and we've been helping local
+              businesses make their mark with custom signs, wraps, banners, and more.
+            </p>
+            <p>
+              From a small window decal to a full vehicle fleet wrap — we handle it all
+              with the same attention to detail and personal service.
+            </p>
+          </div>
+        </div>
+        <!-- Accent block -->
+        <div style="background:#0f0f1a; border:1px solid #1e1e35; border-top:3px solid #3B9AE1; border-radius:12px; padding:3rem;">
+          <div class="font-display" style="font-size:4rem; color:#3B9AE1; margin-bottom:0.5rem;">OH!</div>
+          <div class="font-display" style="font-size:1.75rem; color:#eaeaea; margin-bottom:1rem;">Every sign tells<br />your story.</div>
+          <p style="font-size:0.9rem; color:#7a8090; line-height:1.6;">
+            We believe in doing things right — quality materials, sharp design, and a process
+            that respects your time and budget.
+          </p>
+        </div>
       </div>
-    </div>
-    <!-- Accent block -->
-    <div class="bg-[#00e5cc] rounded-3xl p-12 text-gray-900">
-      <div class="font-display text-6xl mb-4">OH!</div>
-      <div class="font-display text-2xl mb-6">Every sign tells<br />your story.</div>
-      <p class="text-sm leading-relaxed text-gray-800">
-        We believe in doing things right — quality materials, sharp design, and a process
-        that respects your time and budget.
-      </p>
     </div>
   </section>
 
   <!-- Values -->
-  <section class="bg-gray-50 py-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Why Us</p>
-      <h2 class="font-display text-3xl md:text-4xl text-gray-900 mb-14">
+  <section style="background:#0f0f1a; border-top:1px solid #1e1e35; border-bottom:1px solid #1e1e35; padding:5rem 1.5rem;">
+    <div class="max-w-6xl mx-auto">
+      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">Why Us</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3.5rem); color:#eaeaea; margin-bottom:3rem;">
         What makes us different.
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.25rem;">
         {values.map(v => (
-          <div class="bg-white rounded-2xl p-8 border border-gray-100">
-            <div class="text-3xl mb-4">{v.icon}</div>
-            <h3 class="font-display text-lg text-gray-900 mb-2">{v.title}</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
+          <div style="background:#151525; border:1px solid #1e1e35; border-radius:10px; padding:2rem;">
+            <div style="font-size:2rem; margin-bottom:1rem;">{v.icon}</div>
+            <h3 class="font-display" style="font-size:1.5rem; color:#eaeaea; margin-bottom:0.5rem;">{v.title}</h3>
+            <p style="font-size:0.9rem; color:#7a8090; line-height:1.6;">{v.desc}</p>
           </div>
         ))}
       </div>
@@ -76,36 +78,38 @@ const values = [
   </section>
 
   <!-- Contact / CTA -->
-  <section class="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-    <div>
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Get In Touch</p>
-      <h2 class="font-display text-3xl text-gray-900 mb-6">
-        Let's talk about<br />your next project.
-      </h2>
-      <ul class="space-y-3 text-gray-600 text-sm">
-        <li class="flex items-center gap-3">
-          <span class="text-[#00e5cc] font-bold">✉</span>
-          <a href="mailto:info@ohsigns.shop" class="hover:text-gray-900 transition-colors">info@ohsigns.shop</a>
-        </li>
-        <li class="flex items-center gap-3">
-          <span class="text-[#00e5cc] font-bold">📍</span>
-          <span>South Florida</span>
-        </li>
-      </ul>
-    </div>
-    <div class="flex flex-col gap-4">
-      <a
-        href="/quote"
-        class="bg-[#00e5cc] text-gray-900 font-bold px-8 py-5 rounded-xl text-center text-sm tracking-wide hover:bg-[#00b8a3] transition-colors"
-      >
-        GET A FREE QUOTE
-      </a>
-      <a
-        href="/shop"
-        class="border-2 border-gray-200 text-gray-900 font-bold px-8 py-5 rounded-xl text-center text-sm tracking-wide hover:border-gray-400 transition-colors"
-      >
-        BROWSE THE SHOP
-      </a>
+  <section style="padding:5rem 1.5rem;">
+    <div class="max-w-6xl mx-auto" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; align-items:center;">
+      <div>
+        <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">Get In Touch</p>
+        <h2 class="font-display" style="font-size:2.5rem; color:#eaeaea; margin-bottom:1.5rem;">
+          Let's talk about<br />your next project.
+        </h2>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem; color:#7a8090;">
+          <li style="display:flex; align-items:center; gap:0.75rem;">
+            <span style="color:#3B9AE1; font-weight:700;">✉</span>
+            <a href="mailto:info@ohsigns.shop" style="color:#7a8090; text-decoration:none;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">info@ohsigns.shop</a>
+          </li>
+          <li style="display:flex; align-items:center; gap:0.75rem;">
+            <span style="color:#3B9AE1; font-weight:700;">📍</span>
+            <span>Winston-Salem, NC</span>
+          </li>
+        </ul>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <a
+          href="/quote"
+          style="background:#FFE600; color:#0a0a0f; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:1.1rem 2rem; border-radius:8px; text-align:center; text-decoration:none;"
+        >
+          GET A FREE QUOTE
+        </a>
+        <a
+          href="/shop"
+          style="border:2px solid #1e1e35; color:#7a8090; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:1.1rem 2rem; border-radius:8px; text-align:center; text-decoration:none;"
+        >
+          BROWSE THE SHOP
+        </a>
+      </div>
     </div>
   </section>
 
