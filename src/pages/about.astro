@@ -2,113 +2,95 @@
 import Layout from '../layouts/Layout.astro';
 
 const values = [
-  { icon: '🤝', title: 'We Keep It Personal', desc: 'You work directly with us — no call centers, no middlemen. Your project gets our full attention.' },
-  { icon: '⚡', title: 'Fast Without Cutting Corners', desc: 'We know your deadline matters. We move fast and deliver quality every time.' },
-  { icon: '🎨', title: 'Design Is Part of the Deal', desc: 'No designer? No problem. We help bring your vision to life from concept to final product.' },
-  { icon: '📍', title: 'Rooted in the Community', desc: "We're a local Winston-Salem business serving local businesses. When you win, we win." },
+  { icon: '🤝', title: 'We Keep It Personal', desc: 'You work directly with us — no call centers, no middlemen. Your project gets our full attention.', color: '#3B9AE1' },
+  { icon: '⚡', title: 'Fast Without Cutting Corners', desc: 'We know your deadline matters. We move fast and deliver quality every time.', color: '#FFE600' },
+  { icon: '🎨', title: 'Design Is Part of the Deal', desc: "No designer? No problem. We help bring your vision to life from concept to final product.", color: '#E84020' },
+  { icon: '📍', title: 'Rooted in the Community', desc: "We're a local Winston-Salem business serving local businesses. When you win, we win.", color: '#3B9AE1' },
+];
+
+const stats = [
+  { num: '500+', label: 'Signs Made' },
+  { num: '100%', label: 'Custom' },
+  { num: '5★', label: 'Reviews' },
 ];
 ---
 
 <Layout title="About" description="Family-owned sign shop in Winston-Salem, NC. Custom signs, banners, wraps & more.">
 
   <!-- Hero -->
-  <section style="background:#0f0f1a; border-bottom:1px solid #1e1e35; padding:5rem 1.5rem;">
-    <div class="max-w-6xl mx-auto">
-      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3B9AE1; margin-bottom:0.75rem;">Our Story</p>
-      <h1 class="font-display" style="font-size:clamp(3rem,8vw,6rem); line-height:1; color:#eaeaea;">
-        Built by makers,<br />
-        <span style="color:#3B9AE1;">for businesses.</span>
+  <section style="padding:100px 24px 60px; text-align:center;">
+    <div style="max-width:700px; margin:0 auto;">
+      <p class="fade-up" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:16px;">Our Story</p>
+      <h1 class="fade-up-d1 font-display" style="font-size:clamp(2.8rem,7vw,5rem); line-height:1.05; letter-spacing:3px; margin-bottom:16px;">
+        Built by Makers,<br /><span style="color:#3B9AE1;">For Businesses.</span>
       </h1>
+      <div class="fade-up-d2" style="width:60px; height:4px; background:#E84020; margin:0 auto; border-radius:2px;"></div>
     </div>
   </section>
 
   <!-- Story -->
-  <section style="padding:5rem 1.5rem;">
-    <div class="max-w-6xl mx-auto" style="display:grid; grid-template-columns:1fr; gap:3rem;">
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; align-items:center;">
-        <div>
-          <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">Who We Are</p>
-          <h2 class="font-display" style="font-size:2.5rem; color:#eaeaea; margin-bottom:1.5rem;">OH! Signs LLC</h2>
-          <!-- Replace with your actual story -->
-          <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.95rem; color:#7a8090; line-height:1.65;">
-            <p>
-              OH! Signs was born from a simple idea: every business deserves great signage,
-              and getting it shouldn't be complicated or overpriced.
-            </p>
-            <p>
-              We're a family-owned shop based in Winston-Salem, NC, and we've been helping local
-              businesses make their mark with custom signs, wraps, banners, and more.
-            </p>
-            <p>
-              From a small window decal to a full vehicle fleet wrap — we handle it all
-              with the same attention to detail and personal service.
-            </p>
-          </div>
+  <section style="padding:40px 24px 60px;">
+    <div style="max-width:800px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; align-items:center;">
+      <div class="fade-up-d1">
+        <div style="display:flex; flex-direction:column; gap:16px; font-size:0.95rem; color:#707080; line-height:1.7;">
+          <p>OH! Signs was born from a simple idea: every business deserves great signage, and getting it shouldn't be complicated or overpriced.</p>
+          <p>We're a family-owned shop based in Winston-Salem, NC, and we've been helping local businesses make their mark with custom signs, wraps, banners, and more.</p>
+          <p>From a small window decal to a full vehicle fleet wrap — we handle it all with the same attention to detail and personal service.</p>
         </div>
-        <!-- Accent block -->
-        <div style="background:#0f0f1a; border:1px solid #1e1e35; border-top:3px solid #3B9AE1; border-radius:12px; padding:3rem;">
-          <div class="font-display" style="font-size:4rem; color:#3B9AE1; margin-bottom:0.5rem;">OH!</div>
-          <div class="font-display" style="font-size:1.75rem; color:#eaeaea; margin-bottom:1rem;">Every sign tells<br />your story.</div>
-          <p style="font-size:0.9rem; color:#7a8090; line-height:1.6;">
-            We believe in doing things right — quality materials, sharp design, and a process
-            that respects your time and budget.
-          </p>
-        </div>
+      </div>
+      <div class="glass-card fade-up-d2" style="border-top:3px solid #3B9AE1; text-align:center; padding:36px;">
+        <div class="font-display" style="font-size:4rem; color:#3B9AE1; animation:floatSlow 5s ease-in-out infinite;">OH!</div>
+        <div class="font-display" style="font-size:1.6rem; letter-spacing:2px; color:#F5F5F5; margin:8px 0 12px;">Every Sign Tells<br />Your Story.</div>
+        <p style="font-size:0.85rem; color:#707080; line-height:1.6;">Quality materials, sharp design, and a process that respects your time and budget.</p>
       </div>
     </div>
   </section>
 
+  <!-- Stats -->
+  <section style="padding:40px 24px;">
+    <div style="max-width:500px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; text-align:center;">
+      {stats.map((s, i) => (
+        <div class={`fade-up-d${i + 1}`}>
+          <div class="font-display" style={`font-size:2.5rem; letter-spacing:2px; color:#FFE600; animation:float ${4 + i}s ease-in-out infinite;`}>{s.num}</div>
+          <div style="font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#707080; margin-top:4px;">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
   <!-- Values -->
-  <section style="background:#0f0f1a; border-top:1px solid #1e1e35; border-bottom:1px solid #1e1e35; padding:5rem 1.5rem;">
-    <div class="max-w-6xl mx-auto">
-      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">Why Us</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3.5rem); color:#eaeaea; margin-bottom:3rem;">
-        What makes us different.
-      </h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.25rem;">
-        {values.map(v => (
-          <div style="background:#151525; border:1px solid #1e1e35; border-radius:10px; padding:2rem;">
-            <div style="font-size:2rem; margin-bottom:1rem;">{v.icon}</div>
-            <h3 class="font-display" style="font-size:1.5rem; color:#eaeaea; margin-bottom:0.5rem;">{v.title}</h3>
-            <p style="font-size:0.9rem; color:#7a8090; line-height:1.6;">{v.desc}</p>
+  <section style="padding:60px 24px;">
+    <div style="max-width:900px; margin:0 auto;">
+      <div class="fade-up" style="text-align:center; margin-bottom:48px;">
+        <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">What Makes Us Different</h2>
+        <div style="width:60px; height:4px; background:#FFE600; margin:0 auto; border-radius:2px;"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;">
+        {values.map((v, i) => (
+          <div class={`glass-card fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${v.color};`}>
+            <div style={`font-size:1.8rem; margin-bottom:10px; animation:float ${3 + i}s ease-in-out infinite;`}>{v.icon}</div>
+            <h3 class="font-display" style="font-size:1.3rem; letter-spacing:2px; color:#F5F5F5; margin-bottom:6px;">{v.title}</h3>
+            <p style="font-size:0.85rem; color:#707080; line-height:1.6;">{v.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Contact / CTA -->
-  <section style="padding:5rem 1.5rem;">
-    <div class="max-w-6xl mx-auto" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; align-items:center;">
-      <div>
-        <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">Get In Touch</p>
-        <h2 class="font-display" style="font-size:2.5rem; color:#eaeaea; margin-bottom:1.5rem;">
-          Let's talk about<br />your next project.
-        </h2>
-        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem; color:#7a8090;">
-          <li style="display:flex; align-items:center; gap:0.75rem;">
-            <span style="color:#3B9AE1; font-weight:700;">✉</span>
-            <a href="mailto:info@ohsigns.shop" style="color:#7a8090; text-decoration:none;" onmouseover="this.style.color='#eaeaea'" onmouseout="this.style.color='#7a8090'">info@ohsigns.shop</a>
-          </li>
-          <li style="display:flex; align-items:center; gap:0.75rem;">
-            <span style="color:#3B9AE1; font-weight:700;">📍</span>
-            <span>Winston-Salem, NC</span>
-          </li>
-        </ul>
+  <!-- CTA -->
+  <section style="padding:60px 24px;">
+    <div style="max-width:700px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:30px; align-items:center;">
+      <div class="fade-up">
+        <p style="font-family:'Bebas Neue',sans-serif; font-size:0.8rem; letter-spacing:4px; color:#3a3a55; margin-bottom:8px;">GET IN TOUCH</p>
+        <h2 class="font-display" style="font-size:2.2rem; letter-spacing:2px; color:#F5F5F5; margin-bottom:16px;">Let's Talk About<br />Your Next Project.</h2>
+        <div style="display:flex; flex-direction:column; gap:8px; font-size:0.9rem; color:#707080;">
+          <div style="display:flex; align-items:center; gap:8px;"><span style="color:#3B9AE1;">✉</span> <a href="mailto:info@ohsigns.shop" style="color:#707080; text-decoration:none;" onmouseover="this.style.color='#F5F5F5'" onmouseout="this.style.color='#707080'">info@ohsigns.shop</a></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="color:#3B9AE1;">📍</span> Winston-Salem, NC</div>
+        </div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:1rem;">
-        <a
-          href="/quote"
-          style="background:#FFE600; color:#0a0a0f; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:1.1rem 2rem; border-radius:8px; text-align:center; text-decoration:none;"
-        >
-          GET A FREE QUOTE
-        </a>
-        <a
-          href="/shop"
-          style="border:2px solid #1e1e35; color:#7a8090; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:1.1rem 2rem; border-radius:8px; text-align:center; text-decoration:none;"
-        >
-          BROWSE THE SHOP
-        </a>
+      <div class="fade-up-d2" style="display:flex; flex-direction:column; gap:12px;">
+        <a href="/quote" class="btn-glow" style="background:#FFE600; color:#0a0a0f; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:3px; padding:14px 28px; border-radius:20px; text-align:center; text-decoration:none; transition:all 0.25s;" onmouseover="this.style.transform='translateY(-2px) scale(1.03)'" onmouseout="this.style.transform='none'">GET A FREE QUOTE</a>
+        <a href="/shop" style="border:1.5px solid #3a3a4a; color:#A0A0B8; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:3px; padding:14px 28px; border-radius:20px; text-align:center; text-decoration:none; transition:all 0.25s;" onmouseover="this.style.borderColor='#F5F5F5'; this.style.color='#F5F5F5'" onmouseout="this.style.borderColor='#3a3a4a'; this.style.color='#A0A0B8'">BROWSE THE SHOP</a>
       </div>
     </div>
   </section>

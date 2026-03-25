@@ -4,33 +4,20 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout title="Request Received" description="Your quote request has been received. We'll be in touch within 24 hours.">
 
-  <section style="min-height:70vh; display:flex; align-items:center; justify-content:center; padding:4rem 1.5rem;">
-    <div style="text-align:center; max-width:36rem;">
-      <div style="width:5rem; height:5rem; border-radius:50%; background:rgba(59,154,225,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 2rem; font-size:2.5rem; color:#3B9AE1;">
+  <section style="min-height:70vh; display:flex; align-items:center; justify-content:center; padding:80px 24px;">
+    <div style="text-align:center; max-width:460px;">
+      <div class="fade-up" style="width:80px; height:80px; border-radius:50%; background:rgba(59,154,225,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:2.5rem; color:#3B9AE1; animation:float 4s ease-in-out infinite;">
         ✓
       </div>
-      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3B9AE1; margin-bottom:0.75rem;">Request Received</p>
-      <h1 class="font-display" style="font-size:clamp(2.5rem,6vw,4rem); color:#eaeaea; margin-bottom:1rem;">
-        We've got it!
-      </h1>
-      <p style="font-size:1rem; color:#7a8090; line-height:1.65; margin-bottom:0.75rem;">
-        Your quote request has been submitted. We'll review the details and get back
-        to you within 24 hours with a custom quote.
+      <p class="fade-up-d1" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:12px;">Request Received</p>
+      <h1 class="fade-up-d2 font-display" style="font-size:clamp(2.5rem,6vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:12px;">We've Got It!</h1>
+      <p class="fade-up-d3" style="font-size:0.95rem; color:#707080; line-height:1.65; margin-bottom:8px;">
+        Your quote request has been submitted. We'll review the details and get back to you within 24 hours.
       </p>
-      <p id="ref-display" style="font-size:0.8rem; color:#3a3a55; font-family:monospace; margin-bottom:2.5rem;"></p>
-      <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
-        <a
-          href="/"
-          style="background:#3B9AE1; color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2rem; border-radius:8px; text-decoration:none;"
-        >
-          BACK TO HOME
-        </a>
-        <a
-          href="/shop"
-          style="border:2px solid #1e1e35; color:#7a8090; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2rem; border-radius:8px; text-decoration:none;"
-        >
-          BROWSE THE SHOP
-        </a>
+      <p id="ref-display" class="fade-up-d3" style="font-size:0.8rem; color:#3a3a55; font-family:'Space Mono',monospace; margin-bottom:32px;"></p>
+      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+        <a href="/" style="background:#3B9AE1; color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; padding:12px 28px; border-radius:20px; text-decoration:none; transition:all 0.25s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">BACK TO HOME</a>
+        <a href="/shop" style="border:1.5px solid #3a3a4a; color:#A0A0B8; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; padding:12px 28px; border-radius:20px; text-decoration:none; transition:all 0.25s;" onmouseover="this.style.borderColor='#F5F5F5'; this.style.color='#F5F5F5'" onmouseout="this.style.borderColor='#3a3a4a'; this.style.color='#A0A0B8'">BROWSE THE SHOP</a>
       </div>
     </div>
   </section>

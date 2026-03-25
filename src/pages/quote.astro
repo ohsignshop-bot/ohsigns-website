@@ -22,125 +22,100 @@ const budgets = [
   '$3,000+',
   'Not sure yet',
 ];
-
-const inputStyle = "width:100%; background:#151525; border:1px solid #1e1e35; border-radius:8px; padding:0.75rem 1rem; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; box-sizing:border-box;";
-const labelStyle = "display:block; font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.5rem;";
 ---
 
 <Layout title="Get a Quote" description="Request a custom quote from OH! Signs. Banners, wraps, signs & more.">
 
-  <section style="max-width:42rem; margin:0 auto; padding:4rem 1.5rem;">
-    <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3B9AE1; margin-bottom:0.75rem;">Free Quote</p>
-    <h1 class="font-display" style="font-size:clamp(2.5rem,6vw,4.5rem); color:#eaeaea; margin-bottom:1rem;">
-      Let's build<br />something great.
-    </h1>
-    <p style="font-size:1rem; color:#7a8090; margin-bottom:2.5rem; line-height:1.6;">
-      Fill out the form below and we'll get back to you within 24 hours with a detailed quote.
-      The more detail you give us, the faster we can help.
-    </p>
+  <section style="max-width:560px; margin:0 auto; padding:100px 24px 60px;">
+    <div class="fade-up" style="text-align:center; margin-bottom:36px;">
+      <p style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:16px;">Free Quote</p>
+      <h1 class="font-display" style="font-size:clamp(2.5rem,6vw,4rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">
+        Let's Build<br />Something Great.
+      </h1>
+      <div style="width:60px; height:4px; background:#FFE600; margin:0 auto 16px; border-radius:2px;"></div>
+      <p style="font-size:0.95rem; color:#707080; line-height:1.6;">
+        Fill out the form and we'll get back to you within 24 hours with a detailed quote.
+      </p>
+    </div>
 
     <!-- Error message -->
-    <div id="form-error" style="display:none; background:#2a0a0a; border:1px solid #E84020; color:#ff8070; font-size:0.9rem; border-radius:8px; padding:0.9rem 1.25rem; margin-bottom:1.5rem;"></div>
+    <div id="form-error" style="display:none; background:rgba(232,64,32,0.1); border:1px solid #E84020; color:#ff8070; font-size:0.85rem; border-radius:6px; padding:10px 16px; margin-bottom:16px;"></div>
 
-    <form id="quote-form" style="display:flex; flex-direction:column; gap:1.5rem;" novalidate>
+    <form id="quote-form" class="fade-up-d1" style="display:flex; flex-direction:column; gap:16px;" novalidate>
 
-      <!-- Name + Email -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
         <div>
-          <label style={labelStyle} for="customer_name">Full Name <span style="color:#3B9AE1;">*</span></label>
-          <input type="text" id="customer_name" name="customer_name" required placeholder="Jane Smith" style={inputStyle} />
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">FULL NAME <span style="color:#3B9AE1;">*</span></label>
+          <input type="text" id="customer_name" name="customer_name" required placeholder="Jane Smith" style="width:100%; background:rgba(15,15,26,0.85); backdrop-filter:blur(8px); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'" />
         </div>
         <div>
-          <label style={labelStyle} for="email">Email <span style="color:#3B9AE1;">*</span></label>
-          <input type="email" id="email" name="email" required placeholder="jane@business.com" style={inputStyle} />
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">EMAIL <span style="color:#3B9AE1;">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="jane@business.com" style="width:100%; background:rgba(15,15,26,0.85); backdrop-filter:blur(8px); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'" />
         </div>
       </div>
 
-      <!-- Phone + Product -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
         <div>
-          <label style={labelStyle} for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" style={inputStyle} />
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">PHONE</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" style="width:100%; background:rgba(15,15,26,0.85); backdrop-filter:blur(8px); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'" />
         </div>
         <div>
-          <label style={labelStyle} for="product_type">Product Type <span style="color:#3B9AE1;">*</span></label>
-          <select id="product_type" name="product_type" required style={inputStyle + " cursor:pointer;"}>
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">PRODUCT TYPE <span style="color:#3B9AE1;">*</span></label>
+          <select id="product_type" name="product_type" required style="width:100%; background:rgba(15,15,26,0.85); backdrop-filter:blur(8px); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; cursor:pointer; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'">
             <option value="">Select a product…</option>
             {productTypes.map(p => <option value={p}>{p}</option>)}
           </select>
         </div>
       </div>
 
-      <!-- Dimensions + Qty -->
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem;">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
         <div>
-          <label style={labelStyle} for="width_in">Width (in)</label>
-          <input type="number" id="width_in" name="width_in" min="0" placeholder='e.g. 48"' style={inputStyle} />
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">WIDTH (IN)</label>
+          <input type="number" id="width_in" name="width_in" min="0" placeholder='48"' style="width:100%; background:rgba(15,15,26,0.85); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'" />
         </div>
         <div>
-          <label style={labelStyle} for="height_in">Height (in)</label>
-          <input type="number" id="height_in" name="height_in" min="0" placeholder='e.g. 24"' style={inputStyle} />
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">HEIGHT (IN)</label>
+          <input type="number" id="height_in" name="height_in" min="0" placeholder='24"' style="width:100%; background:rgba(15,15,26,0.85); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'" />
         </div>
         <div>
-          <label style={labelStyle} for="qty">Quantity</label>
-          <input type="number" id="qty" name="qty" min="1" value="1" style={inputStyle} />
+          <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">QUANTITY</label>
+          <input type="number" id="qty" name="qty" min="1" value="1" style="width:100%; background:rgba(15,15,26,0.85); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'" />
         </div>
       </div>
 
-      <!-- Budget -->
       <div>
-        <label style={labelStyle} for="budget">Budget Range</label>
-        <select id="budget" name="budget" style={inputStyle + " cursor:pointer;"}>
+        <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">BUDGET RANGE</label>
+        <select id="budget" name="budget" style="width:100%; background:rgba(15,15,26,0.85); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; cursor:pointer; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'">
           <option value="">Select a range…</option>
           {budgets.map(b => <option value={b}>{b}</option>)}
         </select>
       </div>
 
-      <!-- Comments -->
       <div>
-        <label style={labelStyle} for="comments">Project Details</label>
-        <textarea
-          id="comments"
-          name="comments"
-          rows="4"
-          placeholder="Describe your project — colors, material, intended use, deadline, any other details…"
-          style={inputStyle + " resize:vertical; min-height:100px;"}
-        ></textarea>
+        <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">PROJECT DETAILS</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Describe your project — colors, material, intended use, deadline…" style="width:100%; background:rgba(15,15,26,0.85); border:1px solid #2a2a3a; border-radius:6px; padding:10px 14px; font-family:'Barlow Condensed',sans-serif; font-size:1rem; color:#eaeaea; outline:none; transition:border-color 0.3s; resize:vertical; min-height:80px; box-sizing:border-box;" onfocus="this.style.borderColor='#FFE600'" onblur="this.style.borderColor='#2a2a3a'"></textarea>
       </div>
 
-      <!-- Artwork upload -->
+      <!-- Artwork -->
       <div>
-        <label style={labelStyle} for="artwork">
-          Artwork / Logo <span style="color:#3a3a55; font-weight:400; text-transform:none; letter-spacing:0;">(optional)</span>
-        </label>
-        <div
-          id="drop-zone"
-          style="border:2px dashed #1e1e35; border-radius:10px; padding:2.5rem 1.5rem; text-align:center; cursor:pointer; transition:border-color 0.2s;"
-        >
-          <div style="font-size:2.5rem; margin-bottom:0.5rem;">📎</div>
-          <p style="font-size:0.95rem; color:#7a8090; margin-bottom:0.25rem;">Drop your file here or <span style="color:#3B9AE1; font-weight:600;">browse</span></p>
-          <p style="font-size:0.8rem; color:#3a3a55;">PNG, JPG, PDF, AI, SVG — max 20MB</p>
+        <label style="display:block; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:2px; color:#3a3a55; margin-bottom:5px;">ARTWORK / LOGO <span style="color:#3a3a55; font-weight:400; text-transform:none; letter-spacing:0;">(optional)</span></label>
+        <div id="drop-zone" style="border:2px dashed #2a2a3a; border-radius:8px; padding:28px 16px; text-align:center; cursor:pointer; transition:border-color 0.2s;">
+          <div style="font-size:2rem; margin-bottom:4px;">📎</div>
+          <p style="font-size:0.9rem; color:#707080;">Drop your file here or <span style="color:#3B9AE1; font-weight:600;">browse</span></p>
+          <p style="font-size:0.75rem; color:#3a3a55; margin-top:2px;">PNG, JPG, PDF, AI, SVG — max 20MB</p>
           <input type="file" id="artwork" name="artwork" accept="image/*,.pdf,.ai,.svg,.eps" style="display:none;" />
         </div>
-        <div id="file-info" style="display:none; margin-top:0.5rem; font-size:0.85rem; color:#7a8090; display:none; align-items:center; gap:0.5rem;">
+        <div id="file-info" style="display:none; margin-top:6px; font-size:0.8rem; color:#707080; align-items:center; gap:6px;">
           <span style="color:#3B9AE1;">✓</span>
           <span id="file-name"></span>
-          <button type="button" id="remove-file" style="background:none; border:none; color:#E84020; cursor:pointer; margin-left:auto; font-size:0.85rem;">Remove</button>
+          <button type="button" id="remove-file" style="background:none; border:none; color:#E84020; cursor:pointer; margin-left:auto; font-size:0.8rem;">Remove</button>
         </div>
       </div>
 
-      <!-- Submit -->
-      <button
-        type="submit"
-        id="submit-btn"
-        style="width:100%; background:#3B9AE1; color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:1.1rem; border-radius:8px; border:none; cursor:pointer; transition:opacity 0.2s;"
-      >
+      <button type="submit" id="submit-btn" class="btn-glow" style="width:100%; background:#3B9AE1; color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px; border:none; border-radius:20px; cursor:pointer; transition:all 0.25s;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='none'">
         SEND REQUEST
       </button>
-
-      <p style="font-size:0.8rem; color:#3a3a55; text-align:center;">
-        We'll reply within 24 hours with a detailed quote.
-      </p>
+      <p style="font-size:0.75rem; color:#3a3a55; text-align:center; letter-spacing:1px;">We'll reply within 24 hours with a detailed quote.</p>
     </form>
   </section>
 
@@ -157,21 +132,15 @@ const labelStyle = "display:block; font-size:0.7rem; font-weight:700; letter-spa
 
   dropZone.addEventListener('click', () => fileInput.click());
   dropZone.addEventListener('dragover', e => { e.preventDefault(); (dropZone as HTMLElement).style.borderColor = '#3B9AE1'; });
-  dropZone.addEventListener('dragleave', () => { (dropZone as HTMLElement).style.borderColor = '#1e1e35'; });
+  dropZone.addEventListener('dragleave', () => { (dropZone as HTMLElement).style.borderColor = '#2a2a3a'; });
   dropZone.addEventListener('drop', e => {
     e.preventDefault();
-    (dropZone as HTMLElement).style.borderColor = '#1e1e35';
+    (dropZone as HTMLElement).style.borderColor = '#2a2a3a';
     const file = e.dataTransfer?.files[0];
     if (file) setFile(file);
   });
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files?.[0]) setFile(fileInput.files[0]);
-  });
-  removeBtn.addEventListener('click', () => {
-    fileInput.value = '';
-    fileInfo.style.display = 'none';
-    dropZone.style.display = 'block';
-  });
+  fileInput.addEventListener('change', () => { if (fileInput.files?.[0]) setFile(fileInput.files[0]); });
+  removeBtn.addEventListener('click', () => { fileInput.value = ''; fileInfo.style.display = 'none'; dropZone.style.display = 'block'; });
 
   function setFile(file: File) {
     fileNameEl.textContent = `${file.name} (${(file.size / 1024).toFixed(0)} KB)`;
@@ -216,9 +185,7 @@ const labelStyle = "display:block; font-size:0.7rem; font-weight:700; letter-spa
         });
         data.artwork_base64 = base64;
         data.artwork_filename = file.name;
-      } catch {
-        // artwork read failed — submit without it
-      }
+      } catch { /* skip artwork */ }
     }
 
     submitBtn.disabled = true;

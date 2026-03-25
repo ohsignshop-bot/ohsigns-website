@@ -1,76 +1,53 @@
 ---
 const links = [
+  { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Shop', href: '/shop' },
 ];
+const tickerItems = ['Vinyl Decals','Custom Signs','Business Branding','UV Prints','One-Off Designs','Fast Turnaround','Winston-Salem NC'];
 ---
 
-<header class="sticky top-0 z-50" style="background:#0a0a0f; border-bottom:1px solid #1e1e35;">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+<!-- Marquee Ticker -->
+<div style="position:sticky; top:0; z-index:100; overflow:hidden; white-space:nowrap; padding:7px 0; font-family:'Bebas Neue',sans-serif; font-size:0.9rem; letter-spacing:3px; color:#0a0a0f; border-bottom:2px solid #2a2a32; background:repeating-linear-gradient(90deg,#E84020 0 50px,#FFE600 50px 100px,#3B9AE1 100px 150px,#111 150px 200px);">
+  <div style="display:inline-flex; animation:marquee 30s linear infinite;">
+    {tickerItems.map(t => <span style="padding:0 28px;">{`✦ ${t.toUpperCase()}`}</span>)}
+    {tickerItems.map(t => <span style="padding:0 28px;">{`✦ ${t.toUpperCase()}`}</span>)}
+  </div>
+</div>
+
+<!-- Nav Bar -->
+<nav style="position:sticky; top:36px; z-index:99; background:rgba(0,0,20,0.8); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid #2a2a3a;">
+  <div style="max-width:72rem; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-3">
-      <img src="/logo-icon.png" alt="OH! Signs logo" style="height:36px; width:auto;" />
-      <span class="font-display text-2xl tracking-wide leading-none">
-        <span style="color:#3B9AE1">OH!</span> <span style="color:#E84020">SIGNS</span>
+    <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+      <img src="/logo-icon.png" alt="OH! Signs" style="height:32px; width:auto;" />
+      <span class="font-display" style="font-size:1.6rem; letter-spacing:2px; line-height:1;">
+        <span style="color:#3B9AE1;">OH!</span> <span style="color:#E84020;">SIGNS</span>
       </span>
     </a>
 
-    <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-8">
+    <!-- Links -->
+    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
       {links.map(link => (
         <a
           href={link.href}
-          style="font-family:'Barlow Condensed',sans-serif; font-size:0.95rem; font-weight:600; color:#7a8090; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; transition:color 0.2s;"
-          onmouseover="this.style.color='#eaeaea'"
-          onmouseout="this.style.color='#7a8090'"
+          style="font-family:'Bebas Neue',sans-serif; font-size:0.95rem; letter-spacing:2px; color:#A0A0B8; text-decoration:none; padding:6px 14px; border-radius:20px; transition:all 0.2s;"
+          onmouseover="this.style.color='#F5F5F5'"
+          onmouseout="this.style.color='#A0A0B8'"
         >
-          {link.label}
+          {link.label.toUpperCase()}
         </a>
       ))}
       <a
         href="/quote"
-        style="background:#FFE600; color:#0a0a0f; font-family:'Barlow Condensed',sans-serif; font-size:0.9rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.55rem 1.25rem; border-radius:6px; text-decoration:none; transition:opacity 0.2s;"
-        onmouseover="this.style.opacity='0.85'"
-        onmouseout="this.style.opacity='1'"
+        style="font-family:'Bebas Neue',sans-serif; font-size:0.95rem; letter-spacing:2px; background:#FFE600; color:#0a0a0f; text-decoration:none; padding:6px 18px; border-radius:20px; transition:all 0.25s;"
+        onmouseover="this.style.transform='translateY(-2px) scale(1.03)'"
+        onmouseout="this.style.transform='none'"
       >
-        Get a Quote
+        GET A QUOTE
       </a>
-    </nav>
+    </div>
 
-    <!-- Mobile menu button -->
-    <button id="menu-btn" style="background:none; border:none; color:#7a8090; cursor:pointer; padding:0.5rem;" aria-label="Open menu">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
   </div>
-
-  <!-- Paint drip bar -->
-  <div style="height:3px; background:repeating-linear-gradient(90deg,#3B9AE1 0px,#3B9AE1 32px,#E84020 32px,#E84020 64px,#FFE600 64px,#FFE600 96px);"></div>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" style="display:none; border-top:1px solid #1e1e35; background:#0f0f1a; padding:1.25rem 1.5rem;">
-    {links.map(link => (
-      <a
-        href={link.href}
-        style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:600; color:#7a8090; text-transform:uppercase; letter-spacing:0.05em; padding:0.5rem 0; text-decoration:none;"
-      >
-        {link.label}
-      </a>
-    ))}
-    <a
-      href="/quote"
-      style="display:block; margin-top:0.75rem; background:#FFE600; color:#0a0a0f; font-family:'Barlow Condensed',sans-serif; font-size:0.9rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.75rem 1.25rem; border-radius:6px; text-align:center; text-decoration:none;"
-    >
-      Get a Quote
-    </a>
-  </div>
-</header>
-
-<script>
-  const btn = document.getElementById('menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    if (menu) menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-  });
-</script>
+</nav>

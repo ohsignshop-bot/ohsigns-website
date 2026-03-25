@@ -2,118 +2,168 @@
 import Layout from '../layouts/Layout.astro';
 
 const services = [
-  {
-    title: 'Banners & Displays',
-    desc: 'Vinyl banners, retractable stands, foam board — indoor or outdoor, any size.',
-    color: '#3B9AE1',
-  },
-  {
-    title: 'Vehicle Wraps',
-    desc: 'Full wraps, partial wraps, and fleet graphics that turn heads on the road.',
-    color: '#E84020',
-  },
-  {
-    title: 'Wall & Window Graphics',
-    desc: 'Storefront decals, wall murals, floor graphics, and frosted window film.',
-    color: '#FFE600',
-  },
-  {
-    title: 'Custom Signs',
-    desc: 'Yard signs, rigid signs, acrylic, and anything else your business needs.',
-    color: '#3B9AE1',
-  },
+  { icon: '🖨️', title: 'Cut Vinyl', desc: 'Precision-cut lettering, logos, and decals in any color — perfect for windows, vehicles, and walls.', color: '#3B9AE1' },
+  { icon: '🎨', title: 'Print Vinyl', desc: 'Full-color printed graphics on premium vinyl — banners, wraps, stickers, and large format.', color: '#E84020' },
+  { icon: '🪧', title: 'Custom Signs', desc: 'Yard signs, A-frames, foam board, acrylic — rigid signage for any indoor or outdoor need.', color: '#FFE600' },
+  { icon: '🚗', title: 'Vehicle Wraps', desc: 'Full and partial vehicle wraps that turn your ride into a moving billboard.', color: '#3B9AE1' },
+  { icon: '🏢', title: 'Wall & Window', desc: 'Storefront graphics, wall murals, frosted film, and floor decals.', color: '#E84020' },
+  { icon: '⚡', title: 'Rush Orders', desc: "Tight deadline? We move fast without cutting corners. Let's make it happen.", color: '#FFE600' },
 ];
 
 const trust = [
-  { label: 'Family Owned', icon: '🏠' },
-  { label: 'Fast Turnaround', icon: '⚡' },
-  { label: 'Custom Work', icon: '🎨' },
-  { label: 'Winston-Salem, NC', icon: '📍' },
+  { num: '500+', label: 'Signs Made' },
+  { num: '24hr', label: 'Quote Response' },
+  { num: '100%', label: 'Custom Work' },
+  { num: 'NC', label: 'Local Business' },
+];
+
+const portfolio = [
+  { type: 'Vehicle Wrap', title: 'Full Fleet Branding — Local HVAC', color: '#E84020' },
+  { type: 'Vinyl Banner', title: '10ft Grand Opening Banner', color: '#FFE600' },
+  { type: 'Window Graphics', title: 'Storefront Privacy Film + Logo', color: '#3B9AE1' },
+  { type: 'Yard Signs', title: 'Campaign Signs — 200 Units', color: '#E84020' },
 ];
 ---
 
 <Layout title="Home" description="OH! Signs — Custom signs, banners, vehicle wraps & more. Handcrafted in Winston-Salem, NC.">
 
-  <!-- Hero -->
-  <section style="padding:6rem 1.5rem 5rem; text-align:center;">
-    <div class="max-w-5xl mx-auto">
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section style="position:relative; padding:100px 24px 80px; text-align:center; overflow:hidden;">
+    <!-- Decorative radial glows -->
+    <div style="position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(ellipse,rgba(59,154,225,0.1) 0%,transparent 70%); pointer-events:none;"></div>
+    <div style="position:absolute; bottom:0; right:10%; width:400px; height:300px; background:radial-gradient(ellipse,rgba(232,64,32,0.06) 0%,transparent 70%); pointer-events:none;"></div>
 
-      <p style="font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#3B9AE1; margin-bottom:1.25rem;">
+    <div style="max-width:800px; margin:0 auto; position:relative;">
+
+      <!-- Logo float -->
+      <div class="fade-up" style="margin-bottom:24px;">
+        <img src="/logo.png" alt="OH! Signs" style="height:80px; width:auto; animation:floatSlow 5s ease-in-out infinite; filter:drop-shadow(0 4px 20px rgba(59,154,225,0.25));" />
+      </div>
+
+      <!-- Eyebrow -->
+      <p class="fade-up-d1" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:16px;">
         Winston-Salem, NC · Custom Sign Shop
       </p>
 
-      <h1 class="font-display" style="font-size:clamp(3.5rem,10vw,8rem); line-height:0.95; margin-bottom:1.5rem; color:#eaeaea;">
-        Your Vision.<br />
+      <!-- Headline -->
+      <h1 class="fade-up-d2 font-display" style="font-size:clamp(3rem,8vw,5.5rem); line-height:1.05; letter-spacing:3px; margin-bottom:20px;">
+        <span style="color:#F5F5F5;">Your Vision.</span><br />
         <span style="color:#3B9AE1;">Every</span>
         <span style="color:#E84020;"> Sign.</span>
       </h1>
 
-      <p style="font-family:'Barlow Condensed',sans-serif; font-size:1.15rem; font-weight:500; color:#7a8090; max-width:38rem; margin:0 auto 2.5rem; line-height:1.55;">
+      <!-- Sub-copy -->
+      <p class="fade-up-d3" style="font-size:1.1rem; color:#707080; line-height:1.7; max-width:520px; margin:0 auto 36px; font-weight:400;">
         Banners, wraps, wall graphics, custom signs — we handle it all with care and fast turnaround.
         Tell us what you need and we'll make it happen.
       </p>
 
-      <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
+      <!-- CTAs -->
+      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
         <a
           href="/quote"
-          style="background:#FFE600; color:#0a0a0f; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2.25rem; border-radius:8px; text-decoration:none; box-shadow:4px 4px 0 #E84020, 8px 8px 0 #3B9AE1;"
+          class="btn-glow"
+          style="background:#FFE600; color:#0a0a0f; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 36px; border-radius:20px; text-decoration:none; transition:all 0.25s;"
+          onmouseover="this.style.transform='translateY(-2px) scale(1.03)'"
+          onmouseout="this.style.transform='none'"
         >
-          ⚡ Get a Free Quote
+          ⚡ GET A FREE QUOTE
         </a>
         <a
           href="/shop"
-          style="border:2px solid #1e1e35; color:#7a8090; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2.25rem; border-radius:8px; text-decoration:none;"
+          style="border:1.5px solid #3a3a4a; color:#A0A0B8; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 36px; border-radius:20px; text-decoration:none; transition:all 0.25s;"
+          onmouseover="this.style.borderColor='#F5F5F5'; this.style.color='#F5F5F5'"
+          onmouseout="this.style.borderColor='#3a3a4a'; this.style.color='#A0A0B8'"
         >
-          Shop Now →
+          SHOP NOW →
         </a>
       </div>
+
     </div>
   </section>
 
-  <!-- Services Grid -->
-  <section style="background:#0f0f1a; padding:5rem 1.5rem; border-top:1px solid #1e1e35; border-bottom:1px solid #1e1e35;">
-    <div class="max-w-6xl mx-auto">
-      <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#3a3a55; margin-bottom:0.75rem;">What We Do</p>
-      <h2 class="font-display" style="font-size:clamp(2.5rem,5vw,4rem); color:#eaeaea; margin-bottom:3rem;">
-        Signs for every business.
-      </h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem;">
-        {services.map(s => (
-          <div style={`background:#151525; border:1px solid #1e1e35; border-top:3px solid ${s.color}; border-radius:10px; padding:2rem;`}>
-            <h3 class="font-display" style={`font-size:1.75rem; color:${s.color}; margin-bottom:0.75rem;`}>{s.title}</h3>
-            <p style="font-size:0.95rem; color:#7a8090; line-height:1.55;">{s.desc}</p>
+  <!-- ── SERVICES ────────────────────────────────────────── -->
+  <section style="padding:80px 24px;">
+    <div style="max-width:900px; margin:0 auto;">
+
+      <!-- Section title -->
+      <div class="fade-up" style="text-align:center; margin-bottom:48px;">
+        <h2 class="font-display" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">What We Do</h2>
+        <div style="width:60px; height:4px; background:#E84020; margin:0 auto 12px; border-radius:2px;"></div>
+        <p style="font-size:0.95rem; color:#707080; letter-spacing:1px;">Signs, graphics &amp; wraps for every business.</p>
+      </div>
+
+      <!-- Grid -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
+        {services.map((s, i) => (
+          <div class={`glass-card fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${s.color}; cursor:default;`}>
+            <div style={`font-size:1.8rem; margin-bottom:10px; animation:float ${3 + (i % 3)}s ease-in-out infinite;`}>{s.icon}</div>
+            <h3 class="font-display" style={`font-size:1.4rem; letter-spacing:2px; color:${s.color}; margin-bottom:6px;`}>{s.title}</h3>
+            <p style="font-size:0.85rem; color:#707080; line-height:1.6;">{s.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Trust Bar -->
-  <section style="padding:3.5rem 1.5rem;">
-    <div class="max-w-6xl mx-auto" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; text-align:center;">
-      {trust.map(t => (
-        <div>
-          <div style="font-size:2rem; margin-bottom:0.5rem;">{t.icon}</div>
-          <div class="font-display" style="font-size:1.35rem; color:#eaeaea;">{t.label}</div>
+  <!-- ── STATS ───────────────────────────────────────────── -->
+  <section style="padding:60px 24px;">
+    <div style="max-width:700px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; text-align:center;">
+      {trust.map((t, i) => (
+        <div class={`fade-up-d${i + 1}`}>
+          <div class="font-display" style={`font-size:clamp(2rem,4vw,3rem); letter-spacing:2px; color:#FFE600; animation:float ${4 + i}s ease-in-out infinite;`}>{t.num}</div>
+          <div style="font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#707080; margin-top:4px;">{t.label}</div>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section style="background:#0f0f1a; border:1px solid #1e1e35; border-radius:16px; margin:0 auto 5rem; padding:4rem 2rem; text-align:center; max-width:72rem;">
-    <h2 class="font-display" style="font-size:clamp(2.5rem,6vw,5rem); color:#eaeaea; margin-bottom:1rem;">
-      Ready to make<br /><span style="color:#3B9AE1;">your mark?</span>
-    </h2>
-    <p style="font-size:1.05rem; color:#7a8090; margin-bottom:2rem;">
-      Send us your idea and we'll get back with a quote within 24 hours.
-    </p>
-    <a
-      href="/quote"
-      style="display:inline-block; background:#3B9AE1; color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.9rem 2.5rem; border-radius:8px; text-decoration:none;"
-    >
-      Get a Free Quote →
-    </a>
+  <!-- ── RECENT WORK ─────────────────────────────────────── -->
+  <section style="padding:80px 24px;">
+    <div style="max-width:900px; margin:0 auto;">
+
+      <div class="fade-up" style="text-align:center; margin-bottom:48px;">
+        <h2 class="font-display" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">Recent Work</h2>
+        <div style="width:60px; height:4px; background:#3B9AE1; margin:0 auto 12px; border-radius:2px;"></div>
+        <p style="font-size:0.95rem; color:#707080; letter-spacing:1px;">A few things we've been working on.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
+        {portfolio.map((p, i) => (
+          <div class={`glass-card fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${p.color};`}>
+            <div style="width:100%; height:140px; background:rgba(30,30,45,0.5); border-radius:4px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+              <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; color:#3a3a55;">PHOTO</span>
+            </div>
+            <span style={`font-family:'Bebas Neue',sans-serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:${p.color};`}>{p.type}</span>
+            <h3 class="font-display" style="font-size:1.3rem; letter-spacing:1px; color:#F5F5F5; margin-top:4px;">{p.title}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────────── -->
+  <section style="padding:80px 24px;">
+    <div class="glass-card fade-up" style="max-width:700px; margin:0 auto; text-align:center; padding:50px 36px; border-top:3px solid #3B9AE1; position:relative; overflow:hidden;">
+      <!-- Decorative glow -->
+      <div style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:300px; height:200px; background:radial-gradient(ellipse,rgba(59,154,225,0.08) 0%,transparent 70%); pointer-events:none;"></div>
+
+      <h2 class="font-display" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px; position:relative;">
+        Ready to Make<br /><span style="color:#3B9AE1;">Your Mark?</span>
+      </h2>
+      <p style="font-size:1rem; color:#707080; margin-bottom:28px; position:relative;">
+        Send us your idea and we'll get back with a quote within 24 hours.
+      </p>
+      <a
+        href="/quote"
+        class="btn-glow"
+        style="display:inline-block; background:#FFE600; color:#0a0a0f; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 40px; border-radius:20px; text-decoration:none; transition:all 0.25s; position:relative;"
+        onmouseover="this.style.transform='translateY(-2px) scale(1.03)'"
+        onmouseout="this.style.transform='none'"
+      >
+        GET A FREE QUOTE →
+      </a>
+    </div>
   </section>
 
 </Layout>
