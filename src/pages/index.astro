@@ -1,140 +1,56 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
-const services = [
-  {
-    icon: '🏷️',
-    title: 'Banners & Displays',
-    desc: 'Eye-catching vinyl banners, retractable displays, and trade show graphics built to impress.',
-  },
-  {
-    icon: '🚗',
-    title: 'Vehicle Wraps',
-    desc: 'Turn your vehicle into a moving billboard. Full wraps, partial wraps, and fleet graphics.',
-  },
-  {
-    icon: '🪟',
-    title: 'Wall & Window Graphics',
-    desc: 'Transform your space with bold wall murals, perforated window film, and floor graphics.',
-  },
-  {
-    icon: '✍️',
-    title: 'Custom Signs',
-    desc: 'From channel letters to dimensional signs — if you can imagine it, we can make it.',
-  },
-];
-
-const trust = [
-  { icon: '🏠', label: 'Family Owned' },
-  { icon: '⚡', label: 'Fast Turnaround' },
-  { icon: '🎯', label: 'Custom Work' },
-  { icon: '📍', label: 'Local & Proud' },
-];
-
-const steps = [
-  { step: '01', title: 'Request a Quote', desc: "Fill out our quick form — tell us what you need and we'll get back to you fast." },
-  { step: '02', title: 'Review & Approve', desc: 'We send you a detailed quote and artwork proof. Approve online in one click.' },
-  { step: '03', title: 'Pick Up or Deliver', desc: 'Your sign is produced and ready when promised. No surprises.' },
-];
+import '../styles/global.css';
 ---
 
-<Layout title="Custom Signs & Wraps">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OH! Signs — Custom signs, banners, vehicle wraps & more. Coming soon to South Florida." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <title>OH! Signs — Coming Soon</title>
+  </head>
+  <body class="bg-gray-950 text-white min-h-screen flex items-center justify-center px-6" style="font-family: 'Inter', sans-serif;">
 
-  <!-- Hero -->
-  <section class="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
-    <!-- Accent shape -->
-    <div class="absolute right-0 top-0 w-1/2 h-full bg-gray-50 -skew-x-6 origin-top-right hidden lg:block"></div>
-    <div class="absolute right-12 top-20 w-40 h-40 rounded-full bg-[#00e5cc]/10 hidden lg:block"></div>
-    <div class="absolute right-40 bottom-24 w-20 h-20 rounded-full bg-[#00e5cc]/20 hidden lg:block"></div>
+    <div class="max-w-lg w-full text-center">
 
-    <div class="relative max-w-6xl mx-auto px-6 py-24">
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-6">South Florida's Sign Shop</p>
-      <h1 class="font-display text-6xl md:text-8xl leading-[0.95] text-gray-900 mb-8">
-        Your<br />
-        Vision.<br />
-        <span class="text-[#00e5cc]">Every</span><br />
-        Sign.
+      <!-- Logo -->
+      <div class="font-display text-4xl mb-2">
+        <span style="color:#00e5cc;">OH!</span> SIGNS
+      </div>
+      <p class="text-xs font-bold tracking-[4px] text-gray-500 uppercase mb-16">Sign Shop · South Florida</p>
+
+      <!-- Main message -->
+      <h1 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+        Something<br />
+        <span style="color:#00e5cc;">great</span> is<br />
+        coming.
       </h1>
-      <p class="text-lg text-gray-500 max-w-md mb-10 leading-relaxed">
-        Custom signs, banners, vehicle wraps & more — crafted to make your business impossible to miss.
+
+      <p class="text-gray-400 text-sm leading-relaxed mb-12 max-w-sm mx-auto">
+        We're putting the finishing touches on our new website.
+        In the meantime, we're still open for business — reach out and let's get started on your project.
       </p>
-      <div class="flex flex-wrap gap-4">
-        <a
-          href="/quote"
-          class="bg-gray-900 text-white font-bold px-8 py-4 rounded-xl hover:bg-gray-700 transition-colors text-sm tracking-wide"
-        >
-          GET A QUOTE
-        </a>
-        <a
-          href="/shop"
-          class="border-2 border-gray-200 text-gray-900 font-bold px-8 py-4 rounded-xl hover:border-gray-400 transition-colors text-sm tracking-wide"
-        >
-          SHOP NOW
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <!-- Trust bar -->
-  <section class="bg-[#00e5cc]">
-    <div class="max-w-6xl mx-auto px-6 py-5 flex flex-wrap justify-center md:justify-between gap-6">
-      {trust.map(item => (
-        <div class="flex items-center gap-2 text-gray-900 font-bold text-sm">
-          <span class="text-lg">{item.icon}</span>
-          {item.label}
-        </div>
-      ))}
-    </div>
-  </section>
+      <!-- CTA -->
+      <a
+        href="mailto:info@ohsigns.shop"
+        class="inline-flex items-center gap-3 bg-[#00e5cc] text-gray-900 font-bold px-8 py-4 rounded-xl text-sm tracking-wide hover:bg-[#00b8a3] transition-colors"
+      >
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        info@ohsigns.shop
+      </a>
 
-  <!-- Services -->
-  <section class="max-w-6xl mx-auto px-6 py-24">
-    <div class="mb-14">
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-3">What We Do</p>
-      <h2 class="font-display text-4xl md:text-5xl text-gray-900">
-        Signs for every<br />need & budget.
-      </h2>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      {services.map(s => (
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-gray-100 transition-colors group">
-          <div class="text-4xl mb-5">{s.icon}</div>
-          <h3 class="font-display text-xl text-gray-900 mb-3">{s.title}</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+      <!-- Footer -->
+      <p class="text-gray-600 text-xs mt-16">&copy; {new Date().getFullYear()} OH! Signs LLC. All rights reserved.</p>
 
-  <!-- Process strip -->
-  <section class="bg-gray-950 text-white py-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-3 text-center">How It Works</p>
-      <h2 class="font-display text-3xl md:text-4xl text-center mb-14">Simple. Fast. Done right.</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {steps.map(item => (
-          <div class="text-center">
-            <div class="font-display text-6xl text-[#00e5cc]/20 mb-4">{item.step}</div>
-            <h3 class="font-display text-lg mb-3">{item.title}</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
-      </div>
     </div>
-  </section>
 
-  <!-- CTA Banner -->
-  <section class="max-w-6xl mx-auto px-6 py-24 text-center">
-    <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Ready?</p>
-    <h2 class="font-display text-4xl md:text-6xl text-gray-900 mb-8">
-      Ready to make<br />your mark?
-    </h2>
-    <a
-      href="/quote"
-      class="inline-block bg-[#00e5cc] text-gray-900 font-bold px-10 py-5 rounded-xl text-sm tracking-wide hover:bg-[#00b8a3] transition-colors"
-    >
-      GET A FREE QUOTE
-    </a>
-  </section>
-
-</Layout>
+  </body>
+</html>
