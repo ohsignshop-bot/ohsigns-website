@@ -76,4 +76,190 @@ html { scroll-behavior: smooth; }
   animation: pulse 2.5s ease-in-out infinite;
 }
 
+/* ── Multi-layer floating CTA button ──────────────────── */
+@keyframes layerFloat1 {
+  0%, 100% { transform: translate(-8px, 8px) rotate(-2deg); }
+  50%      { transform: translate(-12px, 4px) rotate(-1deg); }
+}
+@keyframes layerFloat2 {
+  0%, 100% { transform: translate(8px, -8px) rotate(2deg); }
+  50%      { transform: translate(12px, -4px) rotate(1deg); }
+}
+@keyframes layerFloat1Hover {
+  0%, 100% { transform: translate(-14px, 12px) rotate(-4deg) scale(1.04); }
+  50%      { transform: translate(-18px, 6px) rotate(-2deg) scale(1.04); }
+}
+@keyframes layerFloat2Hover {
+  0%, 100% { transform: translate(14px, -12px) rotate(4deg) scale(1.04); }
+  50%      { transform: translate(18px, -6px) rotate(2deg) scale(1.04); }
+}
+
+.cta-stack {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.cta-stack .layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.cta-stack .layer-blue {
+  background: #3B9AE1;
+  animation: layerFloat1 4s ease-in-out infinite;
+  opacity: 0.55;
+}
+.cta-stack .layer-red {
+  background: #E84020;
+  animation: layerFloat2 4.5s ease-in-out infinite;
+  opacity: 0.45;
+}
+.cta-stack:hover .layer-blue {
+  animation: layerFloat1Hover 3s ease-in-out infinite;
+  opacity: 0.7;
+}
+.cta-stack:hover .layer-red {
+  animation: layerFloat2Hover 3.5s ease-in-out infinite;
+  opacity: 0.6;
+}
+.cta-stack:active .layer-blue {
+  transform: translate(-4px, 4px) rotate(0deg) scale(0.97) !important;
+  animation: none;
+}
+.cta-stack:active .layer-red {
+  transform: translate(4px, -4px) rotate(0deg) scale(0.97) !important;
+  animation: none;
+}
+.cta-stack .layer-main {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  background: #FFE600;
+  color: #0a0a0f;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.cta-stack:hover .layer-main {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 30px rgba(255,230,0,0.3);
+}
+.cta-stack:active .layer-main {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* ── Accent line animated ─────────────────────────────── */
+@keyframes lineExpand {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+.accent-line {
+  height: 4px;
+  border-radius: 2px;
+  animation: lineExpand 0.8s ease 0.3s both;
+}
+
+/* ── Glow text on hover ───────────────────────────────── */
+.glow-text-hover {
+  transition: text-shadow 0.3s ease;
+}
+.glow-text-hover:hover {
+  text-shadow: 0 0 20px rgba(59,154,225,0.4), 0 0 40px rgba(59,154,225,0.15);
+}
+
+/* ── Layered section titles ───────────────────────────── */
+.title-layered {
+  position: relative;
+  display: inline-block;
+}
+.title-layered::before,
+.title-layered::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.title-layered::before {
+  color: #3B9AE1;
+  opacity: 0.15;
+  transform: translate(-4px, 4px);
+  animation: subtleDrift 8s ease-in-out infinite;
+}
+.title-layered::after {
+  color: #E84020;
+  opacity: 0.12;
+  transform: translate(4px, -4px);
+  animation: subtleDrift 8s ease-in-out 2s infinite reverse;
+}
+
+/* ── Glass card 3D lift ───────────────────────────────── */
+.glass-card-3d {
+  background: rgba(15,15,26,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #2a2a3a;
+  border-radius: 8px;
+  padding: 28px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+.glass-card-3d::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(59,154,225,0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.glass-card-3d:hover {
+  background: rgba(26,26,36,0.9);
+  border-color: #3a3a5a;
+  transform: translateY(-6px) rotateX(2deg) rotateY(-1deg);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(59,154,225,0.08);
+}
+.glass-card-3d:hover::before {
+  opacity: 1;
+}
+
+/* ── Stat number pop ──────────────────────────────────── */
+@keyframes countPop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.stat-pop {
+  animation: countPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* ── Colored underline on hover ───────────────────────── */
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3B9AE1;
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
+
 .font-display { font-family: 'Bebas Neue', 'Barlow Condensed', sans-serif; }

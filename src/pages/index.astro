@@ -59,18 +59,15 @@ const portfolio = [
       </p>
 
       <!-- CTAs -->
-      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
-        <a
-          href="/quote"
-          class="btn-glow"
-          style="background:#FFE600; color:#0a0a0f; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 36px; border-radius:20px; text-decoration:none; transition:all 0.25s;"
-          onmouseover="this.style.transform='translateY(-2px) scale(1.03)'"
-          onmouseout="this.style.transform='none'"
-        >
-          ⚡ GET A FREE QUOTE
-        </a>
+      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center; align-items:center;">
+        <div class="cta-stack">
+          <div class="layer layer-blue"></div>
+          <div class="layer layer-red"></div>
+          <a href="/quote" class="layer-main">⚡ GET A FREE QUOTE</a>
+        </div>
         <a
           href="/shop"
+          class="hover-underline"
           style="border:1.5px solid #3a3a4a; color:#A0A0B8; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 36px; border-radius:20px; text-decoration:none; transition:all 0.25s;"
           onmouseover="this.style.borderColor='#F5F5F5'; this.style.color='#F5F5F5'"
           onmouseout="this.style.borderColor='#3a3a4a'; this.style.color='#A0A0B8'"
@@ -88,15 +85,15 @@ const portfolio = [
 
       <!-- Section title -->
       <div class="fade-up" style="text-align:center; margin-bottom:48px;">
-        <h2 class="font-display" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">What We Do</h2>
-        <div style="width:60px; height:4px; background:#E84020; margin:0 auto 12px; border-radius:2px;"></div>
+        <h2 class="font-display title-layered" data-text="What We Do" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">What We Do</h2>
+        <div class="accent-line" style="background:#E84020; margin:0 auto 12px;"></div>
         <p style="font-size:0.95rem; color:#707080; letter-spacing:1px;">Signs, graphics &amp; wraps for every business.</p>
       </div>
 
       <!-- Grid -->
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
         {services.map((s, i) => (
-          <div class={`glass-card fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${s.color}; cursor:default;`}>
+          <div class={`glass-card-3d fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${s.color}; cursor:default;`}>
             <div style={`font-size:1.8rem; margin-bottom:10px; animation:float ${3 + (i % 3)}s ease-in-out infinite;`}>{s.icon}</div>
             <h3 class="font-display" style={`font-size:1.4rem; letter-spacing:2px; color:${s.color}; margin-bottom:6px;`}>{s.title}</h3>
             <p style="font-size:0.85rem; color:#707080; line-height:1.6;">{s.desc}</p>
@@ -111,7 +108,7 @@ const portfolio = [
     <div style="max-width:700px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; text-align:center;">
       {trust.map((t, i) => (
         <div class={`fade-up-d${i + 1}`}>
-          <div class="font-display" style={`font-size:clamp(2rem,4vw,3rem); letter-spacing:2px; color:#FFE600; animation:float ${4 + i}s ease-in-out infinite;`}>{t.num}</div>
+          <div class="font-display stat-pop" style={`font-size:clamp(2rem,4vw,3rem); letter-spacing:2px; color:#FFE600; animation:float ${4 + i}s ease-in-out infinite; animation-delay:${0.15 * i}s;`}>{t.num}</div>
           <div style="font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#707080; margin-top:4px;">{t.label}</div>
         </div>
       ))}
@@ -123,15 +120,16 @@ const portfolio = [
     <div style="max-width:900px; margin:0 auto;">
 
       <div class="fade-up" style="text-align:center; margin-bottom:48px;">
-        <h2 class="font-display" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">Recent Work</h2>
-        <div style="width:60px; height:4px; background:#3B9AE1; margin:0 auto 12px; border-radius:2px;"></div>
+        <h2 class="font-display title-layered" data-text="Recent Work" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">Recent Work</h2>
+        <div class="accent-line" style="background:#3B9AE1; margin:0 auto 12px;"></div>
         <p style="font-size:0.95rem; color:#707080; letter-spacing:1px;">A few things we've been working on.</p>
       </div>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
         {portfolio.map((p, i) => (
-          <div class={`glass-card fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${p.color};`}>
-            <div style="width:100%; height:140px; background:rgba(30,30,45,0.5); border-radius:4px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+          <div class={`glass-card-3d fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${p.color};`}>
+            <div style="width:100%; height:140px; background:rgba(30,30,45,0.5); border-radius:4px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; position:relative; overflow:hidden;">
+              <div style={`position:absolute; inset:0; background:linear-gradient(135deg, ${p.color}11 0%, transparent 60%);`}></div>
               <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; color:#3a3a55;">PHOTO</span>
             </div>
             <span style={`font-family:'Bebas Neue',sans-serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:${p.color};`}>{p.type}</span>
@@ -148,21 +146,17 @@ const portfolio = [
       <!-- Decorative glow -->
       <div style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:300px; height:200px; background:radial-gradient(ellipse,rgba(59,154,225,0.08) 0%,transparent 70%); pointer-events:none;"></div>
 
-      <h2 class="font-display" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px; position:relative;">
+      <h2 class="font-display title-layered" data-text="Ready to Make Your Mark?" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px; position:relative;">
         Ready to Make<br /><span style="color:#3B9AE1;">Your Mark?</span>
       </h2>
       <p style="font-size:1rem; color:#707080; margin-bottom:28px; position:relative;">
         Send us your idea and we'll get back with a quote within 24 hours.
       </p>
-      <a
-        href="/quote"
-        class="btn-glow"
-        style="display:inline-block; background:#FFE600; color:#0a0a0f; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 40px; border-radius:20px; text-decoration:none; transition:all 0.25s; position:relative;"
-        onmouseover="this.style.transform='translateY(-2px) scale(1.03)'"
-        onmouseout="this.style.transform='none'"
-      >
-        GET A FREE QUOTE →
-      </a>
+      <div class="cta-stack" style="position:relative;">
+        <div class="layer layer-blue"></div>
+        <div class="layer layer-red"></div>
+        <a href="/quote" class="layer-main">GET A FREE QUOTE →</a>
+      </div>
     </div>
   </section>
 
