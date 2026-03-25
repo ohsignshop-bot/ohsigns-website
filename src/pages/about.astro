@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const values = [
+  { icon: '🤝', title: 'We Keep It Personal', desc: 'You work directly with us — no call centers, no middlemen. Your project gets our full attention.' },
+  { icon: '⚡', title: 'Fast Without Cutting Corners', desc: 'We know your deadline matters. We move fast and deliver quality every time.' },
+  { icon: '🎨', title: 'Design Is Part of the Deal', desc: 'No designer? No problem. We help bring your vision to life from concept to final product.' },
+  { icon: '📍', title: 'Rooted in the Community', desc: 'We\'re a local South Florida business serving local businesses. When you win, we win.' },
+];
+---
+
+<Layout title="About" description="Family-owned sign shop in South Florida. Custom signs, banners, wraps & more.">
+
+  <!-- Hero -->
+  <section class="bg-gray-950 text-white py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Our Story</p>
+      <h1 class="font-['Archivo_Black',sans-serif] text-5xl md:text-7xl leading-tight">
+        Built by makers,<br />
+        <span class="text-[#00e5cc]">for businesses.</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <div>
+      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Who We Are</p>
+      <h2 class="font-['Archivo_Black',sans-serif] text-3xl text-gray-900 mb-6">
+        OH! Signs LLC
+      </h2>
+      <!-- PLACEHOLDER — replace with your actual story -->
+      <div class="space-y-4 text-gray-500 leading-relaxed">
+        <p>
+          OH! Signs was born from a simple idea: every business deserves great signage,
+          and getting it shouldn't be complicated or overpriced.
+        </p>
+        <p>
+          We're a family-owned shop based in South Florida, and we've been helping local
+          businesses make their mark with custom signs, wraps, banners, and more.
+        </p>
+        <p>
+          From a small window decal to a full vehicle fleet wrap — we handle it all
+          with the same attention to detail and personal service.
+        </p>
+      </div>
+    </div>
+    <!-- Accent block -->
+    <div class="bg-[#00e5cc] rounded-3xl p-12 text-gray-900">
+      <div class="font-['Archivo_Black',sans-serif] text-6xl mb-4">OH!</div>
+      <div class="font-['Archivo_Black',sans-serif] text-2xl mb-6">Every sign tells<br />your story.</div>
+      <p class="text-sm leading-relaxed text-gray-800">
+        We believe in doing things right — quality materials, sharp design, and a process
+        that respects your time and budget.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Why Us</p>
+      <h2 class="font-['Archivo_Black',sans-serif] text-3xl md:text-4xl text-gray-900 mb-14">
+        What makes us different.
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {values.map(v => (
+          <div class="bg-white rounded-2xl p-8 border border-gray-100">
+            <div class="text-3xl mb-4">{v.icon}</div>
+            <h3 class="font-['Archivo_Black',sans-serif] text-lg text-gray-900 mb-2">{v.title}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section class="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Get In Touch</p>
+      <h2 class="font-['Archivo_Black',sans-serif] text-3xl text-gray-900 mb-6">
+        Let's talk about<br />your next project.
+      </h2>
+      <ul class="space-y-3 text-gray-600 text-sm">
+        <li class="flex items-center gap-3">
+          <span class="text-[#00e5cc] font-bold">✉</span>
+          <a href="mailto:info@ohsigns.shop" class="hover:text-gray-900 transition-colors">info@ohsigns.shop</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="text-[#00e5cc] font-bold">📍</span>
+          <span>South Florida</span>
+        </li>
+      </ul>
+    </div>
+    <div class="flex flex-col gap-4">
+      <a
+        href="/quote"
+        class="bg-[#00e5cc] text-gray-900 font-bold px-8 py-5 rounded-xl text-center text-sm tracking-wide hover:bg-[#00b8a3] transition-colors"
+      >
+        GET A FREE QUOTE
+      </a>
+      <a
+        href="/shop"
+        class="border-2 border-gray-200 text-gray-900 font-bold px-8 py-5 rounded-xl text-center text-sm tracking-wide hover:border-gray-400 transition-colors"
+      >
+        BROWSE THE SHOP
+      </a>
+    </div>
+  </section>
+
+</Layout>

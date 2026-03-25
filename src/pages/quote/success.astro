@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Request Received" description="Your quote request has been received. We'll be in touch within 24 hours.">
+
+  <section class="min-h-[70vh] flex items-center justify-center px-6 py-20">
+    <div class="text-center max-w-lg">
+      <div class="w-20 h-20 rounded-full bg-[#00e5cc]/15 flex items-center justify-center mx-auto mb-8 text-4xl">
+        ✓
+      </div>
+      <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Request Received</p>
+      <h1 class="font-['Archivo_Black',sans-serif] text-4xl md:text-5xl text-gray-900 mb-4">
+        We've got it!
+      </h1>
+      <p class="text-gray-500 text-sm leading-relaxed mb-3">
+        Your quote request has been submitted. We'll review the details and get back
+        to you within 24 hours with a custom quote.
+      </p>
+      <p id="ref-display" class="text-xs text-gray-400 mb-10 font-mono"></p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="bg-gray-900 text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-gray-700 transition-colors"
+        >
+          BACK TO HOME
+        </a>
+        <a
+          href="/shop"
+          class="border-2 border-gray-200 text-gray-900 font-bold px-8 py-4 rounded-xl text-sm hover:border-gray-400 transition-colors"
+        >
+          BROWSE THE SHOP
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  const el = document.getElementById('ref-display');
+  if (ref && el) el.textContent = `Reference: ${ref}`;
+</script>

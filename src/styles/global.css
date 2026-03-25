@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #00e5cc;
+  --color-accent-dark: #00b8a3;
+  --font-display: 'Archivo Black', sans-serif;
+}

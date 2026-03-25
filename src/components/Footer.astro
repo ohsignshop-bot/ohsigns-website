@@ -1,0 +1,46 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-gray-950 text-gray-400 mt-24">
+  <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- Brand -->
+    <div>
+      <div class="font-['Archivo_Black',sans-serif] text-xl text-white mb-3">
+        <span class="text-[#00e5cc]">OH!</span> SIGNS
+      </div>
+      <p class="text-sm leading-relaxed">
+        Custom signs, banners, vehicle wraps & more — made with care for businesses that want to stand out.
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Pages</div>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+        <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
+        <li><a href="/shop" class="hover:text-white transition-colors">Shop</a></li>
+        <li><a href="/quote" class="hover:text-white transition-colors">Get a Quote</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Contact</div>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="mailto:info@ohsigns.shop" class="hover:text-white transition-colors">
+            info@ohsigns.shop
+          </a>
+        </li>
+        <li class="text-gray-500">South Florida</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-800 max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-600">
+    <span>&copy; {year} OH! Signs LLC. All rights reserved.</span>
+    <a href="/quote" class="text-[#00e5cc] hover:underline font-medium">Get a Free Quote →</a>
+  </div>
+</footer>

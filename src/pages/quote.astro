@@ -1,0 +1,317 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const productTypes = [
+  'Banner / Vinyl Banner',
+  'Vehicle Wrap (Full)',
+  'Vehicle Wrap (Partial)',
+  'Window Graphics / Decal',
+  'Wall Mural / Wall Graphics',
+  'Yard Sign',
+  'Foam Board / Rigid Sign',
+  'Floor Graphics',
+  'Retractable Banner Stand',
+  'Other / Custom',
+];
+
+const budgets = [
+  'Under $200',
+  '$200 – $500',
+  '$500 – $1,000',
+  '$1,000 – $3,000',
+  '$3,000+',
+  'Not sure yet',
+];
+---
+
+<Layout title="Get a Quote" description="Request a custom quote from OH! Signs. Banners, wraps, signs & more.">
+
+  <section class="max-w-2xl mx-auto px-6 py-20">
+    <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Free Quote</p>
+    <h1 class="font-['Archivo_Black',sans-serif] text-4xl md:text-5xl text-gray-900 mb-4">
+      Let's build<br />something great.
+    </h1>
+    <p class="text-gray-500 text-sm mb-10 leading-relaxed">
+      Fill out the form below and we'll get back to you within 24 hours with a detailed quote.
+      The more detail you give us, the faster we can help.
+    </p>
+
+    <!-- Error message -->
+    <div id="form-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-5 py-4 mb-6"></div>
+
+    <form id="quote-form" class="space-y-6" novalidate>
+
+      <!-- Name + Email -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="customer_name">
+            Full Name <span class="text-[#00e5cc]">*</span>
+          </label>
+          <input
+            type="text"
+            id="customer_name"
+            name="customer_name"
+            required
+            placeholder="Jane Smith"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition"
+          />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="email">
+            Email <span class="text-[#00e5cc]">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="jane@business.com"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition"
+          />
+        </div>
+      </div>
+
+      <!-- Phone + Product -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="phone">
+            Phone
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="(555) 000-0000"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition"
+          />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="product_type">
+            Product Type <span class="text-[#00e5cc]">*</span>
+          </label>
+          <select
+            id="product_type"
+            name="product_type"
+            required
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition bg-white"
+          >
+            <option value="">Select a product…</option>
+            {productTypes.map(p => <option value={p}>{p}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <!-- Dimensions + Qty -->
+      <div class="grid grid-cols-3 gap-5">
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="width_in">
+            Width (in)
+          </label>
+          <input
+            type="number"
+            id="width_in"
+            name="width_in"
+            min="0"
+            placeholder='e.g. 48"'
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition"
+          />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="height_in">
+            Height (in)
+          </label>
+          <input
+            type="number"
+            id="height_in"
+            name="height_in"
+            min="0"
+            placeholder='e.g. 24"'
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition"
+          />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="qty">
+            Quantity
+          </label>
+          <input
+            type="number"
+            id="qty"
+            name="qty"
+            min="1"
+            value="1"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition"
+          />
+        </div>
+      </div>
+
+      <!-- Budget -->
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="budget">
+          Budget Range
+        </label>
+        <select
+          id="budget"
+          name="budget"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition bg-white"
+        >
+          <option value="">Select a range…</option>
+          {budgets.map(b => <option value={b}>{b}</option>)}
+        </select>
+      </div>
+
+      <!-- Comments -->
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="comments">
+          Project Details
+        </label>
+        <textarea
+          id="comments"
+          name="comments"
+          rows="4"
+          placeholder="Describe your project — colors, material, intended use, deadline, any other details that help us understand what you need…"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#00e5cc] focus:ring-2 focus:ring-[#00e5cc]/20 transition resize-y"
+        ></textarea>
+      </div>
+
+      <!-- Artwork upload -->
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="artwork">
+          Artwork / Logo <span class="text-gray-400 font-normal normal-case">(optional)</span>
+        </label>
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-gray-200 rounded-xl px-6 py-8 text-center hover:border-[#00e5cc] transition-colors cursor-pointer"
+        >
+          <div class="text-3xl mb-2">📎</div>
+          <p class="text-sm text-gray-500 mb-1">Drop your file here or <span class="text-[#00e5cc] font-semibold">browse</span></p>
+          <p class="text-xs text-gray-400">PNG, JPG, PDF, AI, SVG — max 20MB</p>
+          <input
+            type="file"
+            id="artwork"
+            name="artwork"
+            accept="image/*,.pdf,.ai,.svg,.eps"
+            class="hidden"
+          />
+        </div>
+        <div id="file-info" class="hidden mt-2 text-xs text-gray-500 flex items-center gap-2">
+          <span class="text-[#00e5cc]">✓</span>
+          <span id="file-name"></span>
+          <button type="button" id="remove-file" class="text-red-400 hover:text-red-600 ml-auto">Remove</button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        id="submit-btn"
+        class="w-full bg-gray-900 text-white font-bold py-5 rounded-xl text-sm tracking-wide hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        SEND REQUEST
+      </button>
+
+      <p class="text-xs text-gray-400 text-center">
+        We'll reply within 24 hours with a detailed quote.
+      </p>
+    </form>
+  </section>
+
+</Layout>
+
+<script>
+  const BMS_URL = 'https://bms.ohsigns.shop';
+
+  // File drop zone
+  const dropZone = document.getElementById('drop-zone')!;
+  const fileInput = document.getElementById('artwork') as HTMLInputElement;
+  const fileInfo = document.getElementById('file-info')!;
+  const fileName = document.getElementById('file-name')!;
+  const removeBtn = document.getElementById('remove-file')!;
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#00e5cc]'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-[#00e5cc]'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('border-[#00e5cc]');
+    const file = e.dataTransfer?.files[0];
+    if (file) setFile(file);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files?.[0]) setFile(fileInput.files[0]);
+  });
+  removeBtn.addEventListener('click', () => {
+    fileInput.value = '';
+    fileInfo.classList.add('hidden');
+    dropZone.classList.remove('hidden');
+  });
+
+  function setFile(file: File) {
+    fileName.textContent = `${file.name} (${(file.size / 1024).toFixed(0)} KB)`;
+    fileInfo.classList.remove('hidden');
+  }
+
+  // Form submission
+  const form = document.getElementById('quote-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const errorDiv = document.getElementById('form-error')!;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorDiv.classList.add('hidden');
+
+    const data: Record<string, any> = {
+      customer_name: (form.customer_name as HTMLInputElement).value.trim(),
+      email: (form.email as HTMLInputElement).value.trim(),
+      phone: (form.phone as HTMLInputElement).value.trim(),
+      product_type: (form.product_type as HTMLSelectElement).value,
+      width_in: parseFloat((form.width_in as HTMLInputElement).value) || 0,
+      height_in: parseFloat((form.height_in as HTMLInputElement).value) || 0,
+      qty: parseInt((form.qty as HTMLInputElement).value) || 1,
+      budget: (form.budget as HTMLSelectElement).value,
+      comments: (form.comments as HTMLTextAreaElement).value.trim(),
+    };
+
+    if (!data.customer_name || !data.email || !data.product_type) {
+      errorDiv.textContent = 'Please fill in Name, Email, and Product Type.';
+      errorDiv.classList.remove('hidden');
+      return;
+    }
+
+    const file = fileInput.files?.[0];
+    if (file) {
+      try {
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve((reader.result as string).split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+        data.artwork_base64 = base64;
+        data.artwork_filename = file.name;
+      } catch {
+        // artwork read failed — submit without it
+      }
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(`${BMS_URL}/api/public/requests`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error(await res.text());
+      const result = await res.json();
+      window.location.href = `/quote/success?ref=${result.req_num}`;
+    } catch (err: any) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'SEND REQUEST';
+      errorDiv.textContent = 'Something went wrong. Please try again or email us at info@ohsigns.shop.';
+      errorDiv.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+</script>

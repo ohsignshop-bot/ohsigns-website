@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Shop" description="Shop ready-made signs, banners, and print products from OH! Signs.">
+
+  <section class="max-w-6xl mx-auto px-6 pt-16 pb-6">
+    <p class="text-xs font-bold tracking-[4px] text-[#00e5cc] uppercase mb-4">Our Store</p>
+    <h1 class="font-['Archivo_Black',sans-serif] text-4xl md:text-5xl text-gray-900 mb-3">
+      Ready-made products.
+    </h1>
+    <p class="text-gray-500 text-sm mb-2">
+      Browse and order standard products online. Need something custom?
+      <a href="/quote" class="text-[#00e5cc] font-semibold hover:underline">Get a quote →</a>
+    </p>
+  </section>
+
+  <!-- Ecwid store embed -->
+  <section class="max-w-6xl mx-auto px-6 pb-24 min-h-[600px]">
+    <div id="my-store-131689503"></div>
+  </section>
+
+</Layout>
+
+<script is:inline>
+  window.ecwid_script_defer = true;
+  window.ecwid_dynamic_widgets = true;
+  (function(w, d, s) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById('ecwid-script')) return;
+    js = d.createElement(s);
+    js.id = 'ecwid-script';
+    js.src = 'https://app.ecwid.com/script.js?131689503';
+    js.defer = true;
+    fjs.parentNode.insertBefore(js, fjs);
+  })(window, document, 'script');
+  xProductBrowser("appId=aZAFDm27wC", "id=my-store-131689503");
+</script>
