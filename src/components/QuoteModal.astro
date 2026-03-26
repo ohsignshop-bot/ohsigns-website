@@ -1,5 +1,5 @@
 ---
-const productTypes = [
+const fallbackProductTypes = [
   'Banner / Vinyl Banner',
   'Vehicle Wrap (Full)',
   'Vehicle Wrap (Partial)',
@@ -78,7 +78,7 @@ const budgets = [
           <label class="form-label">PRODUCT TYPE <span style="color:var(--blue);">*</span></label>
           <select name="product_type" required class="form-input" style="cursor:pointer;">
             <option value="">Select a product…</option>
-            {productTypes.map(p => <option value={p}>{p}</option>)}
+            {fallbackProductTypes.map(p => <option value={p}>{p}</option>)}
           </select>
         </div>
       </div>
@@ -151,6 +151,32 @@ const budgets = [
   const fileInfo = document.getElementById('qm-file-info');
   const fileNameEl = document.getElementById('qm-file-name');
   const removeBtn = document.getElementById('qm-remove-file');
+  const productSelect = form ? form.querySelector('select[name="product_type"]') : null;
+
+  // Fetch templates from BMS to populate product type dropdown
+  (function loadTemplates() {
+    fetch(BMS_URL + '/api/public/templates')
+      .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+      .then(function(templates) {
+        if (!productSelect || !templates || templates.length === 0) return;
+        // Keep the placeholder, replace the rest
+        var placeholder = productSelect.querySelector('option[value=""]');
+        productSelect.innerHTML = '';
+        if (placeholder) productSelect.appendChild(placeholder);
+        templates.forEach(function(t) {
+          var opt = document.createElement('option');
+          opt.value = t.name;
+          opt.textContent = t.name;
+          productSelect.appendChild(opt);
+        });
+        // Always add "Other / Custom" at the end
+        var other = document.createElement('option');
+        other.value = 'Other / Custom';
+        other.textContent = 'Other / Custom';
+        productSelect.appendChild(other);
+      })
+      .catch(function() { /* keep fallback options from SSR */ });
+  })();
 
   // Open modal — any element with data-open-quote
   function openModal() {
