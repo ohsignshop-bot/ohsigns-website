@@ -1,14 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const services = [
-  { icon: '🖨️', title: 'Cut Vinyl', desc: 'Precision-cut lettering, logos, and decals in any color — perfect for windows, vehicles, and walls.', color: '#3B9AE1' },
-  { icon: '🎨', title: 'Fine-Art Prints', desc: 'Full-color printed graphics on premium vinyl — banners, wraps, stickers, and large format.', color: '#E84020' },
-  { icon: '🪧', title: 'Custom Signs', desc: 'Yard signs, A-frames, foam board, acrylic — rigid signage for any indoor or outdoor need.', color: '#FFE600' },
-  { icon: '🚗', title: 'Vehicle Wraps', desc: 'Full and partial vehicle wraps that turn your ride into a moving billboard.', color: '#3B9AE1' },
-  { icon: '🏢', title: 'Wall & Window', desc: 'Storefront graphics, wall murals, frosted film, and floor decals.', color: '#E84020' },
-  { icon: '⚡', title: 'Rush Orders', desc: "Tight deadline? We move fast without cutting corners. Let's make it happen.", color: '#FFE600' },
-];
+import SectionTitle from '../components/SectionTitle.astro';
+import Card from '../components/Card.astro';
+import Btn from '../components/Btn.astro';
+import { services } from '../data/services';
+import { testimonials } from '../data/testimonials';
+import { portfolio } from '../data/portfolio';
 
 const trust = [
   { num: '500+', label: 'Signs Made' },
@@ -17,170 +14,160 @@ const trust = [
   { num: 'NC', label: 'Local Business' },
 ];
 
-const portfolio = [
-  { type: 'Vehicle Wrap', title: 'Full Fleet Branding — Local HVAC', color: '#E84020' },
-  { type: 'Vinyl Banner', title: '10ft Grand Opening Banner', color: '#FFE600' },
-  { type: 'Window Graphics', title: 'Storefront Privacy Film + Logo', color: '#3B9AE1' },
-  { type: 'Yard Signs', title: 'Campaign Signs — 200 Units', color: '#E84020' },
-];
-
 const tags = ['Vinyl Decals', 'Fine-Art Prints', 'Business Branding', 'UV Prints', 'Print/Copy Services'];
 ---
 
 <Layout title="Home" description="OH! Signs — Custom signs, banners, vehicle wraps & more. Handcrafted in Winston-Salem, NC.">
 
-  <!-- ── HERO ────────────────────────────────────────────── -->
+  <!-- ── HERO ──────────────────────────────────────── -->
   <section style="position:relative; padding:80px 24px 60px; text-align:center; overflow:hidden;">
-    <!-- Decorative radial glows -->
-    <div style="position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(ellipse,rgba(59,154,225,0.1) 0%,transparent 70%); pointer-events:none;"></div>
-    <div style="position:absolute; bottom:0; right:10%; width:400px; height:300px; background:radial-gradient(ellipse,rgba(232,64,32,0.06) 0%,transparent 70%); pointer-events:none;"></div>
+    <div style="position:absolute; top:-80px; left:50%; transform:translateX(-50%); width:600px; height:350px; background:radial-gradient(ellipse,rgba(0,153,255,0.08) 0%,transparent 70%); pointer-events:none;"></div>
 
-    <div style="max-width:800px; margin:0 auto; position:relative;">
+    <div style="max-width:760px; margin:0 auto; position:relative;">
 
       <!-- Logo -->
-      <div class="fade-up" style="margin-bottom:16px;">
-        <span style="font-family:'Bebas Neue',sans-serif; font-size:3.5rem; letter-spacing:2px; color:#E84020; font-weight:700;">OH!</span>
-        <span style="font-family:'Dancing Script',cursive; font-size:4.5rem; color:#3B9AE1; font-weight:700; position:relative; top:4px;">Signs</span>
+      <div class="fade-up" style="margin-bottom:14px;">
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:3.2rem; letter-spacing:2px; color:var(--red);">OH!</span>
+        <span style="font-family:'Dancing Script',cursive; font-size:4rem; color:var(--blue); position:relative; top:3px;">Signs</span>
       </div>
 
       <!-- Eyebrow -->
-      <p class="fade-up-d1" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:24px;">
+      <p class="fade-up-d1 font-mono" style="font-size:0.75rem; letter-spacing:4px; color:var(--text-dim); text-transform:uppercase; margin-bottom:20px;">
         Winston-Salem, NC — Custom Sign Shop
       </p>
 
-      <!-- Paint stroke decoration -->
-      <div class="fade-up-d1" style="max-width:500px; margin:0 auto 32px; height:8px; border-radius:4px; position:relative; overflow:hidden;">
-        <div style="position:absolute; inset:0; background:linear-gradient(90deg, #E84020 0%, #FFE600 25%, #3B9AE1 50%, #E84020 75%, #FFE600 100%); background-size:200% 100%; animation:shimmer 3s linear infinite;"></div>
-        <div style="position:absolute; inset:0; mask-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 8%22><path d=%22M0,4 Q50,0 100,4 T200,4 T300,5 T400,3 T500,4%22 fill=%22black%22 stroke=%22black%22 stroke-width=%228%22/></svg>'); -webkit-mask-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 500 8%22><path d=%22M0,4 Q50,0 100,4 T200,4 T300,5 T400,3 T500,4%22 fill=%22black%22 stroke=%22black%22 stroke-width=%228%22/></svg>'); mask-size:100% 100%; -webkit-mask-size:100% 100%; background:linear-gradient(90deg, #E84020 0%, #FFE600 30%, #3B9AE1 60%, #E84020 100%);"></div>
-      </div>
+      <!-- Paint stroke -->
+      <div class="fade-up-d1" style="max-width:420px; margin:0 auto 28px; height:6px; border-radius:3px; background:linear-gradient(90deg, var(--red) 0%, var(--yellow) 35%, var(--blue) 65%, var(--red) 100%); background-size:200% 100%; animation:shimmer 4s linear infinite;"></div>
 
       <!-- Headline -->
-      <div class="fade-up-d2" style="margin-bottom:24px;">
-        <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(3.5rem,10vw,7rem); line-height:0.95; letter-spacing:4px; margin:0;">
-          <span style="display:block; color:#F5F5F5;">CREATE.</span>
-          <span class="title-layered" data-text="PRINT." style="display:block; color:#E84020; font-weight:700;">PRINT.</span>
-          <span class="title-layered" data-text="IMPRESS." style="display:block; color:#FFE600;">IMPRESS.</span>
+      <div class="fade-up-d2" style="margin-bottom:20px;">
+        <h1 class="font-display" style="font-size:clamp(3rem,9vw,6.5rem); line-height:0.95; letter-spacing:4px; margin:0;">
+          <span style="display:block; color:var(--text);">CREATE.</span>
+          <span style="display:block; color:var(--red);">PRINT.</span>
+          <span style="display:block; color:var(--yellow);">IMPRESS.</span>
         </h1>
       </div>
 
       <!-- Sub-copy -->
-      <p class="fade-up-d3" style="font-size:1rem; color:#707080; line-height:1.7; max-width:560px; margin:0 auto 28px; font-weight:400;">
-        Small shop, big output — Fine-art Prints, vinyl decals, custom signs, UV print &amp; one-off designs built for artists and businesses that want to stand out. Taking orders now.
+      <p class="fade-up-d3" style="font-size:1rem; color:var(--text-muted); line-height:1.75; max-width:540px; margin:0 auto 24px;">
+        Small shop, big output — Fine-art prints, vinyl decals, custom signs, UV print &amp; one-off designs built for artists and businesses that want to stand out. Taking orders now.
       </p>
 
       <!-- Service tags -->
-      <div class="fade-up-d3" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:36px;">
+      <div class="fade-up-d3" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
         {tags.map((tag, i) => (
-          <span style={`font-family:'Bebas Neue',sans-serif; font-size:0.8rem; letter-spacing:2px; padding:6px 16px; border-radius:6px; border:1.5px solid ${['#3B9AE1','#E84020','#FFE600','#3B9AE1','#E84020'][i]}; color:${['#3B9AE1','#E84020','#FFE600','#3B9AE1','#E84020'][i]}; transition:all 0.25s; cursor:default;`}>
+          <span class="tag" style={`border-color:${['var(--blue)','var(--red)','var(--yellow)','var(--blue)','var(--red)'][i]}40; color:${['var(--blue)','var(--red)','var(--yellow)','var(--blue)','var(--red)'][i]};`}>
             {tag.toUpperCase()}
           </span>
         ))}
       </div>
 
       <!-- CTAs -->
-      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center; align-items:center;">
-        <div class="cta-stack">
-          <div class="layer layer-blue"></div>
-          <div class="layer layer-red"></div>
-          <a href="/quote" class="layer-main">GET A FREE QUOTE</a>
-        </div>
-        <a
-          href="/shop"
-          style="border:1.5px solid #3a3a4a; color:#A0A0B8; font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:3px; padding:14px 36px; border-radius:20px; text-decoration:none; transition:all 0.25s;"
-          onmouseover="this.style.borderColor='#F5F5F5'; this.style.color='#F5F5F5'"
-          onmouseout="this.style.borderColor='#3a3a4a'; this.style.color='#A0A0B8'"
-        >
-          SHOP NOW
-        </a>
+      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center;">
+        <Btn href="/quote" variant="cta">GET A FREE QUOTE</Btn>
+        <Btn href="/shop" variant="outline">SHOP NOW</Btn>
       </div>
 
-      <!-- Bottom info line -->
-      <p class="fade-up-d5" style="font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:3px; color:#3a3a55; text-transform:uppercase; margin-top:32px;">
+      <!-- Bottom info -->
+      <p class="fade-up-d5 font-mono" style="font-size:0.65rem; letter-spacing:3px; color:var(--text-dim); text-transform:uppercase; margin-top:28px;">
         info@ohsigns.shop &nbsp;—&nbsp; fast response &nbsp;—&nbsp; quality work
       </p>
 
     </div>
   </section>
 
-  <!-- ── SERVICES ────────────────────────────────────────── -->
-  <section style="padding:80px 24px;">
-    <div style="max-width:900px; margin:0 auto;">
+  <!-- ── SERVICES PREVIEW ──────────────────────────── -->
+  <section style="padding:60px 24px;">
+    <div style="max-width:960px; margin:0 auto;">
+      <SectionTitle eyebrow="What We Do" title="Our Services" subtitle="Signs, graphics & wraps for every business." accentColor="var(--red)" />
 
-      <!-- Section title -->
-      <div class="fade-up" style="text-align:center; margin-bottom:48px;">
-        <h2 class="font-display title-layered" data-text="What We Do" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">What We Do</h2>
-        <div class="accent-line" style="background:#E84020; margin:0 auto 12px;"></div>
-        <p style="font-size:0.95rem; color:#707080; letter-spacing:1px;">Signs, graphics &amp; wraps for every business.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+        {services.slice(0, 6).map((s, i) => (
+          <Card accentColor={s.color} class={`fade-up-d${(i % 3) + 1}`}>
+            <div style={`font-size:1.6rem; margin-bottom:8px; animation:float ${3 + (i % 3)}s ease-in-out infinite;`}>{s.icon}</div>
+            <h3 class="font-display" style={`font-size:1.25rem; letter-spacing:2px; color:${s.color}; margin-bottom:4px;`}>{s.title}</h3>
+            <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.55;">{s.desc}</p>
+          </Card>
+        ))}
       </div>
 
-      <!-- Grid -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
-        {services.map((s, i) => (
-          <div class={`glass-card-3d fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${s.color}; cursor:default;`}>
-            <div style={`font-size:1.8rem; margin-bottom:10px; animation:float ${3 + (i % 3)}s ease-in-out infinite;`}>{s.icon}</div>
-            <h3 class="font-display" style={`font-size:1.4rem; letter-spacing:2px; color:${s.color}; margin-bottom:6px;`}>{s.title}</h3>
-            <p style="font-size:0.85rem; color:#707080; line-height:1.6;">{s.desc}</p>
-          </div>
-        ))}
+      <div style="text-align:center; margin-top:28px;">
+        <Btn href="/services" variant="outline" size="sm">VIEW ALL SERVICES →</Btn>
       </div>
     </div>
   </section>
 
-  <!-- ── STATS ───────────────────────────────────────────── -->
-  <section style="padding:60px 24px;">
-    <div style="max-width:700px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; text-align:center;">
+  <!-- ── TRUST STATS ───────────────────────────────── -->
+  <section style="padding:40px 24px;">
+    <div style="max-width:640px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; text-align:center;">
       {trust.map((t, i) => (
         <div class={`fade-up-d${i + 1}`}>
-          <div class="font-display stat-pop" style={`font-size:clamp(2rem,4vw,3rem); letter-spacing:2px; color:#FFE600; animation:float ${4 + i}s ease-in-out infinite;`}>{t.num}</div>
-          <div style="font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#707080; margin-top:4px;">{t.label}</div>
+          <div class="stat-num font-display" style={`font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:2px; animation:float ${4 + i}s ease-in-out infinite;`}>{t.num}</div>
+          <div class="font-mono" style="font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-top:4px;">{t.label}</div>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- ── RECENT WORK ─────────────────────────────────────── -->
-  <section style="padding:80px 24px;">
-    <div style="max-width:900px; margin:0 auto;">
+  <!-- ── TESTIMONIALS ──────────────────────────────── -->
+  <section style="padding:60px 24px;">
+    <div style="max-width:960px; margin:0 auto;">
+      <SectionTitle eyebrow="What Customers Say" title="Reviews" accentColor="var(--yellow)" />
 
-      <div class="fade-up" style="text-align:center; margin-bottom:48px;">
-        <h2 class="font-display title-layered" data-text="Recent Work" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">Recent Work</h2>
-        <div class="accent-line" style="background:#3B9AE1; margin:0 auto 12px;"></div>
-        <p style="font-size:0.95rem; color:#707080; letter-spacing:1px;">A few things we've been working on.</p>
-      </div>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px;">
-        {portfolio.map((p, i) => (
-          <div class={`glass-card-3d fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${p.color};`}>
-            <div style="width:100%; height:140px; background:rgba(30,30,45,0.5); border-radius:4px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; position:relative; overflow:hidden;">
-              <div style={`position:absolute; inset:0; background:linear-gradient(135deg, ${p.color}11 0%, transparent 60%);`}></div>
-              <span style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; color:#3a3a55;">PHOTO</span>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;">
+        {testimonials.slice(0, 3).map((t, i) => (
+          <Card class={`fade-up-d${i + 1}`}>
+            <div style="margin-bottom:12px;">
+              {Array.from({length: t.rating}).map(() => (
+                <span style="color:var(--yellow); font-size:0.9rem;">★</span>
+              ))}
             </div>
-            <span style={`font-family:'Bebas Neue',sans-serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:${p.color};`}>{p.type}</span>
-            <h3 class="font-display" style="font-size:1.3rem; letter-spacing:1px; color:#F5F5F5; margin-top:4px;">{p.title}</h3>
-          </div>
+            <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.65; margin-bottom:16px; font-style:italic;">"{t.quote}"</p>
+            <div>
+              <div class="font-display" style="font-size:0.95rem; letter-spacing:1px; color:var(--text);">{t.author}</div>
+              <div class="font-mono" style="font-size:0.65rem; letter-spacing:1px; color:var(--text-dim);">{t.company}</div>
+            </div>
+          </Card>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ── CTA ─────────────────────────────────────────────── -->
-  <section style="padding:80px 24px;">
-    <div class="glass-card fade-up" style="max-width:700px; margin:0 auto; text-align:center; padding:50px 36px; border-top:3px solid #3B9AE1; position:relative; overflow:hidden;">
-      <!-- Decorative glow -->
-      <div style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:300px; height:200px; background:radial-gradient(ellipse,rgba(59,154,225,0.08) 0%,transparent 70%); pointer-events:none;"></div>
+  <!-- ── PORTFOLIO PREVIEW ─────────────────────────── -->
+  <section style="padding:60px 24px;">
+    <div style="max-width:960px; margin:0 auto;">
+      <SectionTitle eyebrow="Our Work" title="Recent Projects" subtitle="A few things we've been working on." accentColor="var(--blue)" />
 
-      <h2 class="font-display title-layered" data-text="Ready to Make Your Mark?" style="font-size:clamp(2.2rem,5vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px; position:relative;">
-        Ready to Make<br /><span style="color:#3B9AE1;">Your Mark?</span>
-      </h2>
-      <p style="font-size:1rem; color:#707080; margin-bottom:28px; position:relative;">
-        Send us your idea and we'll get back with a quote within 24 hours.
-      </p>
-      <div class="cta-stack" style="position:relative;">
-        <div class="layer layer-blue"></div>
-        <div class="layer layer-red"></div>
-        <a href="/quote" class="layer-main">GET A FREE QUOTE →</a>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px;">
+        {portfolio.slice(0, 4).map((p, i) => (
+          <Card accentColor={p.color} class={`fade-up-d${(i % 3) + 1}`}>
+            <div style="width:100%; height:130px; background:rgba(20,20,35,0.6); border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+              <span class="font-display" style="font-size:0.85rem; letter-spacing:3px; color:var(--text-dim);">PHOTO</span>
+            </div>
+            <span class="font-mono" style={`font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:${p.color};`}>{p.type}</span>
+            <h3 class="font-display" style="font-size:1.15rem; letter-spacing:1px; color:var(--text); margin-top:4px;">{p.title}</h3>
+          </Card>
+        ))}
+      </div>
+
+      <div style="text-align:center; margin-top:28px;">
+        <Btn href="/portfolio" variant="outline" size="sm">VIEW ALL PROJECTS →</Btn>
       </div>
     </div>
+  </section>
+
+  <!-- ── BOTTOM CTA ────────────────────────────────── -->
+  <section style="padding:60px 24px;">
+    <Card accentSide="top" accentColor="var(--blue)" class="fade-up" style="max-width:680px; margin:0 auto; text-align:center; padding:44px 32px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:-40px; left:50%; transform:translateX(-50%); width:280px; height:180px; background:radial-gradient(ellipse,rgba(0,153,255,0.06) 0%,transparent 70%); pointer-events:none;"></div>
+      <h2 class="font-display section-heading" style="position:relative;">
+        Ready to Make<br /><span style="color:var(--blue);">Your Mark?</span>
+      </h2>
+      <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:24px; position:relative;">
+        Send us your idea and we'll get back with a quote within 24 hours.
+      </p>
+      <Btn href="/quote" variant="cta">GET A FREE QUOTE →</Btn>
+    </Card>
   </section>
 
 </Layout>

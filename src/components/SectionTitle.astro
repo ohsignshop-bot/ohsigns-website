@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  accentColor?: string;
+  align?: 'center' | 'left';
+}
+
+const { eyebrow, title, subtitle, accentColor = 'var(--blue)', align = 'center' } = Astro.props;
+---
+
+<div style={`text-align:${align}; margin-bottom:40px;`}>
+  {eyebrow && (
+    <p class="fade-up section-eyebrow">{eyebrow}</p>
+  )}
+  <h2 class="fade-up-d1 section-heading">{title}</h2>
+  <div class="fade-up-d2 accent-line" style={`background:${accentColor}; ${align === 'center' ? 'margin:0 auto 12px;' : 'margin:0 0 12px;'}`}></div>
+  {subtitle && (
+    <p class="fade-up-d3" style={`font-size:0.95rem; color:var(--text-muted); max-width:520px; ${align === 'center' ? 'margin:0 auto;' : ''}`}>{subtitle}</p>
+  )}
+</div>

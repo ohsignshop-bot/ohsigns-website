@@ -1,118 +1,112 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const services = [
-  {
-    icon: '✂️',
-    title: 'Cut Vinyl & Decals',
-    desc: 'Precision-cut lettering, logos, and decals in any color. Perfect for windows, vehicles, walls, and storefront displays. Durable outdoor vinyl that lasts.',
-    color: '#3B9AE1',
-    tags: ['Window Lettering', 'Logo Decals', 'Wall Vinyl', 'Die-Cut Stickers'],
-  },
-  {
-    icon: '🖨️',
-    title: 'Fine-Art & UV Prints',
-    desc: 'Full-color printing on premium materials — canvas, photo paper, acrylic, and more. Gallery-quality output for artists, photographers, and businesses.',
-    color: '#E84020',
-    tags: ['Canvas Prints', 'Photo Prints', 'UV Direct Print', 'Giclee'],
-  },
-  {
-    icon: '🪧',
-    title: 'Custom Signs',
-    desc: 'Yard signs, A-frames, foam board, acrylic, and corrugated plastic. Rigid signage for any indoor or outdoor need, from real estate to events.',
-    color: '#FFE600',
-    tags: ['Yard Signs', 'A-Frames', 'Foam Board', 'Acrylic Signs'],
-  },
-  {
-    icon: '🚗',
-    title: 'Vehicle Wraps',
-    desc: 'Full and partial vehicle wraps that turn your car, van, or truck into a moving billboard. Professional installation and premium 3M / Avery materials.',
-    color: '#3B9AE1',
-    tags: ['Full Wraps', 'Partial Wraps', 'Fleet Graphics', 'Magnetic Signs'],
-  },
-  {
-    icon: '🏢',
-    title: 'Wall & Window Graphics',
-    desc: 'Storefront window graphics, privacy film, wall murals, and floor decals. Transform any space with custom large-format graphics.',
-    color: '#E84020',
-    tags: ['Wall Murals', 'Window Film', 'Floor Graphics', 'Privacy Film'],
-  },
-  {
-    icon: '🏳️',
-    title: 'Banners & Displays',
-    desc: 'Vinyl banners, retractable stands, mesh banners, and fabric displays. Indoor and outdoor options for events, grand openings, and trade shows.',
-    color: '#FFE600',
-    tags: ['Vinyl Banners', 'Retractable Stands', 'Mesh Banners', 'Fabric Displays'],
-  },
-  {
-    icon: '💼',
-    title: 'Business Branding',
-    desc: 'Business cards, flyers, brochures, letterhead, and presentation materials. Complete brand collateral printed in-house with fast turnaround.',
-    color: '#3B9AE1',
-    tags: ['Business Cards', 'Flyers', 'Brochures', 'Letterhead'],
-  },
-  {
-    icon: '📋',
-    title: 'Print & Copy Services',
-    desc: 'Black & white or full-color copies, binding, lamination, and finishing. Quick-turn everyday printing for documents, manuals, and handouts.',
-    color: '#E84020',
-    tags: ['Copies', 'Lamination', 'Binding', 'Large Format'],
-  },
-];
+import SectionTitle from '../components/SectionTitle.astro';
+import Card from '../components/Card.astro';
+import Btn from '../components/Btn.astro';
+import { services } from '../data/services';
+import { faq } from '../data/faq';
+import { pricing } from '../data/pricing';
 ---
 
 <Layout title="Services" description="Custom signs, prints, wraps, banners & more from OH! Signs in Winston-Salem, NC.">
 
   <!-- Hero -->
-  <section style="padding:100px 24px 60px; text-align:center;">
-    <div style="max-width:700px; margin:0 auto;">
-      <p class="fade-up" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:16px;">What We Offer</p>
-      <h1 class="fade-up-d1 font-display title-layered" data-text="Our Services." style="font-size:clamp(2.8rem,7vw,5rem); line-height:1.05; letter-spacing:3px; margin-bottom:16px; color:#F5F5F5;">
-        Our <span style="color:#3B9AE1;">Services.</span>
+  <section style="padding:100px 24px 48px; text-align:center;">
+    <div style="max-width:680px; margin:0 auto;">
+      <p class="fade-up section-eyebrow">What We Offer</p>
+      <h1 class="fade-up-d1 font-display" style="font-size:clamp(2.6rem,7vw,4.5rem); line-height:1.05; letter-spacing:3px; margin-bottom:14px; color:var(--text);">
+        Our <span style="color:var(--blue);">Services.</span>
       </h1>
-      <div class="fade-up-d2 accent-line" style="background:#E84020; margin:0 auto 16px;"></div>
-      <p class="fade-up-d3" style="font-size:1rem; color:#707080; line-height:1.7; max-width:520px; margin:0 auto;">
+      <div class="fade-up-d2 accent-line" style="background:var(--red); margin:0 auto 14px;"></div>
+      <p class="fade-up-d3" style="font-size:0.95rem; color:var(--text-muted); line-height:1.7; max-width:500px; margin:0 auto;">
         From a single sticker to a full fleet wrap — we handle it all with care, quality materials, and fast turnaround.
       </p>
     </div>
   </section>
 
   <!-- Services Grid -->
-  <section style="padding:40px 24px 80px;">
-    <div style="max-width:960px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+  <section style="padding:32px 24px 60px;">
+    <div style="max-width:960px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;">
       {services.map((s, i) => (
-        <div class={`glass-card-3d fade-up-d${(i % 3) + 1}`} style={`border-left:3px solid ${s.color};`}>
-          <div style={`font-size:2rem; margin-bottom:12px; animation:float ${3 + (i % 3)}s ease-in-out infinite;`}>{s.icon}</div>
-          <h2 class="font-display" style={`font-size:1.5rem; letter-spacing:2px; color:${s.color}; margin-bottom:8px;`}>{s.title}</h2>
-          <p style="font-size:0.9rem; color:#707080; line-height:1.65; margin-bottom:14px;">{s.desc}</p>
-          <div style="display:flex; flex-wrap:wrap; gap:6px;">
-            {s.tags.map(tag => (
-              <span style={`font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:1px; padding:3px 10px; border-radius:4px; border:1px solid ${s.color}33; color:${s.color}; opacity:0.7;`}>
-                {tag}
-              </span>
-            ))}
+        <Card accentColor={s.color} class={`fade-up-d${(i % 3) + 1}`}>
+          <div style={`font-size:1.8rem; margin-bottom:10px; animation:float ${3 + (i % 3)}s ease-in-out infinite;`}>{s.icon}</div>
+          <h2 class="font-display" style={`font-size:1.35rem; letter-spacing:2px; color:${s.color}; margin-bottom:6px;`}>{s.title}</h2>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6; margin-bottom:12px;">{s.desc}</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">
+              {s.tags.slice(0, 3).map(tag => (
+                <span class="tag" style={`border-color:${s.color}30; color:${s.color}; opacity:0.8;`}>{tag}</span>
+              ))}
+            </div>
+            <span class="font-mono" style={`font-size:0.7rem; color:${s.color}; letter-spacing:1px;`}>FROM {s.startingPrice}</span>
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   </section>
 
-  <!-- CTA -->
-  <section style="padding:40px 24px 80px;">
-    <div class="glass-card fade-up" style="max-width:700px; margin:0 auto; text-align:center; padding:50px 36px; border-top:3px solid #FFE600; position:relative; overflow:hidden;">
-      <div style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:300px; height:200px; background:radial-gradient(ellipse,rgba(255,230,0,0.06) 0%,transparent 70%); pointer-events:none;"></div>
-      <h2 class="font-display title-layered" data-text="Need Something Custom?" style="font-size:clamp(2rem,5vw,3rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px; position:relative;">
-        Need Something<br /><span style="color:#FFE600;">Custom?</span>
-      </h2>
-      <p style="font-size:1rem; color:#707080; margin-bottom:28px; position:relative;">
-        Tell us what you need and we'll send you a free quote within 24 hours.
-      </p>
-      <div class="cta-stack" style="position:relative;">
-        <div class="layer layer-blue"></div>
-        <div class="layer layer-red"></div>
-        <a href="/quote" class="layer-main">GET A FREE QUOTE →</a>
+  <!-- Pricing -->
+  <section style="padding:48px 24px;">
+    <div style="max-width:960px; margin:0 auto;">
+      <SectionTitle eyebrow="Transparent Pricing" title="Starting Prices" subtitle="Prices vary by size, material, and quantity. Get a quote for exact pricing." accentColor="var(--yellow)" />
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+        {pricing.map((cat, i) => (
+          <Card class={`fade-up-d${(i % 3) + 1}`}>
+            <h3 class="font-display" style="font-size:1.1rem; letter-spacing:2px; color:var(--yellow); margin-bottom:14px;">{cat.category}</h3>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              {cat.items.map(item => (
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px solid rgba(42,42,54,0.4);">
+                  <span style="font-size:0.82rem; color:var(--text-muted);">{item.name}</span>
+                  <span class="font-mono" style="font-size:0.75rem; color:var(--yellow); letter-spacing:1px; white-space:nowrap; margin-left:8px;">{item.price}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ))}
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section style="padding:48px 24px;">
+    <div style="max-width:700px; margin:0 auto;">
+      <SectionTitle eyebrow="Common Questions" title="FAQ" accentColor="var(--blue)" />
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        {faq.map((item, i) => (
+          <details class={`fade-up-d${Math.min(i + 1, 4)}`} style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all 0.2s;">
+            <summary style="cursor:pointer; padding:14px 18px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:1.5px; color:var(--text); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+              {item.question}
+              <span style="color:var(--blue); font-size:1.2rem; transition:transform 0.2s;">+</span>
+            </summary>
+            <div style="padding:0 18px 14px; font-size:0.88rem; color:var(--text-muted); line-height:1.65;">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:32px 24px 60px;">
+    <Card accentSide="top" accentColor="var(--yellow)" class="fade-up" style="max-width:680px; margin:0 auto; text-align:center; padding:44px 32px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:-40px; left:50%; transform:translateX(-50%); width:280px; height:180px; background:radial-gradient(ellipse,rgba(255,214,0,0.05) 0%,transparent 70%); pointer-events:none;"></div>
+      <h2 class="font-display section-heading" style="position:relative;">
+        Need Something<br /><span style="color:var(--yellow);">Custom?</span>
+      </h2>
+      <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:24px; position:relative;">
+        Tell us what you need and we'll send you a free quote within 24 hours.
+      </p>
+      <Btn href="/quote" variant="cta">GET A FREE QUOTE →</Btn>
+    </Card>
+  </section>
+
 </Layout>
+
+<style>
+  details[open] summary span {
+    transform: rotate(45deg);
+  }
+</style>

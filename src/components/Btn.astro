@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'outline' | 'cta';
+  size?: 'default' | 'sm';
+  class?: string;
+}
+
+const { href, variant = 'primary', size = 'default', class: className = '' } = Astro.props;
+const sizeClass = size === 'sm' ? 'btn-sm' : '';
+---
+
+{variant === 'cta' ? (
+  <div class="cta-stack">
+    <div class="layer layer-blue"></div>
+    <div class="layer layer-red"></div>
+    <a href={href} class={`btn btn-primary ${sizeClass} ${className}`}>
+      <slot />
+    </a>
+  </div>
+) : (
+  <a href={href} class={`btn ${variant === 'outline' ? 'btn-outline' : 'btn-primary'} ${sizeClass} ${className}`}>
+    <slot />
+  </a>
+)}

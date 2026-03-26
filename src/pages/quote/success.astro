@@ -1,23 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Btn from '../../components/Btn.astro';
 ---
 
 <Layout title="Request Received" description="Your quote request has been received. We'll be in touch within 24 hours.">
 
   <section style="min-height:70vh; display:flex; align-items:center; justify-content:center; padding:80px 24px;">
-    <div style="text-align:center; max-width:460px;">
-      <div class="fade-up" style="width:80px; height:80px; border-radius:50%; background:rgba(59,154,225,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:2.5rem; color:#3B9AE1; animation:float 4s ease-in-out infinite;">
+    <div style="text-align:center; max-width:440px;">
+      <div class="fade-up" style="width:72px; height:72px; border-radius:50%; background:rgba(0,153,255,0.1); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:2.2rem; color:var(--blue); animation:float 4s ease-in-out infinite;">
         ✓
       </div>
-      <p class="fade-up-d1" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:12px;">Request Received</p>
-      <h1 class="fade-up-d2 font-display" style="font-size:clamp(2.5rem,6vw,3.5rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:12px;">We've Got It!</h1>
-      <p class="fade-up-d3" style="font-size:0.95rem; color:#707080; line-height:1.65; margin-bottom:8px;">
+      <p class="fade-up-d1 section-eyebrow">Request Received</p>
+      <h1 class="fade-up-d2 font-display" style="font-size:clamp(2.4rem,6vw,3.2rem); letter-spacing:3px; color:var(--text); margin-bottom:10px;">We've Got It!</h1>
+      <p class="fade-up-d3" style="font-size:0.92rem; color:var(--text-muted); line-height:1.65; margin-bottom:8px;">
         Your quote request has been submitted. We'll review the details and get back to you within 24 hours.
       </p>
-      <p id="ref-display" class="fade-up-d3" style="font-size:0.8rem; color:#3a3a55; font-family:'Space Mono',monospace; margin-bottom:32px;"></p>
-      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
-        <a href="/" style="background:#3B9AE1; color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; padding:12px 28px; border-radius:20px; text-decoration:none; transition:all 0.25s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">BACK TO HOME</a>
-        <a href="/shop" style="border:1.5px solid #3a3a4a; color:#A0A0B8; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:3px; padding:12px 28px; border-radius:20px; text-decoration:none; transition:all 0.25s;" onmouseover="this.style.borderColor='#F5F5F5'; this.style.color='#F5F5F5'" onmouseout="this.style.borderColor='#3a3a4a'; this.style.color='#A0A0B8'">BROWSE THE SHOP</a>
+      <p id="ref-display" class="fade-up-d3 font-mono" style="font-size:0.75rem; color:var(--text-dim); margin-bottom:28px;"></p>
+      <div class="fade-up-d4" style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+        <Btn href="/" variant="primary" size="sm">BACK TO HOME</Btn>
+        <Btn href="/shop" variant="outline" size="sm">BROWSE THE SHOP</Btn>
       </div>
     </div>
   </section>

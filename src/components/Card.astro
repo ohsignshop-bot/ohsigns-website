@@ -1,0 +1,16 @@
+---
+interface Props {
+  accentColor?: string;
+  accentSide?: 'left' | 'top';
+  class?: string;
+}
+
+const { accentColor, accentSide = 'left', class: className = '' } = Astro.props;
+const borderStyle = accentColor
+  ? (accentSide === 'top' ? `border-top:3px solid ${accentColor};` : `border-left:3px solid ${accentColor};`)
+  : '';
+---
+
+<div class={`glass-card ${className}`} style={borderStyle}>
+  <slot />
+</div>

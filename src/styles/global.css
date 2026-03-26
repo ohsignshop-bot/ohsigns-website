@@ -1,266 +1,342 @@
 @import "tailwindcss";
 
-/* ── Animations ────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════
+   OH! Signs — Design System
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Design Tokens (CSS Custom Properties) ────────────── */
+:root {
+  --bg:             #0A0A0F;
+  --bg-end:         #1a0020;
+  --card-bg:        rgba(17, 17, 28, 0.88);
+  --card-hover:     rgba(26, 26, 40, 0.92);
+  --blue:           #0099FF;
+  --red:            #FF2D2D;
+  --yellow:         #FFD600;
+  --text:           #F5F5F5;
+  --text-muted:     #888888;
+  --text-dim:       #555566;
+  --border:         #2A2A36;
+  --border-hover:   #3a3a50;
+  --radius:         8px;
+  --radius-pill:    20px;
+  --radius-sm:      6px;
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+::selection {
+  background: rgba(0, 153, 255, 0.3);
+  color: var(--text);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+/* ── Typography ───────────────────────────────────────── */
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+}
+.font-body {
+  font-family: 'DM Sans', sans-serif;
+}
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+.font-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* ── Keyframe Animations ──────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.92); }
+  from { opacity: 0; transform: scale(0.94); }
   to   { opacity: 1; transform: scale(1); }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
-}
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-10px) rotate(0.5deg); }
+  50%      { transform: translateY(-6px); }
 }
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,230,0,0.4); }
-  50%      { box-shadow: 0 0 24px 6px rgba(255,230,0,0.15); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.35); }
+  50%      { box-shadow: 0 0 20px 4px rgba(255, 214, 0, 0.12); }
 }
 @keyframes glowPulse {
-  0%, 100% { opacity: 0.2; }
-  50%      { opacity: 0.5; }
+  0%, 100% { opacity: 0.15; }
+  50%      { opacity: 0.4; }
 }
-@keyframes subtleDrift {
+@keyframes drift {
   0%, 100% { transform: translate(0, 0); }
-  25%      { transform: translate(6px, -4px); }
-  50%      { transform: translate(-3px, 6px); }
-  75%      { transform: translate(4px, 3px); }
+  25%      { transform: translate(5px, -3px); }
+  50%      { transform: translate(-2px, 5px); }
+  75%      { transform: translate(3px, 2px); }
 }
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+@keyframes lineGrow {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+@keyframes countUp {
+  0%   { transform: scale(0.6); opacity: 0; }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
-/* ── Staggered entrance delays ─────────────────────────── */
-.fade-up { animation: fadeUp 0.65s ease both; }
-.fade-up-d1 { animation: fadeUp 0.65s ease 0.1s both; }
-.fade-up-d2 { animation: fadeUp 0.65s ease 0.2s both; }
-.fade-up-d3 { animation: fadeUp 0.65s ease 0.3s both; }
-.fade-up-d4 { animation: fadeUp 0.65s ease 0.4s both; }
-.fade-up-d5 { animation: fadeUp 0.65s ease 0.5s both; }
-.fade-up-d6 { animation: fadeUp 0.65s ease 0.6s both; }
+/* ── Entrance Animations (staggered) ──────────────────── */
+.fade-up    { animation: fadeUp 0.6s ease both; }
+.fade-up-d1 { animation: fadeUp 0.6s ease 0.08s both; }
+.fade-up-d2 { animation: fadeUp 0.6s ease 0.16s both; }
+.fade-up-d3 { animation: fadeUp 0.6s ease 0.24s both; }
+.fade-up-d4 { animation: fadeUp 0.6s ease 0.32s both; }
+.fade-up-d5 { animation: fadeUp 0.6s ease 0.40s both; }
+.fade-up-d6 { animation: fadeUp 0.6s ease 0.48s both; }
 .fade-scale { animation: fadeInScale 0.5s ease both; }
 
-/* ── Scrollbar ─────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #2a2a48; border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #3a3a5a; }
-
-html { scroll-behavior: smooth; }
-
-/* ── Glass card base ───────────────────────────────────── */
+/* ── Glass Card ───────────────────────────────────────── */
 .glass-card {
-  background: rgba(15,15,26,0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid #2a2a3a;
-  border-radius: 8px;
-  padding: 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
   transition: all 0.3s ease;
 }
 .glass-card:hover {
-  background: rgba(26,26,36,0.9);
-  border-color: #3a3a5a;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  background: var(--card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* ── Glow button ───────────────────────────────────────── */
-.btn-glow {
-  animation: pulse 2.5s ease-in-out infinite;
+/* ── Accent Line ──────────────────────────────────────── */
+.accent-line {
+  height: 4px;
+  width: 60px;
+  border-radius: 2px;
+  animation: lineGrow 0.7s ease 0.2s both;
 }
 
-/* ── Multi-layer floating CTA button ──────────────────── */
-@keyframes layerFloat1 {
-  0%, 100% { transform: translate(-8px, 8px) rotate(-2deg); }
-  50%      { transform: translate(-12px, 4px) rotate(-1deg); }
-}
-@keyframes layerFloat2 {
-  0%, 100% { transform: translate(8px, -8px) rotate(2deg); }
-  50%      { transform: translate(12px, -4px) rotate(1deg); }
-}
-@keyframes layerFloat1Hover {
-  0%, 100% { transform: translate(-14px, 12px) rotate(-4deg) scale(1.04); }
-  50%      { transform: translate(-18px, 6px) rotate(-2deg) scale(1.04); }
-}
-@keyframes layerFloat2Hover {
-  0%, 100% { transform: translate(14px, -12px) rotate(4deg) scale(1.04); }
-  50%      { transform: translate(18px, -6px) rotate(2deg) scale(1.04); }
-}
-
-.cta-stack {
-  position: relative;
+/* ── Buttons ──────────────────────────────────────────── */
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 2px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-primary {
+  background: var(--yellow);
+  color: var(--bg);
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 24px rgba(255, 214, 0, 0.3);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  background: transparent;
+}
+.btn-outline:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn-sm {
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+}
+
+/* ── CTA Stack (layered button) ───────────────────────── */
+.cta-stack {
+  position: relative;
+  display: inline-flex;
   z-index: 1;
 }
 .cta-stack .layer {
   position: absolute;
   inset: 0;
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   pointer-events: none;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: all 0.4s ease;
 }
 .cta-stack .layer-blue {
-  background: #3B9AE1;
-  animation: layerFloat1 4s ease-in-out infinite;
-  opacity: 0.55;
+  background: var(--blue);
+  opacity: 0.45;
+  transform: translate(-6px, 6px) rotate(-1.5deg);
+  animation: float 4s ease-in-out infinite;
 }
 .cta-stack .layer-red {
-  background: #E84020;
-  animation: layerFloat2 4.5s ease-in-out infinite;
-  opacity: 0.45;
+  background: var(--red);
+  opacity: 0.35;
+  transform: translate(6px, -6px) rotate(1.5deg);
+  animation: float 4.5s ease-in-out 0.5s infinite;
 }
 .cta-stack:hover .layer-blue {
-  animation: layerFloat1Hover 3s ease-in-out infinite;
-  opacity: 0.7;
+  opacity: 0.6;
+  transform: translate(-10px, 8px) rotate(-2.5deg);
 }
 .cta-stack:hover .layer-red {
-  animation: layerFloat2Hover 3.5s ease-in-out infinite;
-  opacity: 0.6;
+  opacity: 0.5;
+  transform: translate(10px, -8px) rotate(2.5deg);
 }
-.cta-stack:active .layer-blue {
-  transform: translate(-4px, 4px) rotate(0deg) scale(0.97) !important;
-  animation: none;
-}
+.cta-stack:active .layer-blue,
 .cta-stack:active .layer-red {
-  transform: translate(4px, -4px) rotate(0deg) scale(0.97) !important;
-  animation: none;
+  transform: translate(0, 0) rotate(0deg);
+  opacity: 0.3;
 }
-.cta-stack .layer-main {
+.cta-stack .btn-primary {
   position: relative;
   z-index: 2;
-  display: inline-block;
-  background: #FFE600;
-  color: #0a0a0f;
+}
+
+/* ── Section Title ────────────────────────────────────── */
+.section-eyebrow {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.15rem;
+  font-size: 0.8rem;
+  letter-spacing: 5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
   letter-spacing: 3px;
-  padding: 14px 36px;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-.cta-stack:hover .layer-main {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 6px 30px rgba(255,230,0,0.3);
-}
-.cta-stack:active .layer-main {
-  transform: translateY(1px) scale(0.98);
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.1;
 }
 
-/* ── Accent line animated ─────────────────────────────── */
-@keyframes lineExpand {
-  from { width: 0; }
-  to   { width: 60px; }
-}
-.accent-line {
-  height: 4px;
-  border-radius: 2px;
-  animation: lineExpand 0.8s ease 0.3s both;
+/* ── Stat Counter ─────────────────────────────────────── */
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--yellow);
+  animation: countUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* ── Glow text on hover ───────────────────────────────── */
-.glow-text-hover {
-  transition: text-shadow 0.3s ease;
+/* ── Form Elements ────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background: rgba(10, 10, 20, 0.8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.25s ease;
+  box-sizing: border-box;
 }
-.glow-text-hover:hover {
-  text-shadow: 0 0 20px rgba(59,154,225,0.4), 0 0 40px rgba(59,154,225,0.15);
+.form-input:focus {
+  border-color: var(--blue);
+}
+.form-input::placeholder {
+  color: var(--text-dim);
 }
 
-/* ── Layered section titles ───────────────────────────── */
-.title-layered {
-  position: relative;
+.form-label {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+}
+
+/* ── Tag / Badge ──────────────────────────────────────── */
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   display: inline-block;
 }
-.title-layered::before,
-.title-layered::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  white-space: nowrap;
-}
-.title-layered::before {
-  color: #3B9AE1;
-  opacity: 0.15;
-  transform: translate(-4px, 4px);
-  animation: subtleDrift 8s ease-in-out infinite;
-}
-.title-layered::after {
-  color: #E84020;
-  opacity: 0.12;
-  transform: translate(4px, -4px);
-  animation: subtleDrift 8s ease-in-out 2s infinite reverse;
-}
 
-/* ── Glass card 3D lift ───────────────────────────────── */
-.glass-card-3d {
-  background: rgba(15,15,26,0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid #2a2a3a;
-  border-radius: 8px;
-  padding: 28px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* ── Hover Underline ──────────────────────────────────── */
+.hover-line {
   position: relative;
 }
-.glass-card-3d::before {
+.hover-line::after {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(59,154,225,0.08), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.glass-card-3d:hover {
-  background: rgba(26,26,36,0.9);
-  border-color: #3a3a5a;
-  transform: translateY(-6px) rotateX(2deg) rotateY(-1deg);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(59,154,225,0.08);
-}
-.glass-card-3d:hover::before {
-  opacity: 1;
-}
-
-/* ── Stat number pop ──────────────────────────────────── */
-@keyframes countPop {
-  0%   { transform: scale(0.5); opacity: 0; }
-  60%  { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
-.stat-pop {
-  animation: countPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-
-/* ── Colored underline on hover ───────────────────────── */
-.hover-underline {
-  position: relative;
-  display: inline-block;
-}
-.hover-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
+  bottom: -2px;
   left: 0;
   width: 0;
-  height: 2px;
-  background: #3B9AE1;
-  transition: width 0.3s ease;
+  height: 1.5px;
+  background: var(--blue);
+  transition: width 0.25s ease;
   border-radius: 1px;
 }
-.hover-underline:hover::after {
+.hover-line:hover::after {
   width: 100%;
 }
 
-.font-display { font-family: 'Bebas Neue', 'Barlow Condensed', sans-serif; }
-.font-logo-script { font-family: 'Dancing Script', cursive; }
+/* ── Promo Banner ─────────────────────────────────────── */
+.promo-banner {
+  background: var(--yellow);
+  color: var(--bg);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 8px 40px 8px 16px;
+  position: relative;
+}
+.promo-banner .dismiss {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--bg);
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.promo-banner .dismiss:hover {
+  opacity: 1;
+}

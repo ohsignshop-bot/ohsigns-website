@@ -2,27 +2,27 @@
 const year = new Date().getFullYear();
 ---
 
-<footer style="border-top:1px solid #2a2a3a; margin-top:80px; padding:60px 24px 30px;">
-  <div style="max-width:72rem; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px;">
+<footer style="border-top:1px solid var(--border); margin-top:80px; padding:48px 24px 28px;">
+  <div style="max-width:72rem; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:36px;">
 
     <!-- Brand -->
     <div>
-      <div style="font-size:1.8rem; margin-bottom:12px;">
-        <span style="font-family:'Bebas Neue',sans-serif; letter-spacing:1px; color:#E84020; font-weight:700;">OH!</span>
-        <span style="font-family:'Dancing Script',cursive; color:#3B9AE1; font-weight:700; font-size:2rem;">Signs</span>
+      <div style="margin-bottom:12px;">
+        <span style="font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--red);">OH!</span>
+        <span style="font-family:'Dancing Script',cursive; font-size:1.7rem; color:var(--blue);">Signs</span>
       </div>
-      <p style="font-size:0.9rem; color:#707080; line-height:1.6;">
+      <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;">
         Custom signs, banners, vehicle wraps &amp; more — made with care for businesses that want to stand out.
       </p>
     </div>
 
     <!-- Pages -->
     <div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:3px; color:#3a3a55; margin-bottom:14px;">PAGES</div>
+      <div class="font-display" style="font-size:0.8rem; letter-spacing:3px; color:var(--text-dim); margin-bottom:14px;">PAGES</div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        {['/','/about','/services','/shop','/quote'].map((href,i) => (
-          <a href={href} style="font-size:0.9rem; color:#707080; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#F5F5F5'" onmouseout="this.style.color='#707080'">
-            {['Home','About','Services','Shop','Get a Quote'][i]}
+        {['/','/about','/services','/portfolio','/shop','/quote'].map((href,i) => (
+          <a href={href} class="hover-line" style="font-size:0.85rem; color:var(--text-muted); text-decoration:none; transition:color 0.2s; display:inline-block; width:fit-content;">
+            {['Home','About','Services','Portfolio','Shop','Get a Quote'][i]}
           </a>
         ))}
       </div>
@@ -30,29 +30,29 @@ const year = new Date().getFullYear();
 
     <!-- Contact -->
     <div>
-      <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:3px; color:#3a3a55; margin-bottom:14px;">CONTACT</div>
-      <div style="display:flex; flex-direction:column; gap:8px; font-size:0.9rem;">
-        <a href="mailto:info@ohsigns.shop" style="color:#707080; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#F5F5F5'" onmouseout="this.style.color='#707080'">info@ohsigns.shop</a>
-        <span style="color:#3a3a55;">Winston-Salem, NC</span>
+      <div class="font-display" style="font-size:0.8rem; letter-spacing:3px; color:var(--text-dim); margin-bottom:14px;">CONTACT</div>
+      <div style="display:flex; flex-direction:column; gap:8px; font-size:0.85rem;">
+        <a href="mailto:info@ohsigns.shop" class="hover-line" style="color:var(--text-muted); text-decoration:none; display:inline-block; width:fit-content;">info@ohsigns.shop</a>
+        <span style="color:var(--text-dim);">Winston-Salem, NC</span>
       </div>
       <!-- Socials -->
-      <div style="display:flex; gap:12px; margin-top:16px;">
-        <a href="https://www.instagram.com/ohsignshop" target="_blank" rel="noopener" style="width:36px; height:36px; border:1.5px solid #2a2a3a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#707080; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='#3B9AE1'; this.style.color='#3B9AE1'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#2a2a3a'; this.style.color='#707080'; this.style.transform='none'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <div style="display:flex; gap:10px; margin-top:14px;">
+        <a href="https://www.instagram.com/ohsignshop" target="_blank" rel="noopener" style="width:34px; height:34px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--text-dim); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--blue)'; this.style.color='var(--blue)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-dim)'; this.style.transform='none'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
         </a>
-        <a href="https://www.facebook.com/OhSignShop" target="_blank" rel="noopener" style="width:36px; height:36px; border:1.5px solid #2a2a3a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#707080; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='#3B9AE1'; this.style.color='#3B9AE1'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#2a2a3a'; this.style.color='#707080'; this.style.transform='none'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <a href="https://www.facebook.com/OhSignShop" target="_blank" rel="noopener" style="width:34px; height:34px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--text-dim); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--blue)'; this.style.color='var(--blue)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-dim)'; this.style.transform='none'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="mailto:ohsignshop@gmail.com" style="width:36px; height:36px; border:1.5px solid #2a2a3a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#707080; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='#3B9AE1'; this.style.color='#3B9AE1'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#2a2a3a'; this.style.color='#707080'; this.style.transform='none'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:ohsignshop@gmail.com" style="width:34px; height:34px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--text-dim); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--blue)'; this.style.color='var(--blue)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-dim)'; this.style.transform='none'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
       </div>
     </div>
 
   </div>
 
-  <div style="max-width:72rem; margin:36px auto 0; padding-top:20px; border-top:1px solid #1a1a2a; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; font-size:0.75rem; color:#2a2a3a; letter-spacing:2px; font-family:'Bebas Neue',sans-serif;">
-    <span>&copy; {year} OH! SIGNS LLC · WINSTON-SALEM, NC</span>
-    <a href="/quote" style="color:#3B9AE1; text-decoration:none; letter-spacing:2px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">GET A FREE QUOTE →</a>
+  <div style="max-width:72rem; margin:32px auto 0; padding-top:16px; border-top:1px solid rgba(42,42,54,0.5); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; font-size:0.7rem; color:var(--text-dim); letter-spacing:2px; font-family:'Bebas Neue',sans-serif;">
+    <span>&copy; {year} OH! SIGNS LLC &middot; WINSTON-SALEM, NC</span>
+    <a href="/quote" style="color:var(--blue); text-decoration:none; letter-spacing:2px;">GET A FREE QUOTE &rarr;</a>
   </div>
 </footer>

@@ -1,18 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Btn from '../components/Btn.astro';
 ---
 
 <Layout title="Shop" description="Shop ready-made signs, banners, and print products from OH! Signs.">
 
-  <section style="max-width:72rem; margin:0 auto; padding:100px 24px 24px; text-align:center;">
-    <p class="fade-up" style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:6px; color:#707080; text-transform:uppercase; margin-bottom:16px;">Our Store</p>
-    <h1 class="fade-up-d1 font-display title-layered" data-text="Ready-Made Products." style="font-size:clamp(2.5rem,6vw,4rem); letter-spacing:3px; color:#F5F5F5; margin-bottom:8px;">
+  <section style="max-width:72rem; margin:0 auto; padding:100px 24px 20px; text-align:center;">
+    <p class="fade-up section-eyebrow">Our Store</p>
+    <h1 class="fade-up-d1 font-display" style="font-size:clamp(2.4rem,6vw,3.8rem); letter-spacing:3px; color:var(--text); margin-bottom:8px;">
       Ready-Made Products.
     </h1>
-    <div class="fade-up-d2 accent-line" style="background:#3B9AE1; margin:0 auto 16px;"></div>
-    <p class="fade-up-d3" style="font-size:0.95rem; color:#707080;">
+    <div class="fade-up-d2 accent-line" style="background:var(--blue); margin:0 auto 14px;"></div>
+    <p class="fade-up-d3" style="font-size:0.95rem; color:var(--text-muted);">
       Browse and order standard products online. Need something custom?
-      <a href="/quote" style="color:#3B9AE1; font-weight:600; text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Get a quote →</a>
+      <a href="/quote" style="color:var(--blue); font-weight:600; text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Get a quote →</a>
     </p>
   </section>
 
