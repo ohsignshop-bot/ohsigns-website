@@ -62,8 +62,8 @@ const budgets = [
           <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" class="form-input" />
         </div>
         <div>
-          <label class="form-label">PRODUCT TYPE <span style="color:var(--blue);">*</span></label>
-          <select id="product_type" name="product_type" required class="form-input" style="cursor:pointer;">
+          <label class="form-label">PRODUCT TYPE</label>
+          <select id="product_type" name="product_type" class="form-input" style="cursor:pointer;">
             <option value="">Select a product…</option>
             {productTypes.map(p => <option value={p}>{p}</option>)}
           </select>
@@ -94,8 +94,8 @@ const budgets = [
       </div>
 
       <div>
-        <label class="form-label">PROJECT DETAILS</label>
-        <textarea id="comments" name="comments" rows="4" placeholder="Describe your project — colors, material, intended use, deadline…" class="form-input" style="resize:vertical; min-height:80px;"></textarea>
+        <label class="form-label">PROJECT DETAILS <span style="color:var(--blue);">*</span></label>
+        <textarea id="comments" name="comments" rows="4" required placeholder="Describe your project — colors, material, intended use, deadline…" class="form-input" style="resize:vertical; min-height:80px;"></textarea>
       </div>
 
       <!-- Artwork -->
@@ -170,8 +170,8 @@ const budgets = [
       comments: (form.comments as HTMLTextAreaElement).value.trim(),
     };
 
-    if (!data.customer_name || !data.email || !data.product_type) {
-      errorDiv.textContent = 'Please fill in Name, Email, and Product Type.';
+    if (!data.customer_name || !data.email || !data.comments) {
+      errorDiv.textContent = 'Please fill in Name, Email, and Project Details.';
       errorDiv.style.display = 'block';
       return;
     }

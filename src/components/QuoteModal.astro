@@ -75,8 +75,8 @@ const budgets = [
           <input type="tel" name="phone" placeholder="(555) 000-0000" class="form-input" />
         </div>
         <div>
-          <label class="form-label">PRODUCT TYPE <span style="color:var(--blue);">*</span></label>
-          <select name="product_type" required class="form-input" style="cursor:pointer;">
+          <label class="form-label">PRODUCT TYPE</label>
+          <select name="product_type" class="form-input" style="cursor:pointer;">
             <option value="">Select a product…</option>
             {fallbackProductTypes.map(p => <option value={p}>{p}</option>)}
           </select>
@@ -107,8 +107,8 @@ const budgets = [
       </div>
 
       <div>
-        <label class="form-label">PROJECT DETAILS</label>
-        <textarea name="comments" rows="3" placeholder="Describe your project — colors, material, intended use, deadline…" class="form-input" style="resize:vertical; min-height:70px;"></textarea>
+        <label class="form-label">PROJECT DETAILS <span style="color:var(--blue);">*</span></label>
+        <textarea name="comments" rows="3" required placeholder="Describe your project — colors, material, intended use, deadline…" class="form-input" style="resize:vertical; min-height:70px;"></textarea>
       </div>
 
       <!-- Artwork -->
@@ -258,8 +258,8 @@ const budgets = [
       comments: (fd.get('comments') || '').toString().trim(),
     };
 
-    if (!data.customer_name || !data.email || !data.product_type) {
-      errorDiv.textContent = 'Please fill in Name, Email, and Product Type.';
+    if (!data.customer_name || !data.email || !data.comments) {
+      errorDiv.textContent = 'Please fill in Name, Email, and Project Details.';
       errorDiv.style.display = 'block';
       return;
     }
