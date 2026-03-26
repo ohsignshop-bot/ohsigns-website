@@ -491,13 +491,20 @@
     submitBtn.textContent = 'Sending…';
 
     try {
-      const res = await fetch(`${BMS_URL}/api/public/contact`, {
+      const res = await fetch(`${BMS_URL}/api/public/requests`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, message }),
+        body: JSON.stringify({
+          customer_name: name,
+          email,
+          phone,
+          product_type: 'Other / Custom',
+          comments: message,
+        }),
       });
       if (!res.ok) throw new Error();
-      msgEl.textContent = "✓ Sent! We'll be in touch within 24 hours.";
+      const result = await res.json();
+      msgEl.textContent = `✓ Sent! Reference: ${result.req_num} — We'll be in touch within 24 hours.`;
       msgEl.className = 'form-msg ok';
       form.reset();
       submitBtn.textContent = 'SENT ✓';
