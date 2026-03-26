@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import QuoteModal from '../components/QuoteModal.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -51,6 +52,7 @@ const { title, description = 'Custom signs, banners, vehicle wraps & more — ha
         <slot />
       </main>
       <Footer />
+      <QuoteModal />
     </div>
 
   </body>

@@ -1,0 +1,281 @@
+---
+const productTypes = [
+  'Banner / Vinyl Banner',
+  'Vehicle Wrap (Full)',
+  'Vehicle Wrap (Partial)',
+  'Window Graphics / Decal',
+  'Wall Mural / Wall Graphics',
+  'Yard Sign',
+  'Foam Board / Rigid Sign',
+  'Floor Graphics',
+  'Retractable Banner Stand',
+  'Business Cards / Flyers',
+  'Fine-Art Print / Canvas',
+  'Other / Custom',
+];
+
+const budgets = [
+  'Under $200',
+  '$200 – $500',
+  '$500 – $1,000',
+  '$1,000 – $3,000',
+  '$3,000+',
+  'Not sure yet',
+];
+---
+
+<!-- Quote Modal Overlay -->
+<div id="quote-modal" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); overflow-y:auto; padding:20px;">
+  <div style="max-width:520px; margin:40px auto; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:28px 24px; position:relative;">
+
+    <!-- Close button -->
+    <button id="quote-modal-close" style="position:absolute; top:14px; right:14px; background:none; border:none; color:var(--text-muted); font-size:1.5rem; cursor:pointer; line-height:1; padding:4px 8px;" aria-label="Close">&times;</button>
+
+    <!-- Header -->
+    <div style="text-align:center; margin-bottom:24px;">
+      <p class="section-eyebrow">Free Quote</p>
+      <h2 class="font-display" style="font-size:clamp(1.8rem,5vw,2.4rem); letter-spacing:3px; color:var(--text); margin-bottom:6px;">
+        Get a Free Quote
+      </h2>
+      <div class="accent-line" style="background:var(--yellow); margin:0 auto 10px;"></div>
+      <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">
+        Fill out the form and we'll get back to you within 24 hours.
+      </p>
+    </div>
+
+    <!-- Error message -->
+    <div id="qm-error" style="display:none; background:rgba(255,45,45,0.08); border:1px solid var(--red); color:#ff8070; font-size:0.82rem; border-radius:8px; padding:10px 16px; margin-bottom:14px;"></div>
+
+    <!-- Success message (hidden by default) -->
+    <div id="qm-success" style="display:none; text-align:center; padding:40px 20px;">
+      <div style="width:56px; height:56px; border-radius:50%; background:rgba(0,153,255,0.1); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:1.8rem; color:var(--blue);">✓</div>
+      <h3 class="font-display" style="font-size:1.6rem; letter-spacing:2px; color:var(--text); margin-bottom:8px;">We've Got It!</h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5; margin-bottom:6px;">Your quote request has been submitted. We'll review the details and get back to you within 24 hours.</p>
+      <p id="qm-ref" class="font-mono" style="font-size:0.72rem; color:var(--text-dim); margin-bottom:20px;"></p>
+      <button id="qm-close-success" class="btn btn-primary" style="border:none; padding:10px 28px; font-size:0.9rem; cursor:pointer;">GOT IT</button>
+    </div>
+
+    <!-- Form -->
+    <form id="qm-form" style="display:flex; flex-direction:column; gap:12px;" novalidate>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div>
+          <label class="form-label">FULL NAME <span style="color:var(--blue);">*</span></label>
+          <input type="text" name="customer_name" required placeholder="Jane Smith" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">EMAIL <span style="color:var(--blue);">*</span></label>
+          <input type="email" name="email" required placeholder="jane@business.com" class="form-input" />
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div>
+          <label class="form-label">PHONE</label>
+          <input type="tel" name="phone" placeholder="(555) 000-0000" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">PRODUCT TYPE <span style="color:var(--blue);">*</span></label>
+          <select name="product_type" required class="form-input" style="cursor:pointer;">
+            <option value="">Select a product…</option>
+            {productTypes.map(p => <option value={p}>{p}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+        <div>
+          <label class="form-label">WIDTH (IN)</label>
+          <input type="number" name="width_in" min="0" placeholder='48"' class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">HEIGHT (IN)</label>
+          <input type="number" name="height_in" min="0" placeholder='24"' class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">QUANTITY</label>
+          <input type="number" name="qty" min="1" value="1" class="form-input" />
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label">BUDGET RANGE</label>
+        <select name="budget" class="form-input" style="cursor:pointer;">
+          <option value="">Select a range…</option>
+          {budgets.map(b => <option value={b}>{b}</option>)}
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label">PROJECT DETAILS</label>
+        <textarea name="comments" rows="3" placeholder="Describe your project — colors, material, intended use, deadline…" class="form-input" style="resize:vertical; min-height:70px;"></textarea>
+      </div>
+
+      <!-- Artwork -->
+      <div>
+        <label class="form-label">ARTWORK / LOGO <span style="color:var(--text-dim); font-weight:400; text-transform:none; letter-spacing:0;">(optional)</span></label>
+        <div id="qm-drop-zone" style="border:2px dashed var(--border); border-radius:8px; padding:16px 12px; text-align:center; cursor:pointer; transition:border-color 0.2s;">
+          <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Drop file or <span style="color:var(--blue); font-weight:600;">browse</span></p>
+          <p class="font-mono" style="font-size:0.6rem; color:var(--text-dim); margin:2px 0 0;">PNG, JPG, PDF, AI, SVG — max 20MB</p>
+          <input type="file" id="qm-artwork" name="artwork" accept="image/*,.pdf,.ai,.svg,.eps" style="display:none;" />
+        </div>
+        <div id="qm-file-info" style="display:none; margin-top:4px; font-size:0.78rem; color:var(--text-muted); align-items:center; gap:6px;">
+          <span style="color:var(--blue);">✓</span>
+          <span id="qm-file-name"></span>
+          <button type="button" id="qm-remove-file" style="background:none; border:none; color:var(--red); cursor:pointer; margin-left:auto; font-size:0.78rem;">Remove</button>
+        </div>
+      </div>
+
+      <button type="submit" id="qm-submit" class="btn btn-primary" style="width:100%; border:none; padding:12px; font-size:1rem; cursor:pointer;">
+        SEND REQUEST
+      </button>
+      <p class="font-mono" style="font-size:0.6rem; color:var(--text-dim); text-align:center; letter-spacing:1px; margin:0;">We'll reply within 24 hours with a detailed quote.</p>
+    </form>
+
+  </div>
+</div>
+
+<script is:inline>
+(function() {
+  const BMS_URL = 'https://bms.ohsigns.shop';
+  const modal = document.getElementById('quote-modal');
+  const form = document.getElementById('qm-form');
+  const errorDiv = document.getElementById('qm-error');
+  const successDiv = document.getElementById('qm-success');
+  const submitBtn = document.getElementById('qm-submit');
+  const refEl = document.getElementById('qm-ref');
+  const closeBtn = document.getElementById('quote-modal-close');
+  const closeSuccess = document.getElementById('qm-close-success');
+  const dropZone = document.getElementById('qm-drop-zone');
+  const fileInput = document.getElementById('qm-artwork');
+  const fileInfo = document.getElementById('qm-file-info');
+  const fileNameEl = document.getElementById('qm-file-name');
+  const removeBtn = document.getElementById('qm-remove-file');
+
+  // Open modal — any element with data-open-quote
+  function openModal() {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function resetModal() {
+    form.reset();
+    form.style.display = 'flex';
+    successDiv.style.display = 'none';
+    errorDiv.style.display = 'none';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'SEND REQUEST';
+    fileInput.value = '';
+    fileInfo.style.display = 'none';
+    dropZone.style.display = 'block';
+  }
+
+  // Global open function
+  window.openQuoteModal = openModal;
+
+  // Bind all triggers: data-open-quote AND any link to /quote
+  document.querySelectorAll('[data-open-quote], a[href="/quote"]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // Close triggers
+  closeBtn.addEventListener('click', function() { closeModal(); resetModal(); });
+  closeSuccess.addEventListener('click', function() { closeModal(); resetModal(); });
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) { closeModal(); resetModal(); }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'block') { closeModal(); resetModal(); }
+  });
+
+  // File upload
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = 'var(--blue)'; });
+  dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = 'var(--border)'; });
+  dropZone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dropZone.style.borderColor = 'var(--border)';
+    if (e.dataTransfer && e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', function() { if (fileInput.files && fileInput.files[0]) setFile(fileInput.files[0]); });
+  removeBtn.addEventListener('click', function() { fileInput.value = ''; fileInfo.style.display = 'none'; dropZone.style.display = 'block'; });
+
+  function setFile(file) {
+    fileNameEl.textContent = file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
+    fileInfo.style.display = 'flex';
+    dropZone.style.display = 'none';
+  }
+
+  // Form submit
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    errorDiv.style.display = 'none';
+
+    var fd = new FormData(form);
+    var data = {
+      customer_name: (fd.get('customer_name') || '').toString().trim(),
+      email: (fd.get('email') || '').toString().trim(),
+      phone: (fd.get('phone') || '').toString().trim(),
+      product_type: (fd.get('product_type') || '').toString(),
+      width_in: parseFloat(fd.get('width_in')) || 0,
+      height_in: parseFloat(fd.get('height_in')) || 0,
+      qty: parseInt(fd.get('qty')) || 1,
+      budget: (fd.get('budget') || '').toString(),
+      comments: (fd.get('comments') || '').toString().trim(),
+    };
+
+    if (!data.customer_name || !data.email || !data.product_type) {
+      errorDiv.textContent = 'Please fill in Name, Email, and Product Type.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    // Artwork base64
+    var file = fileInput.files && fileInput.files[0];
+    if (file) {
+      try {
+        var base64 = await new Promise(function(resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function() { resolve(reader.result.split(',')[1]); };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+        data.artwork_base64 = base64;
+        data.artwork_filename = file.name;
+      } catch(err) { /* skip artwork */ }
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      var res = await fetch(BMS_URL + '/api/public/requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      var result = await res.json();
+
+      // Show success in modal
+      form.style.display = 'none';
+      errorDiv.style.display = 'none';
+      refEl.textContent = 'Reference: ' + result.req_num;
+      successDiv.style.display = 'block';
+    } catch(err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'SEND REQUEST';
+      errorDiv.textContent = 'Something went wrong. Please try again or email us at info@ohsigns.shop.';
+      errorDiv.style.display = 'block';
+    }
+  });
+})();
+</script>
