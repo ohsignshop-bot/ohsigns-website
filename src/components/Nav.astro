@@ -2,33 +2,38 @@
 const links = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
   { label: 'Shop', href: '/shop' },
 ];
-const tickerItems = ['Vinyl Decals','Custom Signs','Business Branding','UV Prints','One-Off Designs','Fast Turnaround','Winston-Salem NC'];
+const tickerItems = ['UV Prints','Fast Turnaround','Vinyl Decals','Small Business','Fine-Art Prints','Business Cards','Flyers','Custom Signs','Branding','Illustrations','Lamination'];
 ---
 
 <!-- Marquee Ticker -->
-<div style="position:sticky; top:0; z-index:100; overflow:hidden; white-space:nowrap; padding:7px 0; font-family:'Bebas Neue',sans-serif; font-size:0.9rem; letter-spacing:3px; color:#0a0a0f; border-bottom:2px solid #2a2a32; background:repeating-linear-gradient(90deg,#E84020 0 50px,#FFE600 50px 100px,#3B9AE1 100px 150px,#111 150px 200px);">
-  <div style="display:inline-flex; animation:marquee 30s linear infinite;">
-    {tickerItems.map(t => <span style="padding:0 28px;">{`✦ ${t.toUpperCase()}`}</span>)}
-    {tickerItems.map(t => <span style="padding:0 28px;">{`✦ ${t.toUpperCase()}`}</span>)}
+<div style="position:sticky; top:0; z-index:100; overflow:hidden; white-space:nowrap; padding:6px 0; font-family:'Bebas Neue',sans-serif; font-size:0.75rem; letter-spacing:3px; color:#0a0a0f; border-bottom:1px solid #2a2a32;">
+  <!-- Colored blocks background -->
+  <div style="position:absolute; inset:0; display:flex;">
+    {Array.from({length: 60}).map((_, i) => (
+      <div style={`flex:0 0 40px; height:100%; background:${['#E84020','#FFE600','#3B9AE1','#1a1a2a'][i % 4]};`}></div>
+    ))}
+  </div>
+  <div style="position:relative; display:inline-flex; animation:marquee 40s linear infinite;">
+    {tickerItems.map(t => <span style="padding:0 24px; font-weight:700;">{t.toUpperCase()}</span>)}
+    {tickerItems.map(t => <span style="padding:0 24px; font-weight:700;">{t.toUpperCase()}</span>)}
   </div>
 </div>
 
 <!-- Nav Bar -->
-<nav style="position:sticky; top:36px; z-index:99; background:rgba(0,0,20,0.8); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid #2a2a3a;">
-  <div style="max-width:72rem; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+<nav style="position:sticky; top:32px; z-index:99; background:rgba(0,0,20,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid #2a2a3a;">
+  <div style="max-width:72rem; margin:0 auto; padding:10px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
 
     <!-- Logo -->
-    <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
-      <img src="/logo-icon.png" alt="OH! Signs" style="height:32px; width:auto;" />
-      <span class="font-display" style="font-size:1.6rem; letter-spacing:2px; line-height:1;">
-        <span style="color:#3B9AE1;">OH!</span> <span style="color:#E84020;">SIGNS</span>
-      </span>
+    <a href="/" style="display:flex; align-items:baseline; gap:2px; text-decoration:none;">
+      <span style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; color:#E84020; font-weight:700;">OH!</span>
+      <span style="font-family:'Dancing Script',cursive; font-size:1.8rem; color:#3B9AE1; font-weight:700;">Signs</span>
     </a>
 
     <!-- Links -->
-    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+    <div style="display:flex; align-items:center; gap:4px; flex-wrap:wrap;">
       {links.map(link => (
         <a
           href={link.href}
@@ -40,16 +45,16 @@ const tickerItems = ['Vinyl Decals','Custom Signs','Business Branding','UV Print
           {link.label.toUpperCase()}
         </a>
       ))}
-      <span style="position:relative; display:inline-flex; align-items:center;">
-        <span style="position:absolute; inset:0; background:#3B9AE1; border-radius:20px; opacity:0.4; animation:layerFloat1 4s ease-in-out infinite; transform:translate(-3px,3px) rotate(-1deg);"></span>
-        <span style="position:absolute; inset:0; background:#E84020; border-radius:20px; opacity:0.3; animation:layerFloat2 4.5s ease-in-out infinite; transform:translate(3px,-3px) rotate(1deg);"></span>
+      <span style="position:relative; display:inline-flex; align-items:center; margin-left:4px;">
+        <span style="position:absolute; inset:0; border:1.5px solid #3B9AE1; border-radius:6px; opacity:0.4; animation:layerFloat1 4s ease-in-out infinite; transform:translate(-3px,3px) rotate(-1deg);"></span>
+        <span style="position:absolute; inset:0; border:1.5px solid #E84020; border-radius:6px; opacity:0.3; animation:layerFloat2 4.5s ease-in-out infinite; transform:translate(3px,-3px) rotate(1deg);"></span>
         <a
           href="/quote"
-          style="position:relative; z-index:2; font-family:'Bebas Neue',sans-serif; font-size:0.95rem; letter-spacing:2px; background:#FFE600; color:#0a0a0f; text-decoration:none; padding:6px 18px; border-radius:20px; transition:all 0.25s;"
-          onmouseover="this.style.transform='translateY(-2px) scale(1.03)'; this.style.boxShadow='0 4px 16px rgba(255,230,0,0.3)'"
-          onmouseout="this.style.transform='none'; this.style.boxShadow='none'"
+          style="position:relative; z-index:2; font-family:'Bebas Neue',sans-serif; font-size:0.9rem; letter-spacing:2px; border:1.5px solid #F5F5F5; color:#F5F5F5; text-decoration:none; padding:5px 16px; border-radius:6px; transition:all 0.25s; white-space:nowrap;"
+          onmouseover="this.style.background='#FFE600'; this.style.color='#0a0a0f'; this.style.borderColor='#FFE600'; this.style.boxShadow='0 4px 16px rgba(255,230,0,0.3)'"
+          onmouseout="this.style.background='transparent'; this.style.color='#F5F5F5'; this.style.borderColor='#F5F5F5'; this.style.boxShadow='none'"
         >
-          GET A QUOTE
+          GET A FREE QUOTE
         </a>
       </span>
     </div>

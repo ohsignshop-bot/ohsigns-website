@@ -7,8 +7,9 @@ const year = new Date().getFullYear();
 
     <!-- Brand -->
     <div>
-      <div class="font-display" style="font-size:1.8rem; letter-spacing:2px; margin-bottom:12px;">
-        <span style="color:#3B9AE1;">OH!</span> <span style="color:#E84020;">SIGNS</span>
+      <div style="font-size:1.8rem; margin-bottom:12px;">
+        <span style="font-family:'Bebas Neue',sans-serif; letter-spacing:1px; color:#E84020; font-weight:700;">OH!</span>
+        <span style="font-family:'Dancing Script',cursive; color:#3B9AE1; font-weight:700; font-size:2rem;">Signs</span>
       </div>
       <p style="font-size:0.9rem; color:#707080; line-height:1.6;">
         Custom signs, banners, vehicle wraps &amp; more — made with care for businesses that want to stand out.
@@ -19,9 +20,9 @@ const year = new Date().getFullYear();
     <div>
       <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:3px; color:#3a3a55; margin-bottom:14px;">PAGES</div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        {['/','/about','/shop','/quote'].map((href,i) => (
+        {['/','/about','/services','/shop','/quote'].map((href,i) => (
           <a href={href} style="font-size:0.9rem; color:#707080; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#F5F5F5'" onmouseout="this.style.color='#707080'">
-            {['Home','About','Shop','Get a Quote'][i]}
+            {['Home','About','Services','Shop','Get a Quote'][i]}
           </a>
         ))}
       </div>
