@@ -1,79 +1,92 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CropCorners from '../components/CropCorners.astro';
+
+const faq = [
+  { q: 'Do you have a minimum order?', a: 'No minimum. One sticker, one sign — whatever you need. Pricing just scales with quantity.' },
+  { q: 'Can you work with my existing files?', a: "Send us what you have and we'll tell you if it's print-ready. If it needs work, we can fix it — we'll tell you upfront what that costs." },
+  { q: 'Do you ship?', a: 'Yes, nationwide. Shipping cost is quoted separately based on order size and destination.' },
+  { q: 'How fast can you turn a job around?', a: "Most orders run 3–5 business days from approved art. Rush jobs are possible — ask and we'll tell you honestly whether we can do it." },
+  { q: 'Do you do installation?', a: "It depends on the job and your location. Ask us — we'll either handle it or point you to someone reliable." },
+];
 ---
 
 <Layout
   title="Contact"
-  description="Get in touch with Oh! Signs — for questions, quotes, and everything in between."
+  description="Get in touch with Oh! Signs — for quotes, questions, and everything in between."
+  sheet="09/11"
 >
-  <section class="page-hero section-y">
+  <!-- Hero -->
+  <section class="contact-hero section-y">
     <div class="container">
-      <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">Contact</p>
-      <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Let's talk.</h1>
-      <p class="page-hero-body">
-        For quotes, use the <a href="/quote" style="color: var(--color-acid);">quote form</a> — it gives us exactly the info we need to respond fast.
-        For everything else, the email below works great.
+      <p class="text-label" style="color: var(--smoke); margin-bottom: 0.75rem;">Contact</p>
+      <h1 class="text-h1 contact-title">Let's talk.</h1>
+      <p class="contact-intro">
+        For quotes, use the <a href="/quote" class="contact-inline-link">quote form</a> — it gives us what we need to respond fast.
+        For everything else, email works great.
       </p>
     </div>
   </section>
 
-  <section class="contact-section section-cream section-y">
+  <!-- Contact info + FAQ -->
+  <section class="contact-section section-y">
     <div class="container contact-inner">
+
       <div class="contact-info">
-        <h2 class="text-h2">Get in touch.</h2>
+        <div class="contact-method-box">
+          <CropCorners color="var(--cyan)" gap={8} size={12} weight={1} />
+          <div class="contact-methods">
+            <div class="contact-method">
+              <p class="contact-method-label">Email</p>
+              <a href="mailto:hello@ohsigns.shop" class="contact-link">hello@ohsigns.shop</a>
+              <p class="contact-method-note">Best for questions, proofing, and anything that needs a paper trail.</p>
+            </div>
 
-        <div class="contact-method">
-          <p class="text-label contact-method-label">Email</p>
-          <a href="mailto:hello@ohsigns.shop" class="contact-link">hello@ohsigns.shop</a>
-          <p class="contact-method-note">Best for questions, proofing, and anything that needs a paper trail.</p>
-        </div>
+            <div class="contact-method">
+              <p class="contact-method-label">Quote Request</p>
+              <a href="/quote" class="contact-link">ohsigns.shop/quote</a>
+              <p class="contact-method-note">Start here if you know what you need. We respond within one business day — usually faster.</p>
+            </div>
 
-        <div class="contact-method">
-          <p class="text-label contact-method-label">Quote Request</p>
-          <a href="/quote" class="contact-link">ohsigns.shop/quote</a>
-          <p class="contact-method-note">Start here if you know what you need. We respond within one business day — usually faster.</p>
-        </div>
-
-        <div class="contact-method">
-          <p class="text-label contact-method-label">Response time</p>
-          <p class="contact-method-note" style="margin: 0;">Business days, usually within a few hours during shop hours. Nights and weekends — we're not robots.</p>
+            <div class="contact-method">
+              <p class="contact-method-label">Response Time</p>
+              <p class="contact-method-note" style="margin: 0;">Business days, usually within a few hours during shop hours. Nights and weekends — we're not robots.</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="contact-faq">
-        <h2 class="text-h2">Common questions.</h2>
+        <p class="text-label faq-label">Common Questions</p>
         <div class="faq-list">
-          <details class="faq-item">
-            <summary class="faq-q">Do you have a minimum order?</summary>
-            <p class="faq-a">No minimum. One sticker, one sign — whatever you need. Pricing just scales with quantity.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">Can you work with my existing files?</summary>
-            <p class="faq-a">Yes. Send us what you have and we'll tell you if it's print-ready. If it needs work, we can fix it — we'll tell you upfront what that costs.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">Do you ship?</summary>
-            <p class="faq-a">Yes, we ship nationwide. Shipping cost is quoted separately based on order size and destination.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">How fast can you turn a job around?</summary>
-            <p class="faq-a">Most orders run 3–5 business days from approved art. Rush jobs are possible — ask and we'll tell you honestly whether we can do it.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-q">Do you do installation?</summary>
-            <p class="faq-a">It depends on the job and your location. Ask us — we'll either handle it or point you to someone reliable.</p>
-          </details>
+          {faq.map(({ q, a }) => (
+            <details class="faq-item">
+              <summary class="faq-q">{q}</summary>
+              <p class="faq-a">{a}</p>
+            </details>
+          ))}
         </div>
       </div>
+
     </div>
   </section>
 </Layout>
 
 <style>
-  .page-hero { background-color: var(--color-ink); }
-  .page-hero-body { color: var(--color-smoke); max-width: 52ch; margin: 0; }
+  .contact-hero { background: var(--key); }
+  .contact-title { color: var(--paper); margin: 0 0 1rem; }
+  .contact-intro {
+    color: var(--smoke);
+    max-width: 52ch;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+  .contact-inline-link { color: var(--yellow); transition: opacity 150ms; }
+  .contact-inline-link:hover { opacity: 0.8; }
 
-  .contact-section { background-color: var(--color-cream); color: var(--color-ink); }
+  /* Contact section */
+  .contact-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
   .contact-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -81,53 +94,67 @@ import Layout from '../layouts/Layout.astro';
     align-items: start;
   }
 
-  .contact-info { display: flex; flex-direction: column; gap: 2rem; }
-  .contact-info .text-h2 { margin: 0; }
-
+  .contact-method-box {
+    position: relative;
+    padding: 2rem;
+    border: 1px solid rgba(245,240,232,0.1);
+  }
+  .contact-methods { display: flex; flex-direction: column; gap: 1.75rem; }
   .contact-method { display: flex; flex-direction: column; gap: 0.375rem; }
-  .contact-method-label { margin: 0; color: #5a6050; }
+  .contact-method-label {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin: 0;
+  }
   .contact-link {
     font-family: var(--font-display);
     font-size: 1.125rem;
-    color: var(--color-ink);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
     text-decoration: underline;
-    text-decoration-color: rgba(14,15,12,0.25);
+    text-decoration-color: rgba(245,240,232,0.2);
     text-underline-offset: 3px;
-    transition: text-decoration-color var(--duration-fast);
+    transition: text-decoration-color 150ms;
   }
-  .contact-link:hover { text-decoration-color: var(--color-ink); }
-  .contact-method-note { margin: 0; font-size: var(--text-sm); color: #5a6050; }
+  .contact-link:hover { text-decoration-color: var(--yellow); }
+  .contact-method-note { margin: 0; font-size: var(--text-sm); color: var(--smoke); line-height: 1.6; }
 
-  .contact-faq { display: flex; flex-direction: column; gap: 1.5rem; }
-  .contact-faq .text-h2 { margin: 0; }
-
+  /* FAQ */
+  .faq-label { color: var(--smoke); margin-bottom: 1.25rem; }
   .faq-list { display: flex; flex-direction: column; }
-  .faq-item { border-bottom: 1px solid rgba(14,15,12,0.1); }
-  .faq-item:first-child { border-top: 1px solid rgba(14,15,12,0.1); }
+  .faq-item {
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+  }
+  .faq-item:first-child { border-top: 1px solid rgba(245,240,232,0.08); }
 
   .faq-q {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
-    font-weight: 600;
-    font-size: 0.9375rem;
+    font-size: var(--text-sm);
+    color: var(--paper);
     cursor: pointer;
     list-style: none;
     user-select: none;
+    line-height: 1.4;
   }
   .faq-q::-webkit-details-marker { display: none; }
   .faq-q::after {
     content: '+';
     font-family: var(--font-display);
     font-size: 1.25rem;
-    color: var(--color-blood);
-    transition: transform var(--duration-fast);
+    color: var(--yellow);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 150ms;
   }
   .faq-item[open] .faq-q::after { transform: rotate(45deg); }
-  .faq-a { margin: 0 0 1rem; font-size: var(--text-sm); color: #5a6050; }
+  .faq-a { margin: 0 0 1rem; font-size: var(--text-sm); color: var(--smoke); line-height: 1.65; }
 
-  @media (max-width: 768px) {
-    .contact-inner { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 768px) { .contact-inner { grid-template-columns: 1fr; } }
 </style>

@@ -234,25 +234,17 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
         <h2 className="qf-success-title">
           {mode === 'sample' ? "You're on the list." : "We've got it."}
         </h2>
-        <p className="qf-success-body">
-          {mode === 'sample'
-            ? "Sample pack goes out within 1–2 business days."
-            : "We'll review and reply within one business day — usually faster."}
-        </p>
         {reqNum && (
           <div className="qf-success-ref">
-            <span className="qf-ref-label">Reference</span>
+            <span className="qf-ref-label">Your reference number</span>
             <span className="qf-ref-num">{reqNum}</span>
-            <a
-              href={`https://bms.ohsigns.shop/jobs?q=${reqNum}`}
-              className="qf-track-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Track your order →
-            </a>
           </div>
         )}
+        <p className="qf-success-body">
+          {mode === 'sample'
+            ? "Sample pack ships within 1–2 business days."
+            : "Hold onto this reference — you'll hear from us within one business day."}
+        </p>
         <button
           className="qf-reset-btn"
           onClick={() => { setForm(EMPTY); setErrors({}); setStatus('idle'); setReqNum(''); setArtworkFile(null); }}

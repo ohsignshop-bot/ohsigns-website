@@ -9,14 +9,16 @@ interface Props {
   ogImage?: string;
   noIndex?: boolean;
   canonical?: string;
+  sheet?: string;
 }
 
 const {
   title,
-  description = 'Custom signs, vehicle wraps, decals, and UV printing for businesses and individuals. Made in-house, delivered fast.',
+  description = 'Die-cut decals, UV printing on rigid substrates, and brand design. Made in-house by one person in Winston-Salem.',
   ogImage = '/og.png',
   noIndex = false,
   canonical,
+  sheet,
 } = Astro.props;
 
 const siteUrl = 'https://ohsigns.shop';
@@ -60,6 +62,6 @@ const fullTitle = title === 'Oh! Signs' ? title : `${title} | Oh! Signs`;
     <main id="main">
       <slot />
     </main>
-    <SheetFooter />
+    <SheetFooter sheet={sheet} />
   </body>
 </html>

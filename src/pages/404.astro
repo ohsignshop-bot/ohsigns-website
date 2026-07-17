@@ -1,36 +1,88 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CropCorners from '../components/CropCorners.astro';
 ---
 
-<Layout title="Page Not Found" noIndex={true}>
-  <section class="not-found section-y">
-    <div class="container not-found-inner">
-      <p class="not-found-code text-label">404</p>
-      <h1 class="text-h1" style="color: var(--color-cream); margin: 0.5rem 0 1rem;">
-        That page doesn't exist.
-      </h1>
-      <p style="color: var(--color-smoke); max-width: 44ch; margin: 0 0 2rem;">
-        Either the link is broken, or it never existed in the first place.
-        Either way, you can find what you're looking for from the home page.
-      </p>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="/" class="btn btn-primary">Go Home</a>
-        <a href="/services" class="btn btn-outline">Browse Services</a>
+<Layout title="Misprint — Page Not Found" noIndex={true} sheet="11/11">
+  <section class="misprint section-y">
+    <div class="container misprint-inner">
+      <div class="misprint-box">
+        <CropCorners color="var(--magenta)" gap={16} size={20} weight={1.5} />
+        <div class="misprint-content">
+          <p class="misprint-stamp" aria-hidden="true">MISPRINT</p>
+          <p class="text-label misprint-label">Error 404</p>
+          <h1 class="text-h1 misprint-title">That page doesn't exist.</h1>
+          <p class="misprint-body">
+            Either the link is broken, or it never ran to begin with.
+            Either way — back to the top.
+          </p>
+          <div class="misprint-actions">
+            <a href="/" class="btn-sticker">Go Home</a>
+            <a href="/services" class="misprint-link">Browse Services →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .not-found { background-color: var(--color-ink); min-height: calc(100svh - 4rem); display: flex; align-items: center; }
-  .not-found-inner { max-width: 640px; }
-  .not-found-code {
-    color: var(--color-acid);
-    font-family: var(--font-display);
-    font-size: 4rem;
-    letter-spacing: -0.02em;
-    display: block;
-    margin-bottom: 0;
-    line-height: 1;
+  .misprint {
+    background: var(--key);
+    min-height: calc(100svh - 4rem);
+    display: flex;
+    align-items: center;
   }
+  .misprint-inner { width: 100%; max-width: 640px; }
+
+  .misprint-box {
+    position: relative;
+    padding: clamp(2.5rem, 6vw, 4rem);
+    border: 1px solid rgba(236, 0, 140, 0.2);
+  }
+  .misprint-content { display: flex; flex-direction: column; gap: 1rem; }
+
+  .misprint-stamp {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    opacity: 0.15;
+    margin: 0;
+    line-height: 1;
+    /* off-register effect on the stamp */
+    text-shadow: 2px 2px 0 rgba(0,174,239,0.3), -2px -1px 0 rgba(255,242,0,0.2);
+    position: absolute;
+    top: clamp(1.5rem, 4vw, 2.5rem);
+    right: clamp(1.5rem, 4vw, 2.5rem);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .misprint-label { color: var(--magenta); margin: 0; }
+  .misprint-title { color: var(--paper); margin: 0; }
+  .misprint-body {
+    color: var(--smoke);
+    max-width: 40ch;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+  .misprint-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+  .misprint-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    transition: color 150ms;
+  }
+  .misprint-link:hover { color: var(--paper); }
 </style>

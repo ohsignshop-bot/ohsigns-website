@@ -1,142 +1,171 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import CropCorners from '../../components/CropCorners.astro';
+
+const offerings = [
+  { name: 'Logo Design', body: "Original mark or wordmark delivered in all standard formats (AI, EPS, SVG, PNG). Includes a one-page usage guide so the logo stays consistent." },
+  { name: 'Brand Identity', body: "Logo plus colour system, type pairing, and basic brand guidelines. Scoped to fit small businesses through full commercial rollouts." },
+  { name: 'Signage Layout', body: "Take your logo and copy and design a sign that works at scale. We know what reads from ten feet and what disappears." },
+  { name: 'File Prep &amp; Cleanup', body: "Already have a logo but it's a low-res JPG from 2009? We vectorise, clean up, and prep it for production. Flat fee, fast turn." },
+  { name: 'Retouching &amp; Modifications', body: "Add a year, swap a tagline, adjust a colour. Small revisions handled quickly without charging for a whole new design." },
+];
+
+const steps = [
+  { n: '01', title: 'Brief', body: "Tell us what the business does, who it's for, and what feeling you're going for. The more detail, the better the first round." },
+  { n: '02', title: 'Concepts', body: "We deliver initial concepts. Logo projects typically include 2–3 directions — you pick one to develop." },
+  { n: '03', title: 'Revisions', body: "Two rounds of revisions included. Additional rounds at an hourly rate. Most projects wrap in two." },
+  { n: '04', title: 'Final Files', body: "Production-ready files delivered in all formats — and we'll answer questions about how to use them going forward." },
+];
 ---
 
 <Layout
   title="Design Services"
-  description="Logo design, brand identity systems, and print-ready file prep for signs, wraps, and everything in between. Oh! Signs."
+  description="Logo design, brand identity, signage layout, and file prep from Oh! Signs — art that goes to press looking right."
+  sheet="05/11"
 >
+  <!-- Hero -->
   <section class="page-hero section-y">
     <div class="container">
       <nav aria-label="Breadcrumb" class="breadcrumb">
         <a href="/services">Services</a>
-        <span aria-hidden="true">/</span>
+        <span aria-hidden="true"> / </span>
         <span aria-current="page">Design Services</span>
       </nav>
-      <h1 class="text-h1" style="color: var(--color-cream); margin: 1rem 0;">Design Services.</h1>
-      <p class="page-hero-body">
-        Great printing starts with great art. We do original design, brand systems,
-        and production-ready file prep — so nothing goes to press looking wrong.
+      <h1 class="text-h1 page-title">Design Services.</h1>
+      <p class="page-intro">
+        Great printing starts with great art. We do original design, brand systems, and production-ready file prep — so nothing goes to press looking wrong.
       </p>
-      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="/quote" class="btn btn-primary">Get a Design Quote</a>
+      <div class="hero-actions">
+        <a href="/quote" class="btn-sticker">Get a Design Quote</a>
       </div>
     </div>
   </section>
 
-  <section class="design-offerings section-cream section-y">
+  <!-- Offerings -->
+  <section class="offerings-section section-y">
     <div class="container">
-      <h2 class="text-h2" style="margin-bottom: 2rem;">What we offer.</h2>
+      <p class="text-label offerings-label">What We Offer</p>
       <div class="offerings-grid">
-        <div class="offering">
-          <h3 class="text-h3">Logo Design</h3>
-          <p>Original mark or wordmark, delivered in all standard formats (AI, EPS, SVG, PNG). Includes a usage guide so your logo stays consistent everywhere it appears.</p>
-        </div>
-        <div class="offering">
-          <h3 class="text-h3">Brand Identity</h3>
-          <p>Logo plus colour system, type pairing, and basic brand guidelines. Priced by scope — small businesses to full commercial rollouts.</p>
-        </div>
-        <div class="offering">
-          <h3 class="text-h3">Signage Layout & Artwork</h3>
-          <p>We'll take your logo and copy and design a sign that actually works at scale. We know what reads from 10 feet and what disappears.</p>
-        </div>
-        <div class="offering">
-          <h3 class="text-h3">Vehicle Wrap Design</h3>
-          <p>Designing for a 3D surface is different from print. We work with your vehicle template and artwork to make sure it wraps correctly — no mirror-flip logos, no stretched text.</p>
-        </div>
-        <div class="offering">
-          <h3 class="text-h3">File Prep & Cleanup</h3>
-          <p>Already have a logo but it's a low-res JPG from 2009? We vectorise, clean up, and prep it for production. Flat fee, fast turnaround.</p>
-        </div>
-        <div class="offering">
-          <h3 class="text-h3">Retouching & Modifications</h3>
-          <p>Need to update an existing design? Add a year, swap a tagline, adjust a colour? We handle small revisions quickly without charging for a whole new design.</p>
-        </div>
+        {offerings.map(({ name, body }) => (
+          <div class="offering-card">
+            <h2 class="offering-name" set:html={name} />
+            <p class="offering-body" set:html={body} />
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="design-process section-y">
-    <div class="container">
-      <h2 class="text-h2" style="color: var(--color-cream); margin-bottom: 2rem;">The process.</h2>
-      <div class="process-steps">
-        <div class="process-step">
-          <span class="step-n">01</span>
-          <div>
-            <h3 class="text-h3" style="color: var(--color-cream);">Brief</h3>
-            <p style="color: var(--color-smoke);">Tell us what the business does, who it's for, and what feeling you're going for. The more detail, the better the first round.</p>
-          </div>
+  <!-- Process -->
+  <section class="process-section section-y">
+    <div class="container process-inner">
+      <div class="process-box">
+        <CropCorners color="var(--yellow)" gap={12} size={14} weight={1} />
+        <p class="text-label process-label">The Process</p>
+        <div class="process-steps">
+          {steps.map(({ n, title, body }) => (
+            <div class="process-step">
+              <span class="step-num">{n}</span>
+              <div>
+                <h3 class="step-title">{title}</h3>
+                <p class="step-body">{body}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        <div class="process-step">
-          <span class="step-n">02</span>
-          <div>
-            <h3 class="text-h3" style="color: var(--color-cream);">Concepts</h3>
-            <p style="color: var(--color-smoke);">We deliver initial concepts. Logo projects typically include 2–3 directions. You pick one to develop.</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <span class="step-n">03</span>
-          <div>
-            <h3 class="text-h3" style="color: var(--color-cream);">Revisions</h3>
-            <p style="color: var(--color-smoke);">Two rounds of revisions are included. Additional rounds at an hourly rate. Most projects wrap in two.</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <span class="step-n">04</span>
-          <div>
-            <h3 class="text-h3" style="color: var(--color-cream);">Final files</h3>
-            <p style="color: var(--color-smoke);">We deliver production-ready files — and answer questions about how to use them going forward.</p>
-          </div>
-        </div>
+        <a href="/quote" class="btn-sticker" style="margin-top: 2rem; display: inline-flex;">Start a Design Project</a>
       </div>
-      <a href="/quote" class="btn btn-primary" style="margin-top: 2.5rem;">Start a Design Project</a>
     </div>
   </section>
 </Layout>
 
 <style>
-  .page-hero { background-color: var(--color-ink); }
-  .page-hero-body { color: var(--color-smoke); max-width: 54ch; margin: 0; }
+  .page-hero { background: var(--key); }
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-bottom: 1.5rem;
+  }
+  .breadcrumb a { color: var(--smoke); transition: color 150ms; }
+  .breadcrumb a:hover { color: var(--paper); }
+  .breadcrumb span[aria-current] { color: var(--yellow); }
 
-  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: var(--text-sm); color: var(--color-smoke); }
-  .breadcrumb a { color: var(--color-smoke); transition: color var(--duration-fast); }
-  .breadcrumb a:hover { color: var(--color-cream); }
-  .breadcrumb span[aria-current] { color: var(--color-cream); }
+  .page-title { color: var(--paper); margin: 0 0 1rem; }
+  .page-intro {
+    color: var(--smoke);
+    max-width: 54ch;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+  .hero-actions { margin-top: 1.75rem; }
 
-  .design-offerings { background-color: var(--color-cream); color: var(--color-ink); }
+  /* Offerings */
+  .offerings-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
+  .offerings-label { color: var(--smoke); margin-bottom: 1.75rem; }
   .offerings-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
-  .offering {
-    padding: 1.75rem;
-    border: 1px solid rgba(14,15,12,0.12);
-    border-radius: var(--radius-md);
+  .offering-card {
+    padding: 1.5rem;
+    border: 1px solid rgba(245,240,232,0.1);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.625rem;
   }
-  .offering h3 { margin: 0; }
-  .offering p  { margin: 0; font-size: var(--text-sm); color: #5a6050; }
-
-  .design-process { background-color: var(--color-ink); }
-  .process-steps { display: flex; flex-direction: column; gap: 1.5rem; max-width: 640px; }
-  .process-step { display: flex; gap: 1.5rem; align-items: flex-start; }
-  .step-n {
+  .offering-name {
     font-family: var(--font-display);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--color-acid);
-    padding: 0.25rem 0.5rem;
-    border: 1px solid rgba(184,230,0,0.3);
-    border-radius: var(--radius-sm);
-    flex-shrink: 0;
-    margin-top: 0.2rem;
+    font-size: 1.125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin: 0;
   }
-  .process-step div { display: flex; flex-direction: column; gap: 0.375rem; }
-  .process-step h3 { margin: 0; }
-  .process-step p  { margin: 0; font-size: var(--text-sm); }
+  .offering-body { margin: 0; font-size: var(--text-sm); color: var(--smoke); line-height: 1.65; }
+
+  /* Process */
+  .process-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
+  .process-inner { max-width: 680px; }
+  .process-box {
+    position: relative;
+    padding: 2.5rem;
+    border: 1px solid rgba(245,240,232,0.1);
+  }
+  .process-label { color: var(--smoke); margin-bottom: 1.75rem; }
+  .process-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+  .process-step {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+    background: rgba(255,242,0,0.08);
+    border: 1px solid rgba(255,242,0,0.2);
+    padding: 0.25rem 0.5rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin: 0 0 0.25rem;
+  }
+  .step-body { margin: 0; font-size: var(--text-sm); color: var(--smoke); line-height: 1.6; }
 
   @media (max-width: 768px) { .offerings-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 480px) { .offerings-grid { grid-template-columns: 1fr; } }

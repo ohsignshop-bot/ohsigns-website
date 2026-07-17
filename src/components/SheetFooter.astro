@@ -1,4 +1,6 @@
 ---
+interface Props { sheet?: string; }
+const { sheet } = Astro.props;
 const year = new Date().getFullYear();
 
 const navLinks = [
@@ -76,6 +78,7 @@ const EMAIL = 'hello@ohsigns.shop';
   <!-- Print manifest strip — Space Mono margin info -->
   <div class="sf-manifest" aria-label="Site info">
     <div class="container sf-manifest-inner">
+      {sheet && <><span class="sf-manifest-item sf-sheet">SHEET {sheet}</span><span class="sf-sep" aria-hidden="true">//</span></>}
       <span class="sf-manifest-item">OH! SIGNS LLC</span>
       <span class="sf-sep" aria-hidden="true">//</span>
       <span class="sf-manifest-item">&copy; {year}</span>
@@ -196,6 +199,7 @@ const EMAIL = 'hello@ohsigns.shop';
     text-transform: uppercase;
   }
   .sf-manifest-item { white-space: nowrap; }
+  .sf-sheet { color: var(--yellow); opacity: 0.7; }
   .sf-manifest-email {
     color: rgba(245, 240, 232, 0.35);
     transition: color var(--duration-fast);

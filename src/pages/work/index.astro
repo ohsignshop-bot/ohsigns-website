@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import CropCorners from '../../components/CropCorners.astro';
 import { getCollection } from 'astro:content';
 
 const allWork = (await getCollection('work'))
@@ -10,19 +11,21 @@ const categories = ['all', ...Array.from(new Set(allWork.map((e) => e.data.categ
 
 <Layout
   title="Our Work"
-  description="A portfolio of recent signs, decals, UV prints, and vehicle wraps from Oh! Signs."
+  description="A portfolio of recent decals, UV prints, and brand design from Oh! Signs in Winston-Salem."
+  sheet="06/11"
 >
+  <!-- Hero -->
   <section class="page-hero section-y">
     <div class="container">
-      <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">Portfolio</p>
-      <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Our Work.</h1>
-      <p class="page-hero-body">
-        Recent projects across decals, UV printing, vehicle wraps, and signage.
-        Photos are coming — this is placeholder content for now.
+      <p class="text-label" style="color: var(--smoke);">Portfolio</p>
+      <h1 class="text-h1 portfolio-title">Our Work.</h1>
+      <p class="portfolio-intro">
+        Recent projects across die-cut decals, UV printing, and brand design.
       </p>
     </div>
   </section>
 
+  <!-- Gallery -->
   <section class="gallery section-y">
     <div class="container">
       <!-- Category filter -->
@@ -40,42 +43,49 @@ const categories = ['all', ...Array.from(new Set(allWork.map((e) => e.data.categ
 
       <div class="work-grid" id="work-grid">
         {allWork.map((entry) => (
-          <a
-            href={`/work/${entry.slug}`}
-            class="work-card"
-            data-category={entry.data.category}
-          >
-            <div class="work-card-img">
-              <img
-                src={entry.data.image}
-                alt={entry.data.imageAlt}
-                width="600"
-                height="400"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="work-card-overlay">
-                <span class="text-label work-card-cat">{entry.data.category.replace('-', ' ')}</span>
+          <div class="work-card" data-category={entry.data.category}>
+            <div class="work-card-img-wrap">
+              <CropCorners color="var(--paper)" gap={6} size={10} weight={1} />
+              <div class="work-card-img">
+                <img
+                  src={entry.data.image}
+                  alt={entry.data.imageAlt}
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <div class="work-card-body">
+              <span class="work-card-cat">{entry.data.category.replace('-', ' ')}</span>
               <h2 class="work-card-title">{entry.data.title}</h2>
-              {entry.data.client && (
-                <p class="work-card-client">{entry.data.client}</p>
-              )}
             </div>
-          </a>
+          </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="work-cta-section section-y">
+    <div class="container">
+      <p class="text-label" style="color: var(--smoke); margin-bottom: 0.75rem;">Next Step</p>
+      <h2 class="text-h2 work-cta-heading">Ready to start a project?</h2>
+      <div class="work-cta-actions">
+        <a href="/quote" class="btn-sticker">Get a Quote</a>
+        <a href="/sample-pack" class="work-secondary-link">Request Sample Pack →</a>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .page-hero { background-color: var(--color-ink); }
-  .page-hero-body { color: var(--color-smoke); max-width: 52ch; margin: 0; }
+  .page-hero { background: var(--key); }
+  .portfolio-title { color: var(--paper); margin: 0.5rem 0 0.75rem; }
+  .portfolio-intro { color: var(--smoke); max-width: 52ch; margin: 0; font-size: var(--text-sm); line-height: 1.7; }
 
-  .gallery { background-color: var(--color-ink); }
+  .gallery { background: var(--key); }
 
   /* Filter bar */
   .filter-bar {
@@ -85,87 +95,101 @@ const categories = ['all', ...Array.from(new Set(allWork.map((e) => e.data.categ
     margin-bottom: 2.5rem;
   }
   .filter-btn {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    padding: 0.375rem 1rem;
-    border: 1px solid rgba(242, 234, 216, 0.2);
-    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid rgba(245,240,232,0.15);
     background: transparent;
-    color: var(--color-smoke);
+    color: var(--smoke);
     cursor: pointer;
-    transition: background var(--duration-fast), color var(--duration-fast), border-color var(--duration-fast);
-    text-transform: capitalize;
+    transition: background 150ms, color 150ms, border-color 150ms;
+    border-radius: 0;
   }
   .filter-btn:hover,
   .filter-btn[aria-pressed="true"] {
-    background: var(--color-cream);
-    color: var(--color-ink);
-    border-color: var(--color-cream);
+    background: var(--paper);
+    color: var(--key);
+    border-color: var(--paper);
   }
 
   /* Work grid */
   .work-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.75rem;
   }
-  .work-card { display: block; color: var(--color-cream); }
+  .work-card { display: flex; flex-direction: column; gap: 0.875rem; }
   .work-card[hidden] { display: none; }
 
-  .work-card-img {
+  .work-card-img-wrap {
     position: relative;
+    overflow: visible;
+  }
+  .work-card-img {
     aspect-ratio: 3/2;
     overflow: hidden;
-    border-radius: var(--radius-md);
-    background: rgba(242, 234, 216, 0.05);
+    background: rgba(245,240,232,0.04);
   }
   .work-card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--duration-base) var(--ease-out-expo);
+    transition: transform 300ms var(--ease-out-expo);
+    display: block;
   }
   .work-card:hover .work-card-img img { transform: scale(1.04); }
-  .work-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(14,15,12,0.6) 0%, transparent 55%);
-    display: flex;
-    align-items: flex-end;
-    padding: 0.875rem;
-  }
+
+  .work-card-body { padding: 0 0.25rem; }
   .work-card-cat {
-    background: rgba(14,15,12,0.65);
-    color: var(--color-cream);
-    padding: 0.25rem 0.625rem;
-    border-radius: var(--radius-sm);
-    backdrop-filter: blur(4px);
-    text-transform: capitalize;
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-bottom: 0.375rem;
+  }
+  .work-card-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin: 0;
+    line-height: 1.15;
   }
 
-  .work-card-body { padding: 0.75rem 0 0; }
-  .work-card-title { margin: 0; font-size: 0.9375rem; font-weight: 500; }
-  .work-card-client { margin: 0.25rem 0 0; font-size: var(--text-sm); color: var(--color-smoke); }
+  /* CTA */
+  .work-cta-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
+  .work-cta-heading { color: var(--paper); margin: 0 0 1.5rem; }
+  .work-cta-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .work-secondary-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    transition: color 150ms;
+  }
+  .work-secondary-link:hover { color: var(--paper); }
 
   @media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .work-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px)  { .work-grid { grid-template-columns: 1fr; } }
 </style>
 
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-  const cards   = document.querySelectorAll<HTMLAnchorElement>('.work-card');
+  const cards   = document.querySelectorAll<HTMLDivElement>('.work-card');
 
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const cat = btn.dataset.category!;
-
       buttons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
       btn.setAttribute('aria-pressed', 'true');
-
       cards.forEach((card) => {
-        const matches = cat === 'all' || card.dataset.category === cat;
-        card.hidden = !matches;
+        card.hidden = !(cat === 'all' || card.dataset.category === cat);
       });
     });
   });

@@ -1,118 +1,190 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import CropCorners from '../../components/CropCorners.astro';
 
 const types = [
-  { name: 'Cut Vinyl Decals', desc: 'Single-colour or multi-colour, precision-cut from durable calendered or cast vinyl. No substrate — just the vinyl itself.' },
-  { name: 'Printed Decals & Stickers', desc: 'Full-colour printing on vinyl or paper stock, with or without laminate. CMYK + white ink available.' },
-  { name: 'Window Perforated Film', desc: 'See-through from the inside, full-colour graphic from the outside. Great for storefronts and vehicle windows.' },
-  { name: 'Floor Graphics', desc: 'Anti-slip laminated floor-rated vinyl. Indoor and short-term outdoor use.' },
-  { name: 'Wall Decals', desc: 'Removable or permanent vinyl for interior walls. Ideal for offices, retail, and murals.' },
-  { name: 'Hard Hat Stickers', desc: 'UV-resistant, waterproof labels built to survive a job site. Custom shapes and sizes.' },
+  { name: 'Cut Vinyl Decals', desc: 'Single or multi-colour, precision-cut from durable calendered or cast vinyl. No substrate — just the vinyl, cut to shape.' },
+  { name: 'Printed Stickers', desc: 'Full-colour CMYK on vinyl or paper stock with or without laminate. White ink available for printing on dark or clear material.' },
+  { name: 'Wall Decals', desc: 'Removable or permanent vinyl for interior walls. Clean install, clean removal. Used in offices, retail, and residential.' },
+  { name: 'Hard Hat & Safety Labels', desc: 'UV-resistant, waterproof labels built to survive a job site. Custom shapes and sizes.' },
 ];
 ---
 
 <Layout
   title="Decals & Stickers"
-  description="Custom cut vinyl decals, printed stickers, window film, and floor graphics made in-house at Oh! Signs."
+  description="Custom die-cut vinyl decals and printed stickers made in-house at Oh! Signs in Winston-Salem."
+  sheet="03/11"
 >
+  <!-- Hero -->
   <section class="page-hero section-y">
     <div class="container">
       <nav aria-label="Breadcrumb" class="breadcrumb">
         <a href="/services">Services</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Decals & Stickers</span>
+        <span aria-hidden="true"> / </span>
+        <span aria-current="page">Decals &amp; Stickers</span>
       </nav>
-      <h1 class="text-h1" style="color: var(--color-cream); margin: 1rem 0;">Decals & Stickers.</h1>
-      <p class="page-hero-body">
-        Cut vinyl, printed stickers, perforated window film, and floor graphics.
-        If it sticks, we can make it. Quote based on size, quantity, and material — fill out the form for a fast turnaround.
+      <h1 class="text-h1 page-title">Decals &amp; Stickers.</h1>
+      <p class="page-intro">
+        Cut vinyl and printed stickers. Any shape, no minimum. Quote based on size, quantity, and material — attach your file and we move fast.
       </p>
-      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="/quote" class="btn btn-primary">Get a Quote</a>
-        <a href="/sample-pack" class="btn btn-outline">Free Sample Pack</a>
+      <div class="hero-actions">
+        <a href="/quote" class="btn-sticker">Get a Quote</a>
+        <a href="/sample-pack" class="hero-secondary-link">Free Sample Pack →</a>
       </div>
     </div>
   </section>
 
-  <section class="types-section section-cream section-y">
+  <!-- Types -->
+  <section class="types-section section-y">
     <div class="container">
-      <h2 class="text-h2" style="margin-bottom: 2rem;">What we make.</h2>
+      <p class="text-label types-label">What We Make</p>
       <div class="types-grid">
         {types.map(({ name, desc }) => (
           <div class="type-card">
-            <h3 class="text-h3">{name}</h3>
-            <p>{desc}</p>
+            <CropCorners color="var(--cyan)" gap={6} size={10} weight={1} />
+            <h2 class="type-name">{name}</h2>
+            <p class="type-desc">{desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- Specs -->
   <section class="spec-section section-y">
     <div class="container spec-inner">
       <div>
-        <h2 class="text-h2" style="color: var(--color-cream); margin-bottom: 1.5rem;">Specs & what to send us.</h2>
+        <p class="text-label spec-label">File Specs</p>
+        <h2 class="text-h2 spec-heading">What to send us.</h2>
         <dl class="spec-list">
-          <dt>Preferred file format</dt>
-          <dd>Vector AI, EPS, or PDF (outlined fonts). High-res PNG/TIFF accepted for print-only.</dd>
+          <dt>Preferred format</dt>
+          <dd>Vector AI, EPS, or PDF with outlined fonts. High-res PNG/TIFF accepted for print-only jobs.</dd>
           <dt>Colour mode</dt>
-          <dd>CMYK for full-colour print. PMS swatches for cut vinyl colour matching.</dd>
-          <dt>Minimum quantity</dt>
-          <dd>No minimum. One sticker is fine. Pricing scales with quantity.</dd>
+          <dd>CMYK for full-colour print. PMS references accepted for cut vinyl colour matching.</dd>
+          <dt>Bleed</dt>
+          <dd>3mm bleed on all edges for die-cut stickers. We'll confirm before cutting.</dd>
+          <dt>Minimum order</dt>
+          <dd>None. One sticker is fine. Pricing scales with quantity.</dd>
           <dt>Lead time</dt>
           <dd>3–5 business days for most orders. Rush available — ask.</dd>
         </dl>
       </div>
-      <div class="spec-cta">
-        <a href="/quote" class="btn btn-primary">Start a Decal Quote</a>
+      <div class="spec-cta-col">
+        <a href="/quote" class="btn-sticker">Start a Decal Quote</a>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .page-hero { background-color: var(--color-ink); }
-  .page-hero-body { color: var(--color-smoke); max-width: 54ch; margin: 0; }
+  .page-hero { background: var(--key); }
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-bottom: 1.5rem;
+  }
+  .breadcrumb a { color: var(--smoke); transition: color 150ms; }
+  .breadcrumb a:hover { color: var(--paper); }
+  .breadcrumb span[aria-current] { color: var(--cyan); }
 
-  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: var(--text-sm); color: var(--color-smoke); }
-  .breadcrumb a { color: var(--color-smoke); transition: color var(--duration-fast); }
-  .breadcrumb a:hover { color: var(--color-cream); }
-  .breadcrumb span[aria-current] { color: var(--color-cream); }
+  .page-title { color: var(--paper); margin: 0 0 1rem; }
+  .page-intro {
+    color: var(--smoke);
+    max-width: 54ch;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+  .hero-secondary-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    transition: color 150ms;
+  }
+  .hero-secondary-link:hover { color: var(--paper); }
 
-  .types-section { background-color: var(--color-cream); color: var(--color-ink); }
+  /* Types grid */
+  .types-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
+  .types-label { color: var(--smoke); margin-bottom: 1.75rem; }
   .types-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
   .type-card {
+    position: relative;
     padding: 1.75rem;
-    border: 1px solid rgba(14,15,12,0.12);
-    border-radius: var(--radius-md);
+    border: 1px solid rgba(245,240,232,0.1);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
-  .type-card h3 { margin: 0; }
-  .type-card p  { margin: 0; font-size: var(--text-sm); color: #5a6050; }
+  .type-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin: 0;
+  }
+  .type-desc {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--smoke);
+    line-height: 1.65;
+  }
 
-  .spec-section { background-color: var(--color-ink); color: var(--color-cream); }
+  /* Specs */
+  .spec-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
+  .spec-label { color: var(--smoke); margin-bottom: 0.75rem; }
+  .spec-heading { color: var(--paper); margin: 0 0 1.5rem; }
   .spec-inner {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 4rem;
     align-items: start;
   }
-  .spec-list { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.5rem; margin: 0; }
-  .spec-list dt { font-weight: 600; font-size: var(--text-sm); white-space: nowrap; }
-  .spec-list dd { margin: 0; font-size: var(--text-sm); color: var(--color-smoke); }
-  .spec-cta { padding-top: 2.75rem; }
+  .spec-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+  }
+  .spec-list dt {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    white-space: nowrap;
+    padding-top: 0.125rem;
+  }
+  .spec-list dd {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--smoke);
+    line-height: 1.6;
+  }
+  .spec-cta-col { padding-top: 3rem; }
 
   @media (max-width: 768px) {
-    .types-grid { grid-template-columns: 1fr 1fr; }
-    .spec-inner { grid-template-columns: 1fr; gap: 2rem; }
-  }
-  @media (max-width: 480px) {
     .types-grid { grid-template-columns: 1fr; }
+    .spec-inner  { grid-template-columns: 1fr; gap: 2rem; }
+    .spec-cta-col { padding-top: 0; }
   }
 </style>

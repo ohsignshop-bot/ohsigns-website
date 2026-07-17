@@ -1,124 +1,209 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import OrnamentFrame from '../../components/OrnamentFrame.astro';
+import CropCorners from '../../components/CropCorners.astro';
+import RegistrationMark from '../../components/RegistrationMark.astro';
 
 const services = [
   {
     href: '/services/decals',
-    name: 'Decals & Stickers',
-    icon: '◈',
-    description: 'Cut vinyl, printed stickers, window perforated film, floor graphics, wall decals. All shapes, all sizes, all quantities.',
-    examples: ['Vehicle decals', 'Product labels', 'Window clings', 'Floor graphics', 'Wall murals', 'Hard hat stickers'],
+    label: 'DECALS & STICKERS',
+    color: 'var(--cyan)',
+    code: 'C',
+    desc: 'Die-cut vinyl, printed stickers, wall decals. Any shape, any size, no minimum.',
+    cta: 'See decal options →',
   },
   {
     href: '/services/uv',
-    name: 'UV Printing',
-    icon: '◉',
-    description: 'Flat-bed UV printing directly onto rigid substrates. Outstanding detail, scratch-resistant curing, works on nearly anything flat.',
-    examples: ['Acrylic signs', 'Metal panels', 'Wood plaques', 'Foam board displays', 'Dibond panels', 'Awards & trophies'],
+    label: 'UV HARD GOODS',
+    color: 'var(--magenta)',
+    code: 'M',
+    desc: 'Flat-bed UV directly onto acrylic, metal, wood, PVC foam board, and more. Scratch-resistant, edge-to-edge.',
+    cta: 'See UV options →',
   },
   {
     href: '/services/design',
-    name: 'Design Services',
-    icon: '◇',
-    description: 'Original logo design, brand identity systems, and production-ready file prep so your prints look exactly right.',
-    examples: ['Logo design', 'Brand identity', 'Print-ready file prep', 'Vehicle wrap design', 'Signage layout', 'Retouching & cleanup'],
+    label: 'DESIGN SERVICES',
+    color: 'var(--yellow)',
+    code: 'Y',
+    desc: 'Logo, brand identity, signage layout, and production-ready file prep. Art that goes to press looking right.',
+    cta: 'See design options →',
   },
 ];
 ---
 
 <Layout
   title="Services"
-  description="Decals, UV printing, design services, and more — all made in-house at Oh! Signs."
+  description="Die-cut vinyl decals, UV printing on rigid substrates, and brand design — made in-house at Oh! Signs."
+  sheet="02/11"
 >
-  <section class="page-hero section-y">
-    <div class="container">
-      <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">What We Do</p>
-      <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Services.</h1>
-      <p class="page-hero-body">
-        Everything is made in-house. That means tighter quality control, faster turnarounds,
-        and fewer "let me check with the vendor" emails.
-      </p>
+  <!-- Hero -->
+  <section class="services-hero section-y">
+    <div class="container services-hero-inner">
+      <div>
+        <p class="text-label" style="color: var(--smoke);">What We Make</p>
+        <h1 class="text-h1 services-headline">What We Do.</h1>
+        <p class="services-intro">
+          Three capabilities. Everything in-house. No mystery vendors, no three-week gaps while your job floats across a supply chain.
+        </p>
+      </div>
+      <RegistrationMark size={48} color="rgba(245,240,232,0.12)" />
     </div>
   </section>
 
-  <section class="services-list section-cream section-y">
+  <!-- Service cards -->
+  <section class="services-cards-section section-y">
     <div class="container">
-      <div class="services-cards">
-        {services.map(({ href, name, icon, description, examples }) => (
-          <div class="service-detail-card">
-            <div class="service-detail-header">
-              <span class="service-detail-icon" aria-hidden="true">{icon}</span>
-              <h2 class="text-h2 service-detail-name">{name}</h2>
+      <div class="services-grid">
+        {services.map(({ href, label, color, code, desc, cta }) => (
+          <a href={href} class="svc-card">
+            <div class="svc-card-inner">
+              <CropCorners color={color} gap={10} size={14} weight={1} />
+              <div class="svc-chip" style={`background: ${color}; color: var(--key);`}>{code}</div>
+              <h2 class="svc-name" style={`color: ${color};`}>{label}</h2>
+              <p class="svc-desc">{desc}</p>
+              <span class="svc-cta" style={`color: ${color};`}>{cta}</span>
             </div>
-            <p class="service-detail-desc">{description}</p>
-            <ul class="service-examples" role="list">
-              {examples.map((ex) => (
-                <li>{ex}</li>
-              ))}
-            </ul>
-            <a href={href} class="btn btn-outline-ink">Learn more &rarr;</a>
-          </div>
+          </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="services-cta section-y">
+  <!-- CTA -->
+  <section class="services-cta-section section-y">
     <div class="container">
-      <OrnamentFrame class="services-cta-frame">
-        <div class="services-cta-inner">
-          <h2 class="text-h2">Not sure what you need?</h2>
-          <p>Tell us what you're trying to accomplish and we'll figure out the right approach together.</p>
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
-            <a href="/quote" class="btn btn-primary">Get a Quote</a>
-            <a href="/contact" class="btn btn-outline">Ask a Question</a>
-          </div>
+      <div class="services-cta-box">
+        <CropCorners color="var(--paper)" gap={14} size={16} weight={1} />
+        <p class="text-label" style="color: var(--smoke);">Start Here</p>
+        <h2 class="text-h2 services-cta-headline">Not sure what you need?</h2>
+        <p class="services-cta-body">Tell us what you're trying to accomplish. We'll figure out the right approach.</p>
+        <div class="services-cta-btns">
+          <a href="/quote" class="btn-sticker">Get a Quote</a>
+          <a href="/contact" class="services-link">Ask a question →</a>
         </div>
-      </OrnamentFrame>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .page-hero { background-color: var(--color-ink); }
-  .page-hero-body { color: var(--color-smoke); max-width: 52ch; margin: 0; }
+  .services-hero {
+    background: var(--key);
+  }
+  .services-hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .services-headline {
+    color: var(--paper);
+    margin: 0.5rem 0 1rem;
+  }
+  .services-intro {
+    color: var(--smoke);
+    max-width: 52ch;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+  }
 
-  .services-list { background-color: var(--color-cream); color: var(--color-ink); }
-  .services-cards { display: flex; flex-direction: column; gap: 2rem; }
+  /* Service cards */
+  .services-cards-section { background: var(--key); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
 
-  .service-detail-card {
+  .svc-card {
+    display: block;
+    color: var(--paper);
+    text-decoration: none;
+    transition: transform 200ms;
+  }
+  .svc-card:hover { transform: translateY(-2px); }
+  .svc-card-inner {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 2.5rem;
-    border: 1px solid rgba(14,15,12,0.12);
-    border-radius: var(--radius-md);
+    padding: 2rem;
+    border: 1px solid rgba(245,240,232,0.1);
+    height: 100%;
+    box-sizing: border-box;
   }
-  .service-detail-header { display: flex; align-items: center; gap: 1rem; }
-  .service-detail-icon { font-size: 1.75rem; color: var(--color-blood); }
-  .service-detail-name { margin: 0; }
-  .service-detail-desc { margin: 0; color: #5a6050; max-width: 60ch; }
 
-  .service-examples {
-    list-style: none;
+  .svc-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .svc-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    line-height: 1.1;
   }
-  .service-examples li {
+  .svc-desc {
+    flex: 1;
     font-size: var(--text-sm);
-    padding: 0.25rem 0.75rem;
-    border: 1px solid rgba(14,15,12,0.2);
-    border-radius: 999px;
-    color: #5a6050;
+    color: var(--smoke);
+    margin: 0;
+    line-height: 1.65;
+  }
+  .svc-cta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
-  .services-cta { background-color: var(--color-ink); }
-  .services-cta-frame { max-width: 640px; color: var(--color-cream); }
-  .services-cta-inner { display: flex; flex-direction: column; gap: 0.75rem; }
-  .services-cta-inner .text-h2 { margin: 0; }
-  .services-cta-inner p { margin: 0; color: var(--color-smoke); }
+  /* Bottom CTA */
+  .services-cta-section { background: var(--key); border-top: 1px solid rgba(245,240,232,0.06); }
+  .services-cta-box {
+    position: relative;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    border: 1px solid rgba(245,240,232,0.1);
+    max-width: 680px;
+  }
+  .services-cta-headline {
+    color: var(--paper);
+    margin: 0.5rem 0 0.75rem;
+  }
+  .services-cta-body {
+    color: var(--smoke);
+    margin: 0 0 1.75rem;
+    font-size: var(--text-sm);
+    max-width: 44ch;
+    line-height: 1.65;
+  }
+  .services-cta-btns {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .services-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    transition: color 150ms;
+  }
+  .services-link:hover { color: var(--paper); }
+
+  @media (max-width: 768px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .services-hero-inner svg { display: none; }
+  }
 </style>
