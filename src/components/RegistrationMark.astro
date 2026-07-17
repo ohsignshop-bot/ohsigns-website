@@ -1,0 +1,28 @@
+---
+interface Props {
+  size?: number;
+  class?: string;
+  color?: string;
+}
+const { size = 24, class: cls = '', color = 'currentColor' } = Astro.props;
+---
+<!-- Registration mark — the ⊕ crosshair used in commercial print to align color plates -->
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class={`reg-mark ${cls}`}
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- outer circle -->
+  <circle cx="12" cy="12" r="9" stroke={color} stroke-width="1"/>
+  <!-- inner circle -->
+  <circle cx="12" cy="12" r="3" stroke={color} stroke-width="1"/>
+  <!-- horizontal crosshair -->
+  <line x1="0" y1="12" x2="24" y2="12" stroke={color} stroke-width="1"/>
+  <!-- vertical crosshair -->
+  <line x1="12" y1="0" x2="12" y2="24" stroke={color} stroke-width="1"/>
+</svg>

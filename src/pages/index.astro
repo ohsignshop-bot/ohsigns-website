@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import OrnamentFrame from '../components/OrnamentFrame.astro';
+import RegistrationMark from '../components/RegistrationMark.astro';
+import CropCorners from '../components/CropCorners.astro';
 import { getCollection } from 'astro:content';
 
 const featuredWork = (await getCollection('work', ({ data }) => data.featured))
@@ -10,19 +11,22 @@ const featuredWork = (await getCollection('work', ({ data }) => data.featured))
 const services = [
   {
     href: '/services/decals',
-    icon: '◈',
+    color: 'var(--cyan)',
+    code: 'C',
     name: 'Decals & Stickers',
     blurb: 'Cut vinyl, printed stickers, window perfs, floor graphics. If it sticks, we make it.',
   },
   {
     href: '/services/uv',
-    icon: '◉',
+    color: 'var(--magenta)',
+    code: 'M',
     name: 'UV Printing',
     blurb: 'Flat-bed UV on any rigid substrate — wood, metal, acrylic, foam board, you name it.',
   },
   {
     href: '/services/design',
-    icon: '◇',
+    color: 'var(--yellow)',
+    code: 'Y',
     name: 'Design Services',
     blurb: 'From logo to full brand system. We make sure your files are production-ready before we print.',
   },
@@ -41,7 +45,7 @@ const jsonLd = JSON.stringify({
   "name": "OH! Signs LLC",
   "url": "https://ohsigns.shop",
   "email": "hello@ohsigns.shop",
-  "description": "Custom signs, vehicle wraps, decals, and UV printing for businesses and individuals.",
+  "description": "Custom decals, UV printing, and design services for businesses and individuals.",
   "areaServed": "US",
   "priceRange": "$$",
 });
@@ -49,53 +53,66 @@ const jsonLd = JSON.stringify({
 
 <Layout
   title="Oh! Signs"
-  description="Custom signs, vehicle wraps, decals, and UV printing for businesses and individuals. Made in-house, delivered fast."
+  description="Custom decals, UV printing, and design services for businesses and individuals. Made in-house, delivered fast."
 >
   <script type="application/ld+json" set:html={jsonLd} slot="head" />
 
   <!-- ─── Hero ──────────────────────────────────────────────────────────────── -->
+  <!-- Effect 2: registration marks appear at hero panel corners              -->
   <section class="hero section-y" aria-labelledby="hero-heading">
     <div class="container hero-inner">
+
       <div class="hero-content">
-        <p class="text-label hero-label">Sign Shop · Est. Whenever We Opened</p>
-        <h1 id="hero-heading" class="text-hero hero-heading">
+        <p class="text-label hero-label">Sign Shop · Decals · UV · Design</p>
+
+        <!-- Effect 1: off-register headline — CMY shadow offsets on key text -->
+        <h1 id="hero-heading" class="text-hero hero-heading off-register">
           Signs that<br/>
-          <span class="hero-accent">actually look good.</span>
+          <span class="hero-accent">actually<br/>look good.</span>
         </h1>
+
         <p class="hero-body">
-          We design, print, and cut everything in-house. No outsourced files, no cut corners,
-          no three-week lead times for a set of stickers.
+          We design, print, and cut everything in-house. No outsourced files,
+          no cut corners, no three-week lead times for a set of stickers.
         </p>
         <div class="hero-actions">
-          <a href="/quote" class="btn btn-primary">Get a Quote</a>
+          <a href="/quote" class="btn-sticker">Get a Quote</a>
           <a href="/sample-pack" class="btn btn-outline">Free Sample Pack</a>
         </div>
       </div>
 
-      <div class="hero-frame-wrap" aria-hidden="true">
-        <OrnamentFrame padded={false} class="hero-frame">
-          <div class="hero-frame-inner">
-            <span class="hero-frame-logo">Oh<span class="hero-frame-bang">!</span></span>
-            <p class="hero-frame-sub">Signs</p>
-            <hr class="hero-frame-rule" />
-            <p class="hero-frame-tagline">We're serious about<br/>the work, not ourselves.</p>
+      <!-- Effect 2: registration target panel with CMYK marks -->
+      <div class="hero-register-panel" aria-hidden="true">
+        <div class="hrp-inner">
+          <RegistrationMark size={40} color="var(--cyan)"    class="hrp-mark hrp-mark-tl" />
+          <RegistrationMark size={40} color="var(--magenta)" class="hrp-mark hrp-mark-tr" />
+          <RegistrationMark size={40} color="var(--yellow)"  class="hrp-mark hrp-mark-bl" />
+          <RegistrationMark size={40} color="var(--paper)"   class="hrp-mark hrp-mark-br" />
+          <div class="hrp-center">
+            <span class="hrp-logo">Oh<span class="hrp-bang">!</span></span>
+            <p class="hrp-sub">Signs</p>
           </div>
-        </OrnamentFrame>
+        </div>
       </div>
+
     </div>
   </section>
 
   <!-- ─── Services strip ───────────────────────────────────────────────────── -->
-  <section class="services-strip section-cream section-y" aria-labelledby="services-heading">
+  <!-- Effect 3: crop marks on service cards                                  -->
+  <section class="services-strip section-paper section-y" aria-labelledby="services-heading">
     <div class="container">
       <div class="section-header">
         <p class="text-label section-label">What We Do</p>
         <h2 id="services-heading" class="text-h2">Every kind of sign.<br/>All under one roof.</h2>
       </div>
       <div class="services-grid">
-        {services.map(({ href, icon, name, blurb }) => (
-          <a href={href} class="service-card">
-            <span class="service-card-icon" aria-hidden="true">{icon}</span>
+        {services.map(({ href, color, code, name, blurb }) => (
+          <a href={href} class="service-card" style={`--card-color: ${color}`}>
+            <CropCorners color="var(--key)" gap={8} size={12} weight={1} />
+            <div class="service-card-header">
+              <span class="service-code text-mono" style={`background:${color}; color: var(--key)`}>{code}</span>
+            </div>
             <h3 class="text-h3 service-card-name">{name}</h3>
             <p class="service-card-blurb">{blurb}</p>
             <span class="service-card-link">Learn more &rarr;</span>
@@ -103,24 +120,28 @@ const jsonLd = JSON.stringify({
         ))}
       </div>
       <div class="services-cta">
-        <a href="/services" class="btn btn-outline-ink">Browse all services</a>
+        <a href="/services" class="btn-sticker btn-sticker-paper">Browse all services</a>
       </div>
     </div>
   </section>
 
   <!-- ─── Sample pack feature ──────────────────────────────────────────────── -->
+  <!-- Effect 4: cut path (dashed border) on the sample swatch card           -->
   <section class="sample-feature section-y" aria-labelledby="sample-heading">
     <div class="container sample-feature-inner">
-      <div class="sample-feature-frame-wrap" aria-hidden="true">
-        <OrnamentFrame class="sample-frame">
-          <div class="sample-frame-inner">
-            <p class="text-label" style="color: var(--color-smoke);">Free</p>
-            <p class="sample-frame-big">Sample<br/>Pack</p>
-          </div>
-        </OrnamentFrame>
+
+      <!-- Cut-path card -->
+      <div class="cut-path-card" aria-hidden="true">
+        <CropCorners color="var(--yellow)" gap={10} size={14} weight={1} />
+        <div class="cut-path-inner">
+          <p class="cut-path-label text-mono">Sample pack</p>
+          <p class="cut-path-big">Free.</p>
+          <p class="cut-path-sub text-mono">Feel it before<br/>you buy it.</p>
+        </div>
       </div>
+
       <div class="sample-feature-content">
-        <p class="text-label">Feel it before you buy it</p>
+        <p class="text-label" style="color: var(--smoke);">Feel it before you buy it</p>
         <h2 id="sample-heading" class="text-h2">We'll send you a free sample pack.</h2>
         <p class="sample-body">
           A curated set of our most popular materials — vinyl finishes, UV substrates, laminate swatches.
@@ -131,22 +152,23 @@ const jsonLd = JSON.stringify({
           <li>UV prints on acrylic, metal, and foam board</li>
           <li>Laminate swatches: gloss, matte, soft-touch</li>
         </ul>
-        <a href="/sample-pack" class="btn btn-primary">Request a Free Sample Pack</a>
+        <a href="/sample-pack" class="btn-sticker">Request a Free Sample Pack</a>
       </div>
     </div>
   </section>
 
   <!-- ─── Work gallery teaser ──────────────────────────────────────────────── -->
-  <section class="gallery-teaser section-cream section-y" aria-labelledby="work-heading">
+  <section class="gallery-teaser section-paper section-y" aria-labelledby="work-heading">
     <div class="container">
       <div class="section-header">
-        <p class="text-label section-label">Our Work</p>
+        <p class="text-label section-label" style="color: #5c5c5c;">Our Work</p>
         <h2 id="work-heading" class="text-h2">Recent projects.</h2>
       </div>
       <div class="gallery-grid">
         {featuredWork.map((entry) => (
           <a href={`/work/${entry.slug}`} class="gallery-card">
             <div class="gallery-card-img-wrap">
+              <CropCorners color="var(--key)" gap={8} size={10} weight={1} />
               <img
                 src={entry.data.image}
                 alt={entry.data.imageAlt}
@@ -156,17 +178,17 @@ const jsonLd = JSON.stringify({
                 decoding="async"
               />
               <div class="gallery-card-overlay">
-                <span class="gallery-card-category text-label">{entry.data.category.replace('-', ' ')}</span>
+                <span class="gallery-card-category text-mono">{entry.data.category.replace('-', ' ')}</span>
               </div>
             </div>
             <div class="gallery-card-body">
-              <h3 class="text-h3 gallery-card-title">{entry.data.title}</h3>
+              <h3 class="gallery-card-title">{entry.data.title}</h3>
             </div>
           </a>
         ))}
       </div>
       <div class="gallery-cta">
-        <a href="/work" class="btn btn-outline-ink">See all work</a>
+        <a href="/work" class="btn-sticker btn-sticker-paper">See all work</a>
       </div>
     </div>
   </section>
@@ -175,13 +197,13 @@ const jsonLd = JSON.stringify({
   <section class="how-it-works section-y" aria-labelledby="how-heading">
     <div class="container">
       <div class="section-header">
-        <p class="text-label" style="color: var(--color-smoke);">The Process</p>
+        <p class="text-label" style="color: var(--smoke);">The Process</p>
         <h2 id="how-heading" class="text-h2">How it works.</h2>
       </div>
       <div class="steps-grid">
         {steps.map(({ n, title, body }) => (
           <div class="step">
-            <span class="step-number text-label" aria-hidden="true">{n}</span>
+            <span class="step-number text-mono" aria-hidden="true">{n}</span>
             <h3 class="text-h3 step-title">{title}</h3>
             <p class="step-body">{body}</p>
           </div>
@@ -191,9 +213,10 @@ const jsonLd = JSON.stringify({
   </section>
 
   <!-- ─── CTA band ─────────────────────────────────────────────────────────── -->
-  <section class="cta-band section-cream">
+  <section class="cta-band section-paper">
     <div class="container cta-band-inner">
-      <OrnamentFrame class="cta-frame">
+      <div class="cta-crop-wrap">
+        <CropCorners color="var(--key)" gap={12} size={16} weight={1} />
         <div class="cta-content">
           <h2 class="text-h2 cta-heading">Ready to make something?</h2>
           <p class="cta-body">
@@ -201,90 +224,113 @@ const jsonLd = JSON.stringify({
             usually faster.
           </p>
           <div class="cta-actions">
-            <a href="/quote" class="btn btn-primary">Get a Quote</a>
+            <a href="/quote" class="btn-sticker btn-sticker-paper">Get a Quote</a>
             <a href="mailto:hello@ohsigns.shop" class="btn btn-outline-ink">Email us directly</a>
           </div>
         </div>
-      </OrnamentFrame>
+      </div>
     </div>
   </section>
+
 </Layout>
 
 <style>
   /* ── Hero ─────────────────────────────────────────────────────────────────── */
-  .hero { background-color: var(--color-ink); }
+  .hero { background-color: var(--key); }
   .hero-inner {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: center;
   }
-  .hero-label { color: var(--color-smoke); margin-bottom: 1rem; }
-  .hero-heading { margin: 0 0 1.25rem; color: var(--color-cream); }
-  .hero-accent  { color: var(--color-acid); }
+
+  .hero-label { color: var(--smoke); margin-bottom: 1.25rem; }
+
+  /* Effect 1 — off-register: CMY text-shadows slightly offset from key text */
+  .off-register {
+    text-shadow:
+      -2px -2px 0 var(--cyan),
+       2px  0px 0 var(--magenta),
+       0px  2px 0 var(--yellow);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .off-register { text-shadow: none; }
+  }
+
+  .hero-heading {
+    margin: 0 0 1.5rem;
+    color: var(--paper);
+  }
+  .hero-accent { color: var(--yellow); display: block; }
+
   .hero-body {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    color: var(--color-smoke);
+    color: var(--smoke);
     max-width: 44ch;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
+    line-height: 1.7;
   }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-  .hero-frame-wrap {
-    flex-shrink: 0;
-    color: var(--color-cream);
-    opacity: 0.35;
-  }
-  .hero-frame { width: 220px; height: 220px; }
-  .hero-frame-inner {
+  .hero-actions {
     display: flex;
-    flex-direction: column;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Effect 2 — registration marks panel */
+  .hero-register-panel {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+  }
+  .hrp-inner {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    text-align: center;
-    width: 220px;
-    height: 220px;
   }
-  .hero-frame-logo {
+  .hrp-mark {
+    position: absolute;
+    opacity: 0.6;
+  }
+  .hrp-mark-tl { top:  0; left:  0; }
+  .hrp-mark-tr { top:  0; right: 0; }
+  .hrp-mark-bl { bottom: 0; left: 0; }
+  .hrp-mark-br { bottom: 0; right: 0; }
+
+  .hrp-center {
+    text-align: center;
+  }
+  .hrp-logo {
     font-family: var(--font-display);
     font-size: 3.5rem;
-    line-height: 1;
-  }
-  .hero-frame-bang { color: var(--color-acid); opacity: 3; }
-  .hero-frame-sub {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin: 0.25rem 0 0.75rem;
+    line-height: 1;
+    color: var(--paper);
   }
-  .hero-frame-rule {
-    border: none;
-    border-top: 1px solid currentColor;
-    opacity: 0.4;
-    width: 100%;
-    margin: 0 0 0.75rem;
-  }
-  .hero-frame-tagline {
-    font-size: 0.6875rem;
-    letter-spacing: 0.06em;
-    text-align: center;
-    color: var(--color-smoke);
-    margin: 0;
-    line-height: 1.5;
+  .hrp-bang  { color: var(--yellow); }
+  .hrp-sub {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin: 0.25rem 0 0;
   }
 
   @media (max-width: 680px) {
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-frame-wrap { display: none; }
+    .hero-register-panel { display: none; }
   }
 
   /* ── Services strip ───────────────────────────────────────────────────────── */
   .section-header {
     margin-bottom: clamp(2rem, 4vw, 3rem);
   }
-  .section-label { color: #5a6050; margin-bottom: 0.5rem; }
+  .section-label { color: #5c5c5c; margin-bottom: 0.5rem; }
   .section-header .text-h2 { margin: 0; }
 
   .services-grid {
@@ -293,21 +339,43 @@ const jsonLd = JSON.stringify({
     gap: 1.5rem;
   }
   .service-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.875rem;
     padding: 2rem 1.75rem;
-    border: 1px solid rgba(14, 15, 12, 0.12);
-    border-radius: var(--radius-md);
-    color: var(--color-ink);
-    transition: border-color var(--duration-base), background-color var(--duration-base);
+    border: 1px solid rgba(10, 10, 10, 0.12);
+    color: var(--key);
+    transition: border-color var(--duration-base);
   }
-  .service-card:hover { border-color: var(--color-ink); background-color: rgba(14,15,12,0.04); }
-  .service-card-icon { font-size: 1.5rem; color: var(--color-blood); }
+  .service-card:hover { border-color: var(--card-color, var(--key)); }
+
+  .service-card-header { display: flex; align-items: center; gap: 0.75rem; }
+  .service-code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
   .service-card-name { margin: 0; }
-  .service-card-blurb { margin: 0; font-size: var(--text-sm); color: #5a6050; flex: 1; }
-  .service-card-link { font-size: var(--text-sm); font-weight: 600; margin-top: auto; }
-  .service-card:hover .service-card-link { color: var(--color-blood); }
+  .service-card-blurb {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: #5c5c5c;
+    flex: 1;
+    line-height: 1.6;
+  }
+  .service-card-link {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    letter-spacing: 0.04em;
+    color: var(--card-color, var(--key));
+    margin-top: auto;
+  }
+
   .services-cta { margin-top: 2.5rem; }
 
   @media (max-width: 768px) {
@@ -315,88 +383,125 @@ const jsonLd = JSON.stringify({
   }
 
   /* ── Sample feature ───────────────────────────────────────────────────────── */
-  .sample-feature { background-color: var(--color-ink); }
+  .sample-feature { background-color: var(--key); }
   .sample-feature-inner {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: center;
   }
-  .sample-feature-frame-wrap { color: var(--color-cream); flex-shrink: 0; }
-  .sample-frame { width: 240px; min-height: 240px; }
-  .sample-frame-inner {
-    width: 200px;
+
+  /* Effect 4 — cut path card with dashed border */
+  .cut-path-card {
+    position: relative;
+    flex-shrink: 0;
+    width: 220px;
+    min-height: 240px;
+    border: 2px solid var(--yellow);
+    /* Inner dashed cut line */
+    outline: 1px dashed rgba(255, 242, 0, 0.4);
+    outline-offset: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
+  .cut-path-inner { text-align: center; }
+  .cut-path-label {
+    color: var(--smoke);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .cut-path-big {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    line-height: 1;
+    margin: 0 0 0.5rem;
+  }
+  .cut-path-sub {
+    color: var(--smoke);
+    font-size: var(--text-mono);
+    line-height: 1.6;
+  }
+
+  .sample-feature-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
+    gap: 1rem;
   }
-  .sample-frame-big {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    line-height: 1.05;
-    margin: 0.25rem 0 0;
-    color: var(--color-cream);
-  }
-  .sample-feature-content { display: flex; flex-direction: column; gap: 1rem; }
-  .sample-feature-content .text-label { color: var(--color-smoke); }
   .sample-feature-content .text-h2 { margin: 0; }
-  .sample-body { color: var(--color-smoke); margin: 0; max-width: 52ch; }
+  .sample-body {
+    color: var(--smoke);
+    margin: 0;
+    max-width: 52ch;
+    line-height: 1.7;
+  }
   .sample-list {
     margin: 0;
-    padding: 0 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.375rem;
+    gap: 0.5rem;
     font-size: var(--text-sm);
-    color: var(--color-smoke);
+    color: var(--smoke);
+  }
+  .sample-list li::before {
+    content: '— ';
+    color: var(--yellow);
   }
 
   @media (max-width: 680px) {
     .sample-feature-inner { grid-template-columns: 1fr; }
-    .sample-feature-frame-wrap { display: none; }
+    .cut-path-card { display: none; }
   }
 
   /* ── Gallery teaser ───────────────────────────────────────────────────────── */
-  .gallery-teaser { background-color: var(--color-cream); color: var(--color-ink); }
+  .gallery-teaser { background-color: var(--paper); color: var(--key); }
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  .gallery-card { display: block; color: var(--color-ink); }
+  .gallery-card { display: block; color: var(--key); }
   .gallery-card-img-wrap {
     position: relative;
     aspect-ratio: 3/2;
-    overflow: hidden;
-    border-radius: var(--radius-md);
-    background: rgba(14,15,12,0.08);
+    overflow: visible;
+    background: rgba(10,10,10,0.08);
   }
   .gallery-card-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--duration-base) var(--ease-out-expo);
+    display: block;
+    transition: opacity var(--duration-base);
   }
-  .gallery-card:hover .gallery-card-img-wrap img { transform: scale(1.04); }
+  .gallery-card:hover .gallery-card-img-wrap img { opacity: 0.88; }
   .gallery-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(14,15,12,0.5) 0%, transparent 50%);
+    background: linear-gradient(to top, rgba(10,10,10,0.55) 0%, transparent 50%);
     display: flex;
     align-items: flex-end;
-    padding: 1rem;
+    padding: 0.875rem;
   }
   .gallery-card-category {
-    color: var(--color-cream);
-    background: rgba(14,15,12,0.6);
-    padding: 0.25rem 0.625rem;
-    border-radius: var(--radius-sm);
-    backdrop-filter: blur(4px);
+    color: var(--paper);
+    background: rgba(10,10,10,0.7);
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.08em;
   }
   .gallery-card-body { padding: 0.75rem 0 0; }
-  .gallery-card-title { margin: 0; font-size: 1rem; }
+  .gallery-card-title {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--key);
+  }
   .gallery-cta { margin-top: 2.5rem; }
 
   @media (max-width: 600px) {
@@ -404,37 +509,57 @@ const jsonLd = JSON.stringify({
   }
 
   /* ── How it works ─────────────────────────────────────────────────────────── */
-  .how-it-works { background-color: var(--color-ink); }
-  .how-it-works .section-header .text-h2 { color: var(--color-cream); }
-  .how-it-works .text-label { color: var(--color-smoke); }
+  .how-it-works { background-color: var(--key); }
+  .how-it-works .section-header .text-h2 { color: var(--paper); }
   .steps-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+    counter-reset: step;
   }
   .step { display: flex; flex-direction: column; gap: 0.75rem; }
   .step-number {
-    font-family: var(--font-display);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    color: var(--color-acid);
-    padding: 0.25rem 0.5rem;
-    border: 1px solid rgba(184,230,0,0.3);
-    border-radius: var(--radius-sm);
-    width: fit-content;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+    display: block;
   }
-  .step-title { color: var(--color-cream); margin: 0; }
-  .step-body  { color: var(--color-smoke); font-size: var(--text-sm); margin: 0; }
+  .step-title {
+    color: var(--paper);
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .step-body {
+    color: var(--smoke);
+    font-size: var(--text-sm);
+    margin: 0;
+    line-height: 1.65;
+  }
 
   @media (max-width: 900px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px) { .steps-grid { grid-template-columns: 1fr; } }
 
   /* ── CTA band ─────────────────────────────────────────────────────────────── */
-  .cta-band { background-color: var(--color-cream); color: var(--color-ink); }
+  .cta-band { background-color: var(--paper); color: var(--key); }
   .cta-band-inner { padding-block: var(--section-y); }
-  .cta-frame { max-width: 680px; margin-inline: auto; }
+  .cta-crop-wrap {
+    position: relative;
+    max-width: 680px;
+    margin-inline: auto;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    border: 1px solid rgba(10,10,10,0.15);
+  }
   .cta-content { display: flex; flex-direction: column; gap: 1rem; }
-  .cta-heading { margin: 0; }
-  .cta-body { margin: 0; color: #5a6050; max-width: 44ch; }
-  .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .cta-heading { margin: 0; color: var(--key); }
+  .cta-body { margin: 0; color: #5c5c5c; max-width: 44ch; line-height: 1.7; }
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
 </style>

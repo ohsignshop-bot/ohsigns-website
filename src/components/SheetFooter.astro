@@ -1,0 +1,218 @@
+---
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { href: '/services', label: 'Services' },
+  { href: '/work',     label: 'Work' },
+  { href: '/about',    label: 'About' },
+  { href: '/contact',  label: 'Contact' },
+  { href: '/quote',    label: 'Get a Quote' },
+];
+
+const services = [
+  { href: '/services/decals', label: 'Decals & Stickers' },
+  { href: '/services/uv',     label: 'UV Printing' },
+  { href: '/services/design', label: 'Design Services' },
+  { href: '/sample-pack',     label: 'Free Sample Pack' },
+];
+
+const EMAIL = 'hello@ohsigns.shop';
+---
+
+<footer class="sheet-footer" role="contentinfo">
+
+  <!-- Navigation block -->
+  <div class="sf-nav-block">
+    <div class="container sf-nav-inner">
+
+      <div class="sf-brand">
+        <a href="/" class="sf-logo" aria-label="Oh! Signs — home">
+          <span class="sf-logo-oh">Oh</span><span class="sf-logo-bang">!</span><span class="sf-logo-signs"> Signs</span>
+        </a>
+        <p class="sf-tagline">We're serious about the work, not ourselves.</p>
+      </div>
+
+      <nav class="sf-nav" aria-label="Footer navigation">
+        <div class="sf-nav-group">
+          <p class="sf-nav-heading">Navigate</p>
+          <ul role="list">
+            {navLinks.map(({ href, label }) => (
+              <li><a href={href}>{label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="sf-nav-group">
+          <p class="sf-nav-heading">Services</p>
+          <ul role="list">
+            {services.map(({ href, label }) => (
+              <li><a href={href}>{label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="sf-nav-group">
+          <p class="sf-nav-heading">Contact</p>
+          <ul role="list">
+            <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+            <li><a href="/quote" class="sf-cta-link">Start a project &rarr;</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- Print manifest strip — Space Mono margin info -->
+  <div class="sf-manifest" aria-label="Site info">
+    <div class="container sf-manifest-inner">
+      <span class="sf-manifest-item">OH! SIGNS LLC</span>
+      <span class="sf-sep" aria-hidden="true">//</span>
+      <span class="sf-manifest-item">&copy; {year}</span>
+      <span class="sf-sep" aria-hidden="true">//</span>
+      <a href={`mailto:${EMAIL}`} class="sf-manifest-item sf-manifest-email">{EMAIL}</a>
+      <span class="sf-manifest-spacer" aria-hidden="true"></span>
+      <span class="sf-manifest-item sf-manifest-tagline" aria-hidden="true">MADE WITH CRAFT, NOT MAGIC.</span>
+      <div class="sf-cmyk" aria-hidden="true">
+        <span class="sf-chip sf-chip-c" title="Cyan">C</span>
+        <span class="sf-chip sf-chip-m" title="Magenta">M</span>
+        <span class="sf-chip sf-chip-y" title="Yellow">Y</span>
+        <span class="sf-chip sf-chip-k" title="Key">K</span>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+<style>
+  .sheet-footer {
+    border-top: 1px solid rgba(245, 240, 232, 0.1);
+    margin-top: auto;
+  }
+
+  /* Navigation block */
+  .sf-nav-block {
+    background-color: #0A0A0A;
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .sf-nav-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .sf-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+  .sf-logo {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .sf-logo-oh    { color: var(--paper); }
+  .sf-logo-bang  { color: var(--yellow); }
+  .sf-logo-signs { color: var(--paper); }
+
+  .sf-tagline {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--smoke);
+    line-height: 1.6;
+    max-width: 28ch;
+  }
+
+  /* Nav columns */
+  .sf-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .sf-nav-group p { margin: 0 0 0.875rem; }
+  .sf-nav-heading {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .sf-nav-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .sf-nav-group a {
+    font-size: var(--text-sm);
+    color: var(--smoke);
+    transition: color var(--duration-fast);
+  }
+  .sf-nav-group a:hover { color: var(--paper); }
+  .sf-cta-link { color: var(--yellow) !important; }
+  .sf-cta-link:hover { color: var(--paper) !important; }
+
+  /* Print manifest strip */
+  .sf-manifest {
+    background-color: #050505;
+    border-top: 1px solid rgba(245, 240, 232, 0.06);
+    padding-block: 0.75rem;
+    overflow: hidden;
+  }
+  .sf-manifest-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: rgba(245, 240, 232, 0.35);
+    text-transform: uppercase;
+  }
+  .sf-manifest-item { white-space: nowrap; }
+  .sf-manifest-email {
+    color: rgba(245, 240, 232, 0.35);
+    transition: color var(--duration-fast);
+  }
+  .sf-manifest-email:hover { color: var(--yellow); }
+  .sf-sep { opacity: 0.4; }
+  .sf-manifest-spacer { flex: 1; }
+  .sf-manifest-tagline { opacity: 0.5; }
+
+  /* CMYK color chips */
+  .sf-cmyk {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    margin-left: 0.5rem;
+  }
+  .sf-chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .sf-chip-c { background: var(--cyan);    color: var(--key); }
+  .sf-chip-m { background: var(--magenta); color: var(--paper); }
+  .sf-chip-y { background: var(--yellow);  color: var(--key); }
+  .sf-chip-k { background: var(--paper);   color: var(--key); border: 1px solid rgba(10,10,10,0.3); }
+
+  @media (max-width: 900px) {
+    .sf-nav-inner { grid-template-columns: 1fr; }
+    .sf-nav        { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .sf-nav { grid-template-columns: 1fr 1fr; }
+    .sf-nav-group:last-child { grid-column: span 2; }
+    .sf-manifest-tagline { display: none; }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+/**
+ * Renders four L-shaped crop marks at the corners of its containing block.
+ * Parent must have position: relative.
+ * These are purely decorative; aria-hidden.
+ */
+interface Props {
+  size?: number;     /* length of each mark arm, px */
+  gap?: number;      /* distance from element edge to mark start, px */
+  color?: string;
+  class?: string;
+  weight?: number;   /* stroke width, px */
+}
+
+const {
+  size = 10,
+  gap = 6,
+  color = 'currentColor',
+  class: cls = '',
+  weight = 1,
+} = Astro.props;
+
+const arm = size;
+const g   = gap;
+const viewSize = arm + g;
+---
+
+<span class={`crop-corners ${cls}`} aria-hidden="true">
+  <!-- top-left -->
+  <svg class="cc cc-tl" viewBox={`0 0 ${viewSize} ${viewSize}`} width={viewSize} height={viewSize} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1={g} y1={g} x2={arm + g} y2={g} stroke={color} stroke-width={weight}/>
+    <line x1={g} y1={g} x2={g} y2={arm + g} stroke={color} stroke-width={weight}/>
+  </svg>
+  <!-- top-right -->
+  <svg class="cc cc-tr" viewBox={`0 0 ${viewSize} ${viewSize}`} width={viewSize} height={viewSize} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1={0} y1={g} x2={arm} y2={g} stroke={color} stroke-width={weight}/>
+    <line x1={arm} y1={g} x2={arm} y2={arm + g} stroke={color} stroke-width={weight}/>
+  </svg>
+  <!-- bottom-right -->
+  <svg class="cc cc-br" viewBox={`0 0 ${viewSize} ${viewSize}`} width={viewSize} height={viewSize} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1={0} y1={arm} x2={arm} y2={arm} stroke={color} stroke-width={weight}/>
+    <line x1={arm} y1={0} x2={arm} y2={arm} stroke={color} stroke-width={weight}/>
+  </svg>
+  <!-- bottom-left -->
+  <svg class="cc cc-bl" viewBox={`0 0 ${viewSize} ${viewSize}`} width={viewSize} height={viewSize} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1={g} y1={arm} x2={arm + g} y2={arm} stroke={color} stroke-width={weight}/>
+    <line x1={g} y1={0} x2={g} y2={arm} stroke={color} stroke-width={weight}/>
+  </svg>
+</span>
+
+<style>
+  .crop-corners {
+    pointer-events: none;
+    user-select: none;
+  }
+  .cc {
+    position: absolute;
+    display: block;
+    opacity: 0.5;
+  }
+  .cc-tl { top:    0; left:   0; transform: none; }
+  .cc-tr { top:    0; right:  0; }
+  .cc-br { bottom: 0; right:  0; }
+  .cc-bl { bottom: 0; left:   0; }
+</style>

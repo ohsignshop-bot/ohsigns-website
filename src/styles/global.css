@@ -1,31 +1,44 @@
 /* Fonts */
-@import '@fontsource/archivo-black/400.css';
-@import '@fontsource-variable/dm-sans';
+@import '@fontsource/bebas-neue/400.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource/space-mono/400.css';
+@import '@fontsource/space-mono/700.css';
 
 /* Tailwind v4 */
 @import 'tailwindcss';
 
 /* ─── Design tokens ────────────────────────────────────────────────────────── */
 @theme {
-  /* Palette */
-  --color-ink:   #0E0F0C;
-  --color-acid:  #B8E600;
-  --color-cream: #F2EAD8;
-  --color-smoke: #8A9080;
-  --color-blood: #C41B17;
+  /* CMYK process palette */
+  --cyan:    #00AEEF;
+  --magenta: #EC008C;
+  --yellow:  #FFF200;
+  --key:     #0A0A0A;
+  --paper:   #F5F0E8;
+  --smoke:   #7A7A7A;
+  --register: #00AEEF;   /* registration mark default color */
+
+  /* Backwards-compatible aliases so non-redesigned pages don't break */
+  --color-ink:   var(--key);
+  --color-cream: var(--paper);
+  --color-acid:  var(--yellow);
+  --color-smoke: var(--smoke);
+  --color-blood: var(--magenta);
 
   /* Typography */
-  --font-display: 'Archivo Black', 'Arial Black', sans-serif;
-  --font-body:    'DM Sans Variable', 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-body:    'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
 
   /* Type scale — fluid, clamp-based */
-  --text-hero:    clamp(2.75rem, 8vw, 5.5rem);
-  --text-h1:      clamp(2rem, 5vw, 3.25rem);
-  --text-h2:      clamp(1.5rem, 3vw, 2rem);
+  --text-hero:    clamp(3rem, 10vw, 7rem);
+  --text-h1:      clamp(2.25rem, 5.5vw, 4rem);
+  --text-h2:      clamp(1.75rem, 3.5vw, 2.5rem);
   --text-h3:      clamp(1.125rem, 2vw, 1.375rem);
   --text-label:   0.6875rem;   /* 11px — uppercase labels */
   --text-body:    1rem;
   --text-sm:      0.875rem;
+  --text-mono:    0.8125rem;   /* Space Mono base */
 
   /* Spacing */
   --section-y:   clamp(5rem, 10vw, 8rem);
@@ -36,6 +49,11 @@
   --radius-sm:  4px;
   --radius-md:  8px;
   --radius-lg:  16px;
+
+  /* Print marks */
+  --mark-len:    12px;   /* length of crop mark lines */
+  --mark-gap:    6px;    /* gap between element edge and mark */
+  --mark-weight: 1px;
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -62,8 +80,8 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--color-ink);
-  color: var(--color-cream);
+  background-color: var(--key);
+  color: var(--paper);
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: 1.65;
@@ -87,11 +105,10 @@ a {
   left: 1rem;
   z-index: 9999;
   padding: 0.5rem 1rem;
-  background: var(--color-acid);
-  color: var(--color-ink);
-  font-weight: 700;
+  background: var(--yellow);
+  color: var(--key);
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
-  border-radius: var(--radius-sm);
   text-decoration: none;
 }
 .skip-link:focus { top: 1rem; }
@@ -104,58 +121,79 @@ a {
   padding-inline: var(--container-x);
 }
 
-/* Typography */
+/* ─── Typography ─────────────────────────────────────────────────────────────  */
 .text-hero {
   font-family: var(--font-display);
   font-size: var(--text-hero);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 .text-h1 {
   font-family: var(--font-display);
   font-size: var(--text-h1);
-  line-height: 1.1;
-  letter-spacing: -0.015em;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 .text-h2 {
   font-family: var(--font-display);
   font-size: var(--text-h2);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
-.text-h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  line-height: 1.25;
-}
-.text-label {
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
-
-/* Ink-on-cream sections */
-.section-cream {
-  background-color: var(--color-cream);
-  color: var(--color-ink);
+.text-h3 {
+  font-family: var(--font-body);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.3;
 }
-.section-cream .text-smoke { color: #5a6050; }
+.text-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+}
+
+/* ─── Background / section helpers ──────────────────────────────────────────  */
+
+/* Key (ink) section — default */
+.section-key {
+  background-color: var(--key);
+  color: var(--paper);
+}
+
+/* Paper (cream) section — inverted */
+.section-paper {
+  background-color: var(--paper);
+  color: var(--key);
+}
+/* backwards compat alias */
+.section-cream {
+  background-color: var(--paper);
+  color: var(--key);
+}
+.section-cream .text-smoke,
+.section-paper .text-smoke { color: #5c5c5c; }
 
 /* Section spacing */
 .section-y { padding-block: var(--section-y); }
 
-/* Buttons */
+/* ─── Buttons ────────────────────────────────────────────────────────────────  */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-family: var(--font-display);
-  font-size: var(--text-sm);
-  letter-spacing: 0.04em;
-  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   border: 2px solid transparent;
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-out-expo),
@@ -166,68 +204,115 @@ a {
   white-space: nowrap;
 }
 .btn:focus-visible {
-  outline: 2px solid var(--color-acid);
+  outline: 2px solid var(--yellow);
   outline-offset: 3px;
 }
 .btn:active { transform: translateY(1px); }
 
+/* Primary — yellow on key */
 .btn-primary {
-  background-color: var(--color-acid);
-  color: var(--color-ink);
-  border-color: var(--color-acid);
+  background-color: var(--yellow);
+  color: var(--key);
+  border-color: var(--yellow);
 }
 .btn-primary:hover {
-  background-color: #d4ff00;
-  border-color: #d4ff00;
+  background-color: #ffed00;
+  border-color: #ffed00;
 }
 
+/* Outline on dark — paper border */
 .btn-outline {
   background-color: transparent;
-  color: var(--color-cream);
-  border-color: currentColor;
+  color: var(--paper);
+  border-color: var(--paper);
 }
 .btn-outline:hover {
-  background-color: var(--color-cream);
-  color: var(--color-ink);
-  border-color: var(--color-cream);
+  background-color: var(--paper);
+  color: var(--key);
 }
 
+/* Outline on paper — key border */
 .btn-outline-ink {
   background-color: transparent;
-  color: var(--color-ink);
-  border-color: var(--color-ink);
+  color: var(--key);
+  border-color: var(--key);
 }
 .btn-outline-ink:hover {
-  background-color: var(--color-ink);
-  color: var(--color-cream);
+  background-color: var(--key);
+  color: var(--paper);
+}
+
+/* Sticker button — die-cut label aesthetic */
+.btn-sticker {
+  position: relative;
+  background-color: var(--yellow);
+  color: var(--key);
+  border: 3px solid var(--key);
+  border-radius: 3px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.875rem 2rem;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out-expo);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-sticker::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1.5px dashed rgba(10, 10, 10, 0.4);
+  border-radius: 1px;
+  pointer-events: none;
+}
+.btn-sticker:hover { transform: rotate(-1deg) scale(1.02); }
+.btn-sticker:active { transform: translateY(1px); }
+.btn-sticker:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* Sticker button — magenta variant for paper sections */
+.btn-sticker-paper {
+  background-color: var(--key);
+  color: var(--paper);
+  border-color: var(--key);
+}
+.btn-sticker-paper::after {
+  border-color: rgba(245, 240, 232, 0.35);
 }
 
 /* Focus ring for all interactive elements */
 :focus-visible {
-  outline: 2px solid var(--color-acid);
+  outline: 2px solid var(--yellow);
   outline-offset: 3px;
 }
 
-/* Form elements */
+/* ─── Form elements ──────────────────────────────────────────────────────────  */
 .form-field {
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
 }
 .form-label {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--color-smoke);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--smoke);
 }
 .form-input,
 .form-textarea,
 .form-select {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(242,234,216,0.2);
-  border-radius: var(--radius-sm);
-  color: var(--color-cream);
+  background: rgba(245,240,232,0.04);
+  border: 1px solid rgba(245,240,232,0.2);
+  color: var(--paper);
   font-family: var(--font-body);
   font-size: var(--text-body);
   transition: border-color var(--duration-fast);
@@ -236,26 +321,48 @@ a {
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: var(--color-acid);
+  border-color: var(--cyan);
 }
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: var(--color-smoke);
+  color: var(--smoke);
 }
 .form-textarea { resize: vertical; min-height: 120px; }
-.form-select option { background: var(--color-ink); }
+.form-select option { background: var(--key); }
 .form-error {
-  font-size: var(--text-sm);
-  color: var(--color-blood);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  color: var(--magenta);
   margin-top: 0.25rem;
 }
 
-/* ─── Ornament helpers ───────────────────────────────────────────────────────  */
+/* ─── Print-mark helpers ─────────────────────────────────────────────────────  */
+
+/* Registration mark crosshair — for use via .reg-mark class on RegistrationMark component */
+.reg-mark {
+  color: var(--register);
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Crop-mark wrapper — adds L-shaped corner marks via pseudo-elements */
+.crop-box {
+  position: relative;
+}
+.crop-box::before,
+.crop-box::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ─── Ornament helpers (legacy — kept for non-redesigned pages) ──────────────  */
 .ornament-rule {
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--color-smoke);
+  color: var(--smoke);
 }
 .ornament-rule::before,
 .ornament-rule::after {
