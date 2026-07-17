@@ -16,9 +16,23 @@ function isActive(href: string) {
 <header class="site-header" role="banner">
   <div class="container header-inner">
 
-    <!-- Logo -->
+    <!-- Logo
+         TODO: drop public/logo.svg (horizontal wordmark, dark-bg variant).
+         Render target: 28px tall, auto width. Export SVG artboard tight to letterforms.
+         Until the file lands, styled-text fallback is active (logo-text span).
+    -->
     <a href="/" class="logo" aria-label="Oh! Signs — home">
-      <span class="logo-oh">Oh</span><span class="logo-bang">!</span><span class="logo-signs"> Signs</span>
+      <img
+        src="/logo.svg"
+        alt="Oh! Signs"
+        class="logo-img"
+        height="28"
+        onload="this.parentElement.querySelector('.logo-text').style.display='none'"
+        onerror="this.style.display='none'"
+      />
+      <span class="logo-text">
+        <span class="logo-oh">Oh</span><span class="logo-bang">!</span><span class="logo-signs"> Signs</span>
+      </span>
     </a>
 
     <!-- Desktop nav -->
@@ -97,12 +111,22 @@ function isActive(href: string) {
 
   /* Logo */
   .logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .logo-img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  .logo-text {
     font-family: var(--font-display);
     font-size: 1.5rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     line-height: 1;
-    flex-shrink: 0;
   }
   .logo-oh    { color: var(--paper); }
   .logo-bang  { color: var(--yellow); }

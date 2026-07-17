@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 type Mode = 'quote' | 'sample';
 
@@ -11,94 +11,146 @@ interface FormState {
   customer_name: string;
   email: string;
   phone: string;
-  company: string;
   product_type: string;
-  quantity: string;
-  width_inches: string;
-  height_inches: string;
-  material: string;
+  width_in: string;
+  height_in: string;
+  qty: string;
+  budget: string;
   comments: string;
-  // sample-pack extras
   shipping_address: string;
 }
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 const PRODUCT_TYPES = [
-  'Decals / Stickers',
-  'Vehicle Wrap or Decal',
-  'UV Print (rigid substrate)',
-  'Storefront / Window Signage',
-  'Floor Graphics',
-  'Design Services',
-  'Other / Not Sure',
+  'Die-cut decals / stickers',
+  'UV-printed hard goods (acrylic, wood, metal, PVC)',
+  'Fine-art / archival print',
+  'Design services',
+  'Other / Custom',
 ];
 
-const MATERIALS = [
-  "Not sure — help me choose",
-  'Cut vinyl (standard)',
-  'Printed vinyl (CMYK)',
-  'Window perforated film',
-  'Acrylic (UV print)',
-  'Aluminium composite (UV print)',
-  'PVC foam board (UV print)',
-  'Wood / other rigid substrate',
-  'Floor-rated vinyl',
+const BUDGET_RANGES = [
+  'Under $100',
+  '$100 – $250',
+  '$250 – $500',
+  '$500 – $1,000',
+  '$1,000 – $2,500',
+  '$2,500+',
+  'Not sure yet',
 ];
+
+const ACCEPT_EXT = '.png,.jpg,.jpeg,.pdf,.ai,.svg,.eps';
+const MAX_FILE_BYTES = 20 * 1024 * 1024;
 
 const EMPTY: FormState = {
   customer_name: '',
   email: '',
   phone: '',
-  company: '',
   product_type: '',
-  quantity: '',
-  width_inches: '',
-  height_inches: '',
-  material: '',
+  width_in: '',
+  height_in: '',
+  qty: '1',
+  budget: '',
   comments: '',
   shipping_address: '',
 };
 
-function Field({ label, required, optional, children }: {
+function readAsBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result.split(',')[1] ?? '');
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function Field({
+  label, required, optional, error, children,
+}: {
   label: string;
   required?: boolean;
   optional?: boolean;
+  error?: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="qf-field">
       <label className="qf-label">
         {label}
-        {required && <span aria-hidden="true"> *</span>}
-        {optional && <span className="qf-optional"> (optional)</span>}
+        {required && <span className="qf-req" aria-hidden="true"> *</span>}
+        {optional && <span className="qf-opt"> (optional)</span>}
       </label>
       {children}
+      {error && <p className="qf-err" role="alert">{error}</p>}
     </div>
   );
 }
 
 export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
-  const [form, setForm] = useState<FormState>(EMPTY);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-  const [status, setStatus] = useState<Status>('idle');
-  const [errMsg, setErrMsg] = useState('');
-  const loadTs = useRef(Date.now());
-  const honeypotRef = useRef<HTMLInputElement>(null);
+  const [form, setForm]       = useState<FormState>(EMPTY);
+  const [errors, setErrors]   = useState<Partial<Record<keyof FormState, string>>>({});
+  const [status, setStatus]   = useState<Status>('idle');
+  const [errMsg, setErrMsg]   = useState('');
+  const [reqNum, setReqNum]   = useState('');
+  const [artworkFile, setArtworkFile]   = useState<File | null>(null);
+  const [artworkErr, setArtworkErr]     = useState('');
+  const [dragOver, setDragOver]         = useState(false);
 
-  const update = useCallback((field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
-      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }, [errors]);
+  const loadTs      = useRef(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Reset load timestamp on mount (SSR-safe)
+  useEffect(() => { loadTs.current = Date.now(); }, []);
+
+  const update = useCallback(
+    (field: keyof FormState) =>
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setForm((prev) => ({ ...prev, [field]: e.target.value }));
+        setErrors((prev) => ({ ...prev, [field]: undefined }));
+      },
+    [],
+  );
+
+  function applyFile(file: File) {
+    setArtworkErr('');
+    if (file.size > MAX_FILE_BYTES) {
+      setArtworkErr('File too large — 20 MB max.');
+      return;
+    }
+    setArtworkFile(file);
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) applyFile(file);
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) applyFile(file);
+  }
+
+  function removeFile() {
+    setArtworkFile(null);
+    setArtworkErr('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }
 
   function validate(): boolean {
     const next: typeof errors = {};
-    if (!form.customer_name.trim()) next.customer_name = 'Name is required.';
+    if (!form.customer_name.trim())
+      next.customer_name = 'Name is required.';
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       next.email = 'A valid email is required.';
-    if (mode === 'quote' && !form.product_type)
-      next.product_type = 'Please select a product type.';
+    if (!form.comments.trim())
+      next.comments = 'Please describe your project.';
     if (mode === 'sample' && !form.shipping_address.trim())
       next.shipping_address = 'Shipping address is required.';
     setErrors(next);
@@ -115,9 +167,9 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
     if (!validate()) return;
 
     setStatus('submitting');
+    setErrMsg('');
 
     let comments = form.comments.trim();
-
     if (mode === 'sample') {
       comments = `SAMPLE PACK REQUEST\nShipping address: ${form.shipping_address.trim()}\n\n${comments}`;
     }
@@ -126,20 +178,32 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
       customer_name: form.customer_name.trim(),
       email: form.email.trim(),
       comments,
+      source: 'website',
     };
-    if (form.phone.trim())    payload.phone    = form.phone.trim();
-    if (form.company.trim())  payload.company  = form.company.trim();
+
+    if (form.phone.trim()) payload.phone = form.phone.trim();
+
     if (mode === 'quote') {
-      if (form.product_type)       payload.product_type  = form.product_type;
-      if (form.quantity.trim())    payload.quantity       = form.quantity.trim();
-      if (form.width_inches.trim())  payload.width_inches  = form.width_inches.trim();
-      if (form.height_inches.trim()) payload.height_inches = form.height_inches.trim();
-      if (form.material)           payload.material       = form.material;
+      if (form.product_type)   payload.product_type = form.product_type;
+      if (form.width_in.trim())  payload.width_in  = parseFloat(form.width_in)  || form.width_in.trim();
+      if (form.height_in.trim()) payload.height_in = parseFloat(form.height_in) || form.height_in.trim();
+      payload.qty = parseInt(form.qty, 10) || 1;
+      if (form.budget)         payload.budget = form.budget;
     }
 
-    const endpoint = bmsUrl
+    if (artworkFile) {
+      try {
+        payload.artwork_base64   = await readAsBase64(artworkFile);
+        payload.artwork_filename = artworkFile.name;
+      } catch {
+        // Non-fatal: submit without artwork
+      }
+    }
+
+    const endpoint =
+      bmsUrl
       || (typeof import.meta !== 'undefined' && (import.meta as Record<string, unknown>).env
-          ? ((import.meta as Record<string, Record<string, string>>).env.PUBLIC_BMS_REQUEST_URL)
+          ? (import.meta as Record<string, Record<string, string>>).env.PUBLIC_BMS_REQUEST_URL
           : undefined)
       || 'https://bms.ohsigns.shop/api/public/requests';
 
@@ -149,30 +213,49 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(`Server error: ${res.status}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json() as { success: boolean; req_num?: string };
+      setReqNum(data.req_num ?? '');
       setStatus('success');
     } catch (err) {
       console.error(err);
-      setErrMsg('Something went wrong. Please email us at hello@ohsigns.shop.');
+      setErrMsg('Something went wrong. Email us at hello@ohsigns.shop and we\'ll sort it out.');
       setStatus('error');
     }
   }
 
+  // ── Success state ───────────────────────────────────────────────────────────
   if (status === 'success') {
     return (
       <div className="qf-success" role="status">
-        <div className="qf-success-icon" aria-hidden="true">&#10003;</div>
+        <p className="qf-success-stage">
+          {mode === 'sample' ? 'SAMPLE REQUEST RECEIVED' : 'QUOTE REQUEST RECEIVED'}
+        </p>
         <h2 className="qf-success-title">
-          {mode === 'sample' ? 'Sample pack request received!' : 'Quote request received!'}
+          {mode === 'sample' ? "You're on the list." : "We've got it."}
         </h2>
         <p className="qf-success-body">
           {mode === 'sample'
-            ? "We'll get your sample pack out within 1–2 business days."
-            : "We'll get back to you within one business day — usually faster."}
+            ? "Sample pack goes out within 1–2 business days."
+            : "We'll review and reply within one business day — usually faster."}
         </p>
+        {reqNum && (
+          <div className="qf-success-ref">
+            <span className="qf-ref-label">Reference</span>
+            <span className="qf-ref-num">{reqNum}</span>
+            <a
+              href={`https://bms.ohsigns.shop/jobs?q=${reqNum}`}
+              className="qf-track-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Track your order →
+            </a>
+          </div>
+        )}
         <button
           className="qf-reset-btn"
-          onClick={() => { setForm(EMPTY); setErrors({}); setStatus('idle'); }}
+          onClick={() => { setForm(EMPTY); setErrors({}); setStatus('idle'); setReqNum(''); setArtworkFile(null); }}
         >
           Submit another request
         </button>
@@ -180,18 +263,27 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
     );
   }
 
+  // ── Form ────────────────────────────────────────────────────────────────────
   return (
     <form className="qf-form" onSubmit={handleSubmit} noValidate>
-      {/* Honeypot */}
+      {/* Honeypot — hidden from humans and screen readers */}
       <div style={{ display: 'none' }} aria-hidden="true">
         <label htmlFor="qf-website">Website</label>
-        <input ref={honeypotRef} type="text" id="qf-website" name="website" tabIndex={-1} autoComplete="off" />
+        <input
+          ref={honeypotRef}
+          type="text"
+          id="qf-website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
-      <div className="qf-section">
-        <p className="qf-section-label">About you</p>
+      {/* ── Contact ────────────────────────────────────────────────────────── */}
+      <fieldset className="qf-fieldset">
+        <legend className="qf-legend">Contact</legend>
         <div className="qf-row-2">
-          <Field label="Name" required>
+          <Field label="Name" required error={errors.customer_name}>
             <input
               className={`qf-input${errors.customer_name ? ' qf-input--err' : ''}`}
               type="text"
@@ -201,9 +293,8 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
               autoComplete="name"
               required
             />
-            {errors.customer_name && <p className="qf-err">{errors.customer_name}</p>}
           </Field>
-          <Field label="Email" required>
+          <Field label="Email" required error={errors.email}>
             <input
               className={`qf-input${errors.email ? ' qf-input--err' : ''}`}
               type="email"
@@ -213,101 +304,148 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
               autoComplete="email"
               required
             />
-            {errors.email && <p className="qf-err">{errors.email}</p>}
           </Field>
         </div>
-        <div className="qf-row-2">
-          <Field label="Phone" optional>
-            <input
-              className="qf-input"
-              type="tel"
-              value={form.phone}
-              onChange={update('phone')}
-              placeholder="(555) 555-5555"
-              autoComplete="tel"
-            />
-          </Field>
-          <Field label="Company" optional>
-            <input
-              className="qf-input"
-              type="text"
-              value={form.company}
-              onChange={update('company')}
-              placeholder="Acme Co."
-              autoComplete="organization"
-            />
-          </Field>
-        </div>
-      </div>
+        <Field label="Phone" optional>
+          <input
+            className="qf-input"
+            type="tel"
+            value={form.phone}
+            onChange={update('phone')}
+            placeholder="(555) 555-5555"
+            autoComplete="tel"
+          />
+        </Field>
+      </fieldset>
 
+      {/* ── Project (quote mode only) ───────────────────────────────────────── */}
       {mode === 'quote' && (
-        <div className="qf-section">
-          <p className="qf-section-label">Project details</p>
-          <Field label="What do you need?" required>
+        <fieldset className="qf-fieldset">
+          <legend className="qf-legend">Project</legend>
+
+          <Field label="What do you need?" optional>
             <select
-              className={`qf-select${errors.product_type ? ' qf-input--err' : ''}`}
+              className="qf-select"
               value={form.product_type}
               onChange={update('product_type')}
-              required
             >
-              <option value="">— Select a product type —</option>
+              <option value="">— Select a type —</option>
               {PRODUCT_TYPES.map((t) => (
                 <option key={t} value={t}>{t}</option>
               ))}
             </select>
-            {errors.product_type && <p className="qf-err">{errors.product_type}</p>}
           </Field>
+
           <div className="qf-row-3">
+            <Field label="Width (in)" optional>
+              <input
+                className="qf-input"
+                type="text"
+                value={form.width_in}
+                onChange={update('width_in')}
+                placeholder="e.g. 4"
+                inputMode="decimal"
+              />
+            </Field>
+            <Field label="Height (in)" optional>
+              <input
+                className="qf-input"
+                type="text"
+                value={form.height_in}
+                onChange={update('height_in')}
+                placeholder="e.g. 3"
+                inputMode="decimal"
+              />
+            </Field>
             <Field label="Quantity" optional>
               <input
                 className="qf-input"
                 type="text"
-                value={form.quantity}
-                onChange={update('quantity')}
-                placeholder="e.g. 100"
+                value={form.qty}
+                onChange={update('qty')}
+                placeholder="1"
                 inputMode="numeric"
               />
             </Field>
-            <Field label='Width (inches)' optional>
-              <input
-                className="qf-input"
-                type="text"
-                value={form.width_inches}
-                onChange={update('width_inches')}
-                placeholder="e.g. 12"
-                inputMode="decimal"
-              />
-            </Field>
-            <Field label='Height (inches)' optional>
-              <input
-                className="qf-input"
-                type="text"
-                value={form.height_inches}
-                onChange={update('height_inches')}
-                placeholder="e.g. 8"
-                inputMode="decimal"
-              />
-            </Field>
           </div>
-          <Field label="Preferred material" optional>
+
+          <Field label="Budget" optional>
             <select
               className="qf-select"
-              value={form.material}
-              onChange={update('material')}
+              value={form.budget}
+              onChange={update('budget')}
             >
-              <option value="">— Not sure yet —</option>
-              {MATERIALS.map((m) => (
-                <option key={m} value={m}>{m}</option>
+              <option value="">— Select a range —</option>
+              {BUDGET_RANGES.map((r) => (
+                <option key={r} value={r}>{r}</option>
               ))}
             </select>
           </Field>
-        </div>
+        </fieldset>
       )}
 
+      {/* ── Artwork upload ──────────────────────────────────────────────────── */}
+      <fieldset className="qf-fieldset">
+        <legend className="qf-legend">
+          {mode === 'sample' ? 'Have artwork to share?' : 'Artwork'}
+        </legend>
+
+        {/* Die-cut drop zone */}
+        <div
+          className={`qf-dropzone${dragOver ? ' qf-dropzone--over' : ''}${artworkFile ? ' qf-dropzone--filled' : ''}`}
+          onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+          onDragLeave={() => setDragOver(false)}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+          role="button"
+          tabIndex={0}
+          aria-label="Upload artwork file"
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') fileInputRef.current?.click(); }}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept={ACCEPT_EXT}
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+            aria-hidden="true"
+          />
+          {artworkFile ? (
+            <div className="qf-file-attached">
+              <span className="qf-file-name">{artworkFile.name}</span>
+              <span className="qf-file-size">({(artworkFile.size / 1024 / 1024).toFixed(1)} MB)</span>
+              <button
+                type="button"
+                className="qf-file-remove"
+                onClick={(e) => { e.stopPropagation(); removeFile(); }}
+                aria-label="Remove attached file"
+              >
+                ✕ Remove
+              </button>
+            </div>
+          ) : (
+            <div className="qf-dropzone-prompt">
+              <span className="qf-dropzone-icon" aria-hidden="true">⊞</span>
+              <span className="qf-dropzone-text">
+                Drop file here or <span className="qf-dropzone-link">click to attach</span>
+              </span>
+              <span className="qf-dropzone-formats">PNG, JPG, PDF, AI, SVG, EPS · 20 MB max</span>
+            </div>
+          )}
+        </div>
+        {artworkErr && <p className="qf-err" role="alert">{artworkErr}</p>}
+        <p className="qf-field-hint">
+          {mode === 'sample'
+            ? 'Optional — share a reference or project you have in mind.'
+            : "Optional — AI, EPS, or PDF preferred. We'll tell you if it needs prep."}
+        </p>
+      </fieldset>
+
+      {/* ── Shipping (sample mode only) ────────────────────────────────────── */}
       {mode === 'sample' && (
-        <div className="qf-section">
-          <p className="qf-section-label">Shipping</p>
-          <Field label="Shipping address" required>
+        <fieldset className="qf-fieldset">
+          <legend className="qf-legend">Shipping</legend>
+          <Field label="Shipping address" required error={errors.shipping_address}>
             <input
               className={`qf-input${errors.shipping_address ? ' qf-input--err' : ''}`}
               type="text"
@@ -317,34 +455,42 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
               autoComplete="street-address"
               required
             />
-            {errors.shipping_address && <p className="qf-err">{errors.shipping_address}</p>}
           </Field>
-        </div>
+        </fieldset>
       )}
 
-      <div className="qf-section">
-        <p className="qf-section-label">
-          {mode === 'sample' ? 'Anything specific you want to evaluate?' : 'Anything else we should know?'}
-        </p>
-        <Field label="Notes" optional>
+      {/* ── Notes ──────────────────────────────────────────────────────────── */}
+      <fieldset className="qf-fieldset">
+        <legend className="qf-legend">
+          {mode === 'sample' ? 'What are you evaluating?' : 'Project notes'}
+        </legend>
+        <Field
+          label="Tell us what you need"
+          required
+          error={errors.comments}
+        >
           <textarea
-            className="qf-textarea"
+            className={`qf-textarea${errors.comments ? ' qf-input--err' : ''}`}
             value={form.comments}
             onChange={update('comments')}
             placeholder={
               mode === 'sample'
-                ? 'e.g. Looking at material options for product labels on bottles'
-                : 'e.g. I need these by a specific date, or I have existing artwork in AI format'
+                ? 'e.g. Evaluating substrate options for outdoor product labels'
+                : 'Describe your project — material preferences, deadline, intended use, anything that helps us quote accurately.'
             }
-            rows={4}
+            rows={5}
           />
         </Field>
-      </div>
+      </fieldset>
 
+      {/* ── Error banner ───────────────────────────────────────────────────── */}
       {status === 'error' && (
-        <div className="qf-form-error" role="alert">{errMsg}</div>
+        <div className="qf-form-error" role="alert">
+          {errMsg}
+        </div>
       )}
 
+      {/* ── Submit ─────────────────────────────────────────────────────────── */}
       <div className="qf-submit-row">
         <button
           type="submit"
@@ -358,7 +504,7 @@ export default function QuoteForm({ mode = 'quote', bmsUrl }: Props) {
               : 'Submit Quote Request'}
         </button>
         <p className="qf-disclaimer">
-          No obligation. We'll review your request and reply with a quote — usually within one business day.
+          No obligation. We'll review your request and respond with a quote — usually within one business day.
         </p>
       </div>
     </form>

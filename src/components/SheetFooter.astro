@@ -26,8 +26,20 @@ const EMAIL = 'hello@ohsigns.shop';
     <div class="container sf-nav-inner">
 
       <div class="sf-brand">
+        <!-- TODO: /logo.svg — render at 32px tall in the footer.
+             Styled-text fallback is active until the file lands. -->
         <a href="/" class="sf-logo" aria-label="Oh! Signs — home">
-          <span class="sf-logo-oh">Oh</span><span class="sf-logo-bang">!</span><span class="sf-logo-signs"> Signs</span>
+          <img
+            src="/logo.svg"
+            alt="Oh! Signs"
+            class="sf-logo-img"
+            height="32"
+            onload="this.parentElement.querySelector('.sf-logo-text').style.display='none'"
+            onerror="this.style.display='none'"
+          />
+          <span class="sf-logo-text">
+            <span class="sf-logo-oh">Oh</span><span class="sf-logo-bang">!</span><span class="sf-logo-signs"> Signs</span>
+          </span>
         </a>
         <p class="sf-tagline">We're serious about the work, not ourselves.</p>
       </div>
@@ -106,10 +118,20 @@ const EMAIL = 'hello@ohsigns.shop';
     gap: 0.875rem;
   }
   .sf-logo {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .sf-logo-img {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+  .sf-logo-text {
     font-family: var(--font-display);
     font-size: 1.75rem;
     line-height: 1;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
   .sf-logo-oh    { color: var(--paper); }

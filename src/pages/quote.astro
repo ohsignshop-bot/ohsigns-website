@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import QuoteForm from '../components/QuoteForm/index.tsx';
-import OrnamentFrame from '../components/OrnamentFrame.astro';
+import CropCorners from '../components/CropCorners.astro';
 import '../components/QuoteForm/styles.css';
 
 const bmsUrl = import.meta.env.PUBLIC_BMS_REQUEST_URL || 'https://bms.ohsigns.shop/api/public/requests';
@@ -9,40 +9,49 @@ const bmsUrl = import.meta.env.PUBLIC_BMS_REQUEST_URL || 'https://bms.ohsigns.sh
 
 <Layout
   title="Get a Quote"
-  description="Request a custom quote for signs, decals, UV prints, vehicle wraps, and more from Oh! Signs."
+  description="Request a quote for die-cut decals, UV-printed hard goods, or design services from Oh! Signs."
 >
+  <!-- Hero -->
   <section class="quote-hero section-y">
     <div class="container quote-hero-inner">
       <div class="quote-hero-content">
-        <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">Get a Quote</p>
-        <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Tell us what you need.</h1>
-        <p style="color: var(--color-smoke); max-width: 48ch; margin: 0;">
-          Fill out the form and we'll get back to you with a quote within one business day.
-          The more detail you give us, the faster we can turn it around.
+        <p class="text-label" style="color: var(--smoke); margin-bottom: 0.75rem;">Get a Quote</p>
+        <h1 class="text-h1 quote-title">Tell us what you need.</h1>
+        <p class="quote-intro">
+          Fill out the form — we'll review and respond within one business day.
+          The more detail, the faster we can turn it around.
         </p>
       </div>
-      <div class="quote-hero-tips" aria-hidden="true">
-        <OrnamentFrame class="tips-frame">
-          <ul class="tips-list" role="list" aria-label="Tips for faster quotes">
+
+      <!-- Tips panel with crop marks -->
+      <div class="quote-tips-wrap" aria-hidden="true">
+        <div class="quote-tips-box">
+          <CropCorners color="var(--paper)" gap={10} size={12} weight={1} />
+          <ul class="tips-list" role="list">
             <li>
-              <span class="tip-n" aria-hidden="true">→</span>
-              <span>Dimensions help us quote accurately — width &times; height in inches.</span>
+              <span class="tip-bullet" aria-hidden="true">—</span>
+              <span>Dimensions help quote accurately: width × height in inches.</span>
             </li>
             <li>
-              <span class="tip-n" aria-hidden="true">→</span>
+              <span class="tip-bullet" aria-hidden="true">—</span>
               <span>Quantity matters for pricing — even a rough number helps.</span>
             </li>
             <li>
-              <span class="tip-n" aria-hidden="true">→</span>
-              <span>Attach artwork if you have it — we'll tell you if it needs prep.</span>
+              <span class="tip-bullet" aria-hidden="true">—</span>
+              <span>Attach artwork if you have it. AI, EPS, or PDF preferred.</span>
+            </li>
+            <li>
+              <span class="tip-bullet" aria-hidden="true">—</span>
+              <span>No artwork yet? Describe what you're going for.</span>
             </li>
           </ul>
-        </OrnamentFrame>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="quote-form-section section-cream section-y">
+  <!-- Form section -->
+  <section class="quote-form-section section-y">
     <div class="container">
       <div class="quote-form-wrap">
         <QuoteForm client:load mode="quote" bmsUrl={bmsUrl} />
@@ -52,56 +61,69 @@ const bmsUrl = import.meta.env.PUBLIC_BMS_REQUEST_URL || 'https://bms.ohsigns.sh
 </Layout>
 
 <style>
-  .quote-hero { background-color: var(--color-ink); }
+  .quote-hero {
+    background-color: var(--key);
+    padding-bottom: 0;
+  }
   .quote-hero-inner {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
   }
-  .quote-hero-tips { flex-shrink: 0; color: var(--color-cream); }
-  .tips-frame { width: 280px; }
+  .quote-title {
+    color: var(--paper);
+    margin: 0 0 1rem;
+  }
+  .quote-intro {
+    color: var(--smoke);
+    max-width: 48ch;
+    margin: 0;
+    line-height: 1.7;
+    font-size: var(--text-sm);
+  }
+
+  /* Tips panel */
+  .quote-tips-wrap {
+    flex-shrink: 0;
+    color: var(--paper);
+  }
+  .quote-tips-box {
+    position: relative;
+    width: 280px;
+    padding: 1.5rem;
+    border: 1px solid rgba(245, 240, 232, 0.1);
+  }
   .tips-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 0.5rem;
+    gap: 0.875rem;
   }
   .tips-list li {
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
     font-size: var(--text-sm);
-    color: var(--color-smoke);
+    color: var(--smoke);
+    line-height: 1.55;
   }
-  .tip-n { color: var(--color-acid); flex-shrink: 0; }
+  .tip-bullet {
+    color: var(--yellow);
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    margin-top: 0.125rem;
+  }
 
-  .quote-form-section { background-color: var(--color-cream); color: var(--color-ink); }
-  .quote-form-wrap { max-width: 720px; }
-
-  /* Override QuoteForm styles for cream background */
-  .quote-form-section :global(.qf-section-label) {
-    color: #5a6050;
-    border-bottom-color: rgba(14,15,12,0.12);
-  }
-  .quote-form-section :global(.qf-label) { color: #5a6050; }
-  .quote-form-section :global(.qf-input),
-  .quote-form-section :global(.qf-select),
-  .quote-form-section :global(.qf-textarea) {
-    background: rgba(255,255,255,0.8);
-    border-color: rgba(14,15,12,0.2);
-    color: var(--color-ink);
-  }
-  .quote-form-section :global(.qf-input::placeholder),
-  .quote-form-section :global(.qf-textarea::placeholder) { color: rgba(90,96,80,0.6); }
-  .quote-form-section :global(.qf-select option) { background: #fff; color: var(--color-ink); }
-  .quote-form-section :global(.qf-disclaimer) { color: #5a6050; }
+  /* Form section — dark background, form styles already match */
+  .quote-form-section { background-color: var(--key); }
+  .quote-form-wrap { max-width: 680px; }
 
   @media (max-width: 768px) {
     .quote-hero-inner { grid-template-columns: 1fr; }
-    .quote-hero-tips { display: none; }
+    .quote-tips-wrap  { display: none; }
   }
 </style>
