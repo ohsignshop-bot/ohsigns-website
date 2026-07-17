@@ -1,74 +1,116 @@
 # Deployment Guide
 
-## Cloudflare Pages setup
+---
 
-### Production (ohsigns.shop)
+## Dev / test environment (current state)
 
-Project name: `ohsigns-website`
-Branch: `master`
-Build command: `npm run build`
-Build output: `dist`
+**Live URL:** https://ohsigns-website.pages.dev (also: https://b3d2ba98.ohsigns-website.pages.dev)
+**Custom domain:** dev.ohsigns.shop (attach in Cloudflare Pages dashboard → Custom Domains)
+**Pages project:** `ohsigns-website`
+**`X-Robots-Tag: noindex`** is set on all responses via `public/_headers` — this site will not be indexed.
 
-Environment variables:
-- `PUBLIC_BMS_REQUEST_URL` = `https://bms.ohsigns.shop/api/public/requests`
+### Redeploy manually
 
-Custom domain: `ohsigns.shop` (+ `www.ohsigns.shop` → 301 to root)
+```bash
+npm run deploy
+# expands to: astro build && wrangler pages deploy dist --project-name ohsigns-website
+```
 
-### Staging (testing.ohsigns.shop)
+Requires `wrangler` authenticated locally (`npx wrangler login`).
+`PUBLIC_BMS_REQUEST_URL` is read from `.env` at build time (gitignored — see `.env.example`).
 
-Project name: `ohsigns-website-staging`
-Branch: `dev`
-Build command: `npm run build`
-Build output: `dist`
+---
 
-Environment variables: same as production.
+## Moving to production (when ready)
 
-Custom domain: `testing.ohsigns.shop`
+### Step 1 — Connect the GitHub repo for auto-deploys
+
+In the Cloudflare Pages dashboard for the `ohsigns-website` project:
+- Settings → Builds & Deployments → Connect to Git
+- Repo: `ohsignshop-bot/ohsigns-website`
+- Production branch: `master`
+- Preview branches: `dev` (gets its own preview URL automatically)
+- Build command: `npm run build`
+- Build output: `dist`
+- Node.js version: **20** (set under Settings → Environment Variables → `NODE_VERSION=20`)
+
+### Step 2 — Set environment variables in the dashboard
+
+Settings → Environment Variables → add for both **Production** and **Preview**:
+
+| Variable | Value |
+|---|---|
+| `PUBLIC_BMS_REQUEST_URL` | `https://bms.ohsigns.shop/api/public/requests` |
+| `NODE_VERSION` | `20` |
+
+Once these are set, the `npm run deploy` / wrangler direct-upload workflow is no longer needed — pushes to `master` trigger production builds automatically.
+
+### Step 3 — Attach custom domains
+
+In Cloudflare Pages → `ohsigns-website` → Custom Domains:
+- `ohsigns.shop` (production)
+- `www.ohsigns.shop` → configure as redirect to root in Cloudflare DNS
+- `dev.ohsigns.shop` (dev — already in allowlist; attach to this project or a separate one)
+
+DNS is already managed by Cloudflare — the Pages dashboard will add the CNAME automatically.
+
+**Do not touch `bms.ohsigns.shop` DNS.**
+
+### Step 4 — Remove noindex from production
+
+When `ohsigns.shop` is attached, update or remove `public/_headers` so the production domain is not blocked from indexing. The current `/*` rule blocks all domains on this project.
 
 ---
 
 ## Branch strategy
 
 ```
-master  → ohsigns.shop         (production — currently "Coming Soon")
-dev     → testing.ohsigns.shop (staging — full site)
+master  → ohsigns.shop (production — auto-deploy via GitHub once connected)
+dev     → testing.ohsigns.shop / preview URL (auto-deploy via GitHub once connected)
 ```
 
-When ready to go live: merge `dev` → `master`. The Cloudflare Pages production build fires automatically.
-
 ---
 
-## Deploy checklist
+## Deploy checklist (before going live)
 
-Before merging to master / going live:
-
+- [ ] Connect GitHub repo in Cloudflare Pages dashboard
+- [ ] Set `PUBLIC_BMS_REQUEST_URL` and `NODE_VERSION=20` as Pages env vars
+- [ ] Attach `ohsigns.shop` custom domain
+- [ ] Remove or scope `X-Robots-Tag: noindex` in `public/_headers`
 - [ ] Replace `public/og.png` with real 1200×630 OG image
 - [ ] Replace `public/apple-touch-icon.png` with real 180×180 icon
-- [ ] Add real portfolio photos (see `TODO-photos.md`)
-- [ ] Verify `PUBLIC_BMS_REQUEST_URL` is set in Cloudflare Pages env vars
-- [ ] Test quote form end-to-end (submit → check BMS for new request)
-- [ ] Test sample pack form end-to-end
+- [ ] Verify quote form end-to-end (submit → check BMS for new request)
+- [ ] Verify sample pack form end-to-end
 - [ ] Test mobile nav (open / close, all links work)
-- [ ] Verify sitemap accessible at `/sitemap-index.xml`
-- [ ] Verify robots.txt at `/robots.txt`
-- [ ] Verify all `/collections/*` and `/products/*` Shopify redirects fire (301, not 404)
-- [ ] Check Lighthouse score — target 95+ performance, 100 accessibility
-- [ ] Verify all internal links resolve correctly
-- [ ] Check `npm run check` passes with no TypeScript errors
+- [ ] Verify `/collections/*` and `/products/*` Shopify redirects return 301
+- [ ] Verify `X-Robots-Tag` absent on `ohsigns.shop` responses
+- [ ] Lighthouse: target 95+ performance, 100 accessibility
+- [ ] `npm run check` passes clean
 
 ---
 
-## `wrangler deploy` (manual, if needed)
+## Sanity checks (dev environment)
 
-The site uses Cloudflare Pages (not Workers), so normal deploys happen via Git push.
-`wrangler deploy` is only needed for the BMS Cloudflare Worker (separate repo).
+```bash
+# Site loads
+curl -I https://ohsigns-website.pages.dev
 
----
+# noindex header present
+curl -I https://dev.ohsigns.shop | grep -i robots
 
-## Updating the site
+# Shopify redirect rules return 301
+curl -I https://dev.ohsigns.shop/products/foo
+curl -I https://dev.ohsigns.shop/collections/foo
 
-1. Edit files on `dev` branch
-2. `npm run check` — must pass clean
-3. Push `dev` → Cloudflare Pages staging builds automatically
-4. Check at `testing.ohsigns.shop`
-5. Merge `dev` → `master` → production builds automatically
+# BMS CORS on public route (POST/OPTIONS allowed)
+curl -s -X OPTIONS https://bms.ohsigns.shop/api/public/requests \
+  -H "Origin: https://dev.ohsigns.shop" \
+  -H "Access-Control-Request-Method: POST" -D - -o /dev/null | grep -i access-control
+
+# BMS quote form contract
+curl -s -X POST https://bms.ohsigns.shop/api/public/requests \
+  -H "Content-Type: application/json" \
+  -H "Origin: https://dev.ohsigns.shop" \
+  -d '{"customer_name":"TEST","email":"test@test.com","comments":"delete me"}'
+# Expected: {"success":true,"req_num":"REQ-..."}
+```
