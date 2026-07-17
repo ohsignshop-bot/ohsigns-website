@@ -1,0 +1,6 @@
+# Cloudflare Pages _headers
+# Path-based rules only — hostname scoping is not supported in this format.
+# This project only serves dev.ohsigns.shop, so /* here == dev.ohsigns.shop/* in effect.
+# The production Pages project will have no _headers noindex rule.
+/*
+  X-Robots-Tag: noindex
