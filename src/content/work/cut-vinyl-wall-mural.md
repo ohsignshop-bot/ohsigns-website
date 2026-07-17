@@ -1,9 +1,9 @@
 ---
-title: Cut Vinyl Wall Mural — Tech Office
+title: Cut Vinyl Wall Installation
 category: decals
-tags: [cut-vinyl, wall-mural, interior]
+tags: [cut-vinyl, wall, interior]
 image: /work/office-wall-graphic.png
-imageAlt: Clean modern office wall with large geometric cut-vinyl pattern in charcoal and brand accent colour
+imageAlt: Office wall with large geometric cut-vinyl pattern applied directly to painted drywall
 date: 2024-06-14
 featured: false
 ---

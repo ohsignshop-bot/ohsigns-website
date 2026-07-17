@@ -4,7 +4,7 @@ const work = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    category: z.enum(['decals', 'uv', 'design', 'vehicle-wrap', 'signage', 'other']),
+    category: z.enum(['decals', 'uv', 'design', 'other']),
     tags: z.array(z.string()).default([]),
     image: z.string(),          // path relative to /public
     imageAlt: z.string(),

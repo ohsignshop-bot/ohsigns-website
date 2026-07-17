@@ -1,11 +1,11 @@
 ---
-title: Brand Identity — Roast & Co.
+title: Brand Identity System
 category: design
-tags: [branding, logo, coffee]
+tags: [branding, logo, identity]
 image: /work/cafe-brand.png
-imageAlt: Warm coffee-toned brand board showing logo, color palette, and typography for Roast & Co. specialty coffee
+imageAlt: Brand board showing logo, color palette, and type pairings on warm-toned presentation
 date: 2024-11-20
 featured: true
 ---
 
-Logo, color system, type pairing, and signage templates for a new specialty coffee bar.
+Logo, color system, and type pairing. Delivered in full production-ready format.
