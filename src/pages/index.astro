@@ -1,0 +1,440 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OrnamentFrame from '../components/OrnamentFrame.astro';
+import { getCollection } from 'astro:content';
+
+const featuredWork = (await getCollection('work', ({ data }) => data.featured))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4);
+
+const services = [
+  {
+    href: '/services/decals',
+    icon: '◈',
+    name: 'Decals & Stickers',
+    blurb: 'Cut vinyl, printed stickers, window perfs, floor graphics. If it sticks, we make it.',
+  },
+  {
+    href: '/services/uv',
+    icon: '◉',
+    name: 'UV Printing',
+    blurb: 'Flat-bed UV on any rigid substrate — wood, metal, acrylic, foam board, you name it.',
+  },
+  {
+    href: '/services/design',
+    icon: '◇',
+    name: 'Design Services',
+    blurb: 'From logo to full brand system. We make sure your files are production-ready before we print.',
+  },
+];
+
+const steps = [
+  { n: '01', title: 'Tell us what you need', body: 'Fill out the quote form or email us. The more detail, the faster we can turn a quote around.' },
+  { n: '02', title: 'We send a quote', body: 'Usually within one business day. You approve the price and artwork before anything runs.' },
+  { n: '03', title: 'Production', body: 'We handle fabrication in-house — no middleman, no mystery delays.' },
+  { n: '04', title: 'Delivery or pickup', body: 'We ship nationwide or you pick up locally. Jobs are tracked every step of the way.' },
+];
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "OH! Signs LLC",
+  "url": "https://ohsigns.shop",
+  "email": "hello@ohsigns.shop",
+  "description": "Custom signs, vehicle wraps, decals, and UV printing for businesses and individuals.",
+  "areaServed": "US",
+  "priceRange": "$$",
+});
+---
+
+<Layout
+  title="Oh! Signs"
+  description="Custom signs, vehicle wraps, decals, and UV printing for businesses and individuals. Made in-house, delivered fast."
+>
+  <script type="application/ld+json" set:html={jsonLd} slot="head" />
+
+  <!-- ─── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="hero section-y" aria-labelledby="hero-heading">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="text-label hero-label">Sign Shop · Est. Whenever We Opened</p>
+        <h1 id="hero-heading" class="text-hero hero-heading">
+          Signs that<br/>
+          <span class="hero-accent">actually look good.</span>
+        </h1>
+        <p class="hero-body">
+          We design, print, and cut everything in-house. No outsourced files, no cut corners,
+          no three-week lead times for a set of stickers.
+        </p>
+        <div class="hero-actions">
+          <a href="/quote" class="btn btn-primary">Get a Quote</a>
+          <a href="/sample-pack" class="btn btn-outline">Free Sample Pack</a>
+        </div>
+      </div>
+
+      <div class="hero-frame-wrap" aria-hidden="true">
+        <OrnamentFrame padded={false} class="hero-frame">
+          <div class="hero-frame-inner">
+            <span class="hero-frame-logo">Oh<span class="hero-frame-bang">!</span></span>
+            <p class="hero-frame-sub">Signs</p>
+            <hr class="hero-frame-rule" />
+            <p class="hero-frame-tagline">We're serious about<br/>the work, not ourselves.</p>
+          </div>
+        </OrnamentFrame>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Services strip ───────────────────────────────────────────────────── -->
+  <section class="services-strip section-cream section-y" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="text-label section-label">What We Do</p>
+        <h2 id="services-heading" class="text-h2">Every kind of sign.<br/>All under one roof.</h2>
+      </div>
+      <div class="services-grid">
+        {services.map(({ href, icon, name, blurb }) => (
+          <a href={href} class="service-card">
+            <span class="service-card-icon" aria-hidden="true">{icon}</span>
+            <h3 class="text-h3 service-card-name">{name}</h3>
+            <p class="service-card-blurb">{blurb}</p>
+            <span class="service-card-link">Learn more &rarr;</span>
+          </a>
+        ))}
+      </div>
+      <div class="services-cta">
+        <a href="/services" class="btn btn-outline-ink">Browse all services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Sample pack feature ──────────────────────────────────────────────── -->
+  <section class="sample-feature section-y" aria-labelledby="sample-heading">
+    <div class="container sample-feature-inner">
+      <div class="sample-feature-frame-wrap" aria-hidden="true">
+        <OrnamentFrame class="sample-frame">
+          <div class="sample-frame-inner">
+            <p class="text-label" style="color: var(--color-smoke);">Free</p>
+            <p class="sample-frame-big">Sample<br/>Pack</p>
+          </div>
+        </OrnamentFrame>
+      </div>
+      <div class="sample-feature-content">
+        <p class="text-label">Feel it before you buy it</p>
+        <h2 id="sample-heading" class="text-h2">We'll send you a free sample pack.</h2>
+        <p class="sample-body">
+          A curated set of our most popular materials — vinyl finishes, UV substrates, laminate swatches.
+          Touch the stuff before you commit to 500 units of it.
+        </p>
+        <ul class="sample-list" role="list">
+          <li>Cut vinyl in gloss, matte, and chrome finishes</li>
+          <li>UV prints on acrylic, metal, and foam board</li>
+          <li>Laminate swatches: gloss, matte, soft-touch</li>
+        </ul>
+        <a href="/sample-pack" class="btn btn-primary">Request a Free Sample Pack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Work gallery teaser ──────────────────────────────────────────────── -->
+  <section class="gallery-teaser section-cream section-y" aria-labelledby="work-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="text-label section-label">Our Work</p>
+        <h2 id="work-heading" class="text-h2">Recent projects.</h2>
+      </div>
+      <div class="gallery-grid">
+        {featuredWork.map((entry) => (
+          <a href={`/work/${entry.slug}`} class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img
+                src={entry.data.image}
+                alt={entry.data.imageAlt}
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="gallery-card-overlay">
+                <span class="gallery-card-category text-label">{entry.data.category.replace('-', ' ')}</span>
+              </div>
+            </div>
+            <div class="gallery-card-body">
+              <h3 class="text-h3 gallery-card-title">{entry.data.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="gallery-cta">
+        <a href="/work" class="btn btn-outline-ink">See all work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How it works ─────────────────────────────────────────────────────── -->
+  <section class="how-it-works section-y" aria-labelledby="how-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="text-label" style="color: var(--color-smoke);">The Process</p>
+        <h2 id="how-heading" class="text-h2">How it works.</h2>
+      </div>
+      <div class="steps-grid">
+        {steps.map(({ n, title, body }) => (
+          <div class="step">
+            <span class="step-number text-label" aria-hidden="true">{n}</span>
+            <h3 class="text-h3 step-title">{title}</h3>
+            <p class="step-body">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA band ─────────────────────────────────────────────────────────── -->
+  <section class="cta-band section-cream">
+    <div class="container cta-band-inner">
+      <OrnamentFrame class="cta-frame">
+        <div class="cta-content">
+          <h2 class="text-h2 cta-heading">Ready to make something?</h2>
+          <p class="cta-body">
+            Tell us what you need. We'll send a quote back within one business day —
+            usually faster.
+          </p>
+          <div class="cta-actions">
+            <a href="/quote" class="btn btn-primary">Get a Quote</a>
+            <a href="mailto:hello@ohsigns.shop" class="btn btn-outline-ink">Email us directly</a>
+          </div>
+        </div>
+      </OrnamentFrame>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ── Hero ─────────────────────────────────────────────────────────────────── */
+  .hero { background-color: var(--color-ink); }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .hero-label { color: var(--color-smoke); margin-bottom: 1rem; }
+  .hero-heading { margin: 0 0 1.25rem; color: var(--color-cream); }
+  .hero-accent  { color: var(--color-acid); }
+  .hero-body {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--color-smoke);
+    max-width: 44ch;
+    margin-bottom: 2rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-frame-wrap {
+    flex-shrink: 0;
+    color: var(--color-cream);
+    opacity: 0.35;
+  }
+  .hero-frame { width: 220px; height: 220px; }
+  .hero-frame-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    width: 220px;
+    height: 220px;
+  }
+  .hero-frame-logo {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    line-height: 1;
+  }
+  .hero-frame-bang { color: var(--color-acid); opacity: 3; }
+  .hero-frame-sub {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0.25rem 0 0.75rem;
+  }
+  .hero-frame-rule {
+    border: none;
+    border-top: 1px solid currentColor;
+    opacity: 0.4;
+    width: 100%;
+    margin: 0 0 0.75rem;
+  }
+  .hero-frame-tagline {
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+    color: var(--color-smoke);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 680px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-frame-wrap { display: none; }
+  }
+
+  /* ── Services strip ───────────────────────────────────────────────────────── */
+  .section-header {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .section-label { color: #5a6050; margin-bottom: 0.5rem; }
+  .section-header .text-h2 { margin: 0; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 2rem 1.75rem;
+    border: 1px solid rgba(14, 15, 12, 0.12);
+    border-radius: var(--radius-md);
+    color: var(--color-ink);
+    transition: border-color var(--duration-base), background-color var(--duration-base);
+  }
+  .service-card:hover { border-color: var(--color-ink); background-color: rgba(14,15,12,0.04); }
+  .service-card-icon { font-size: 1.5rem; color: var(--color-blood); }
+  .service-card-name { margin: 0; }
+  .service-card-blurb { margin: 0; font-size: var(--text-sm); color: #5a6050; flex: 1; }
+  .service-card-link { font-size: var(--text-sm); font-weight: 600; margin-top: auto; }
+  .service-card:hover .service-card-link { color: var(--color-blood); }
+  .services-cta { margin-top: 2.5rem; }
+
+  @media (max-width: 768px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Sample feature ───────────────────────────────────────────────────────── */
+  .sample-feature { background-color: var(--color-ink); }
+  .sample-feature-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .sample-feature-frame-wrap { color: var(--color-cream); flex-shrink: 0; }
+  .sample-frame { width: 240px; min-height: 240px; }
+  .sample-frame-inner {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+  }
+  .sample-frame-big {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.05;
+    margin: 0.25rem 0 0;
+    color: var(--color-cream);
+  }
+  .sample-feature-content { display: flex; flex-direction: column; gap: 1rem; }
+  .sample-feature-content .text-label { color: var(--color-smoke); }
+  .sample-feature-content .text-h2 { margin: 0; }
+  .sample-body { color: var(--color-smoke); margin: 0; max-width: 52ch; }
+  .sample-list {
+    margin: 0;
+    padding: 0 0 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    color: var(--color-smoke);
+  }
+
+  @media (max-width: 680px) {
+    .sample-feature-inner { grid-template-columns: 1fr; }
+    .sample-feature-frame-wrap { display: none; }
+  }
+
+  /* ── Gallery teaser ───────────────────────────────────────────────────────── */
+  .gallery-teaser { background-color: var(--color-cream); color: var(--color-ink); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .gallery-card { display: block; color: var(--color-ink); }
+  .gallery-card-img-wrap {
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: rgba(14,15,12,0.08);
+  }
+  .gallery-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+  .gallery-card:hover .gallery-card-img-wrap img { transform: scale(1.04); }
+  .gallery-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,15,12,0.5) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+  .gallery-card-category {
+    color: var(--color-cream);
+    background: rgba(14,15,12,0.6);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(4px);
+  }
+  .gallery-card-body { padding: 0.75rem 0 0; }
+  .gallery-card-title { margin: 0; font-size: 1rem; }
+  .gallery-cta { margin-top: 2.5rem; }
+
+  @media (max-width: 600px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── How it works ─────────────────────────────────────────────────────────── */
+  .how-it-works { background-color: var(--color-ink); }
+  .how-it-works .section-header .text-h2 { color: var(--color-cream); }
+  .how-it-works .text-label { color: var(--color-smoke); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .step { display: flex; flex-direction: column; gap: 0.75rem; }
+  .step-number {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--color-acid);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(184,230,0,0.3);
+    border-radius: var(--radius-sm);
+    width: fit-content;
+  }
+  .step-title { color: var(--color-cream); margin: 0; }
+  .step-body  { color: var(--color-smoke); font-size: var(--text-sm); margin: 0; }
+
+  @media (max-width: 900px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .steps-grid { grid-template-columns: 1fr; } }
+
+  /* ── CTA band ─────────────────────────────────────────────────────────────── */
+  .cta-band { background-color: var(--color-cream); color: var(--color-ink); }
+  .cta-band-inner { padding-block: var(--section-y); }
+  .cta-frame { max-width: 680px; margin-inline: auto; }
+  .cta-content { display: flex; flex-direction: column; gap: 1rem; }
+  .cta-heading { margin: 0; }
+  .cta-body { margin: 0; color: #5a6050; max-width: 44ch; }
+  .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+</style>

@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import OrnamentFrame from '../../components/OrnamentFrame.astro';
+
+const services = [
+  {
+    href: '/services/decals',
+    name: 'Decals & Stickers',
+    icon: '◈',
+    description: 'Cut vinyl, printed stickers, window perforated film, floor graphics, wall decals. All shapes, all sizes, all quantities.',
+    examples: ['Vehicle decals', 'Product labels', 'Window clings', 'Floor graphics', 'Wall murals', 'Hard hat stickers'],
+  },
+  {
+    href: '/services/uv',
+    name: 'UV Printing',
+    icon: '◉',
+    description: 'Flat-bed UV printing directly onto rigid substrates. Outstanding detail, scratch-resistant curing, works on nearly anything flat.',
+    examples: ['Acrylic signs', 'Metal panels', 'Wood plaques', 'Foam board displays', 'Dibond panels', 'Awards & trophies'],
+  },
+  {
+    href: '/services/design',
+    name: 'Design Services',
+    icon: '◇',
+    description: 'Original logo design, brand identity systems, and production-ready file prep so your prints look exactly right.',
+    examples: ['Logo design', 'Brand identity', 'Print-ready file prep', 'Vehicle wrap design', 'Signage layout', 'Retouching & cleanup'],
+  },
+];
+---
+
+<Layout
+  title="Services"
+  description="Decals, UV printing, design services, and more — all made in-house at Oh! Signs."
+>
+  <section class="page-hero section-y">
+    <div class="container">
+      <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">What We Do</p>
+      <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Services.</h1>
+      <p class="page-hero-body">
+        Everything is made in-house. That means tighter quality control, faster turnarounds,
+        and fewer "let me check with the vendor" emails.
+      </p>
+    </div>
+  </section>
+
+  <section class="services-list section-cream section-y">
+    <div class="container">
+      <div class="services-cards">
+        {services.map(({ href, name, icon, description, examples }) => (
+          <div class="service-detail-card">
+            <div class="service-detail-header">
+              <span class="service-detail-icon" aria-hidden="true">{icon}</span>
+              <h2 class="text-h2 service-detail-name">{name}</h2>
+            </div>
+            <p class="service-detail-desc">{description}</p>
+            <ul class="service-examples" role="list">
+              {examples.map((ex) => (
+                <li>{ex}</li>
+              ))}
+            </ul>
+            <a href={href} class="btn btn-outline-ink">Learn more &rarr;</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="services-cta section-y">
+    <div class="container">
+      <OrnamentFrame class="services-cta-frame">
+        <div class="services-cta-inner">
+          <h2 class="text-h2">Not sure what you need?</h2>
+          <p>Tell us what you're trying to accomplish and we'll figure out the right approach together.</p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <a href="/quote" class="btn btn-primary">Get a Quote</a>
+            <a href="/contact" class="btn btn-outline">Ask a Question</a>
+          </div>
+        </div>
+      </OrnamentFrame>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-ink); }
+  .page-hero-body { color: var(--color-smoke); max-width: 52ch; margin: 0; }
+
+  .services-list { background-color: var(--color-cream); color: var(--color-ink); }
+  .services-cards { display: flex; flex-direction: column; gap: 2rem; }
+
+  .service-detail-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2.5rem;
+    border: 1px solid rgba(14,15,12,0.12);
+    border-radius: var(--radius-md);
+  }
+  .service-detail-header { display: flex; align-items: center; gap: 1rem; }
+  .service-detail-icon { font-size: 1.75rem; color: var(--color-blood); }
+  .service-detail-name { margin: 0; }
+  .service-detail-desc { margin: 0; color: #5a6050; max-width: 60ch; }
+
+  .service-examples {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .service-examples li {
+    font-size: var(--text-sm);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(14,15,12,0.2);
+    border-radius: 999px;
+    color: #5a6050;
+  }
+
+  .services-cta { background-color: var(--color-ink); }
+  .services-cta-frame { max-width: 640px; color: var(--color-cream); }
+  .services-cta-inner { display: flex; flex-direction: column; gap: 0.75rem; }
+  .services-cta-inner .text-h2 { margin: 0; }
+  .services-cta-inner p { margin: 0; color: var(--color-smoke); }
+</style>

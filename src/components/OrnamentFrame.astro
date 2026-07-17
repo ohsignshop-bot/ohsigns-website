@@ -1,0 +1,116 @@
+---
+/**
+ * Frames any content with Art Nouveau corner flourishes.
+ * Works on ink backgrounds (cream) and cream backgrounds (ink).
+ *
+ * The frame uses a CSS border for the straight edges; SVG corners
+ * are absolutely positioned, overlapping the border corners so the
+ * rectangular CSS corner is hidden behind the botanical flourish.
+ */
+interface Props {
+  class?: string;
+  padded?: boolean;
+}
+const { class: cls = '', padded = true } = Astro.props;
+---
+
+<div class={`ornament-frame${padded ? ' ornament-frame--padded' : ''} ${cls}`}>
+  <!-- corners: each SVG is positioned so the frame-rule lines align
+       with the surrounding CSS border -->
+  <span class="ornament-frame__corner ornament-frame__corner--tl" aria-hidden="true">
+    <svg viewBox="0 0 72 72" width="72" height="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="22" y1="5"  x2="72" y2="5"  stroke="currentColor" stroke-width="1.5"/>
+      <line x1="5"  y1="22" x2="5"  y2="72" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="26" y1="11" x2="72" y2="11" stroke="currentColor" stroke-width="0.75"/>
+      <line x1="11" y1="26" x2="11" y2="72" stroke="currentColor" stroke-width="0.75"/>
+      <path d="M 22 5 Q 5 5 5 22" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <path d="M 26 11 Q 11 11 11 26" stroke="currentColor" stroke-width="0.75" fill="none"/>
+      <path d="M 16 16 C 22 8 34 12 30 22 C 24 16 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+      <path d="M 16 16 C 8 22 12 34 22 30 C 16 24 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+      <path d="M 16 16 C 12 12 8 8 5.5 5.5" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+      <circle cx="16" cy="16" r="2" fill="currentColor"/>
+    </svg>
+  </span>
+  <span class="ornament-frame__corner ornament-frame__corner--tr" aria-hidden="true">
+    <svg viewBox="0 0 72 72" width="72" height="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="rotate(90 36 36)">
+        <line x1="22" y1="5"  x2="72" y2="5"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="5"  y1="22" x2="5"  y2="72" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="11" x2="72" y2="11" stroke="currentColor" stroke-width="0.75"/>
+        <line x1="11" y1="26" x2="11" y2="72" stroke="currentColor" stroke-width="0.75"/>
+        <path d="M 22 5 Q 5 5 5 22" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M 26 11 Q 11 11 11 26" stroke="currentColor" stroke-width="0.75" fill="none"/>
+        <path d="M 16 16 C 22 8 34 12 30 22 C 24 16 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+        <path d="M 16 16 C 8 22 12 34 22 30 C 16 24 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+        <path d="M 16 16 C 12 12 8 8 5.5 5.5" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </g>
+    </svg>
+  </span>
+  <span class="ornament-frame__corner ornament-frame__corner--br" aria-hidden="true">
+    <svg viewBox="0 0 72 72" width="72" height="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="rotate(180 36 36)">
+        <line x1="22" y1="5"  x2="72" y2="5"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="5"  y1="22" x2="5"  y2="72" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="11" x2="72" y2="11" stroke="currentColor" stroke-width="0.75"/>
+        <line x1="11" y1="26" x2="11" y2="72" stroke="currentColor" stroke-width="0.75"/>
+        <path d="M 22 5 Q 5 5 5 22" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M 26 11 Q 11 11 11 26" stroke="currentColor" stroke-width="0.75" fill="none"/>
+        <path d="M 16 16 C 22 8 34 12 30 22 C 24 16 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+        <path d="M 16 16 C 8 22 12 34 22 30 C 16 24 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+        <path d="M 16 16 C 12 12 8 8 5.5 5.5" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </g>
+    </svg>
+  </span>
+  <span class="ornament-frame__corner ornament-frame__corner--bl" aria-hidden="true">
+    <svg viewBox="0 0 72 72" width="72" height="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="rotate(270 36 36)">
+        <line x1="22" y1="5"  x2="72" y2="5"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="5"  y1="22" x2="5"  y2="72" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="11" x2="72" y2="11" stroke="currentColor" stroke-width="0.75"/>
+        <line x1="11" y1="26" x2="11" y2="72" stroke="currentColor" stroke-width="0.75"/>
+        <path d="M 22 5 Q 5 5 5 22" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M 26 11 Q 11 11 11 26" stroke="currentColor" stroke-width="0.75" fill="none"/>
+        <path d="M 16 16 C 22 8 34 12 30 22 C 24 16 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+        <path d="M 16 16 C 8 22 12 34 22 30 C 16 24 16 16 16 16 Z" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.18"/>
+        <path d="M 16 16 C 12 12 8 8 5.5 5.5" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </g>
+    </svg>
+  </span>
+
+  <div class="ornament-frame__content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .ornament-frame {
+    position: relative;
+    border: 1.5px solid currentColor;
+    border-opacity: 0.5;
+  }
+  .ornament-frame--padded {
+    padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .ornament-frame__corner {
+    position: absolute;
+    display: block;
+    width: 72px;
+    height: 72px;
+    /* Overlap the CSS border so the SVG lines align with the border edges */
+  }
+  .ornament-frame__corner svg {
+    /* Match the background so the CSS corner is hidden */
+    background: inherit;
+  }
+
+  .ornament-frame__corner--tl { top: -5px;  left: -5px;  }
+  .ornament-frame__corner--tr { top: -5px;  right: -5px; }
+  .ornament-frame__corner--br { bottom: -5px; right: -5px; }
+  .ornament-frame__corner--bl { bottom: -5px; left: -5px;  }
+
+  .ornament-frame__content { position: relative; z-index: 1; }
+</style>

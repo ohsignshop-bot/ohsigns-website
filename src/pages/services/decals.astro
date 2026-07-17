@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const types = [
+  { name: 'Cut Vinyl Decals', desc: 'Single-colour or multi-colour, precision-cut from durable calendered or cast vinyl. No substrate — just the vinyl itself.' },
+  { name: 'Printed Decals & Stickers', desc: 'Full-colour printing on vinyl or paper stock, with or without laminate. CMYK + white ink available.' },
+  { name: 'Window Perforated Film', desc: 'See-through from the inside, full-colour graphic from the outside. Great for storefronts and vehicle windows.' },
+  { name: 'Floor Graphics', desc: 'Anti-slip laminated floor-rated vinyl. Indoor and short-term outdoor use.' },
+  { name: 'Wall Decals', desc: 'Removable or permanent vinyl for interior walls. Ideal for offices, retail, and murals.' },
+  { name: 'Hard Hat Stickers', desc: 'UV-resistant, waterproof labels built to survive a job site. Custom shapes and sizes.' },
+];
+---
+
+<Layout
+  title="Decals & Stickers"
+  description="Custom cut vinyl decals, printed stickers, window film, and floor graphics made in-house at Oh! Signs."
+>
+  <section class="page-hero section-y">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/services">Services</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Decals & Stickers</span>
+      </nav>
+      <h1 class="text-h1" style="color: var(--color-cream); margin: 1rem 0;">Decals & Stickers.</h1>
+      <p class="page-hero-body">
+        Cut vinyl, printed stickers, perforated window film, and floor graphics.
+        If it sticks, we can make it. Quote based on size, quantity, and material — fill out the form for a fast turnaround.
+      </p>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="/quote" class="btn btn-primary">Get a Quote</a>
+        <a href="/sample-pack" class="btn btn-outline">Free Sample Pack</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="types-section section-cream section-y">
+    <div class="container">
+      <h2 class="text-h2" style="margin-bottom: 2rem;">What we make.</h2>
+      <div class="types-grid">
+        {types.map(({ name, desc }) => (
+          <div class="type-card">
+            <h3 class="text-h3">{name}</h3>
+            <p>{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-section section-y">
+    <div class="container spec-inner">
+      <div>
+        <h2 class="text-h2" style="color: var(--color-cream); margin-bottom: 1.5rem;">Specs & what to send us.</h2>
+        <dl class="spec-list">
+          <dt>Preferred file format</dt>
+          <dd>Vector AI, EPS, or PDF (outlined fonts). High-res PNG/TIFF accepted for print-only.</dd>
+          <dt>Colour mode</dt>
+          <dd>CMYK for full-colour print. PMS swatches for cut vinyl colour matching.</dd>
+          <dt>Minimum quantity</dt>
+          <dd>No minimum. One sticker is fine. Pricing scales with quantity.</dd>
+          <dt>Lead time</dt>
+          <dd>3–5 business days for most orders. Rush available — ask.</dd>
+        </dl>
+      </div>
+      <div class="spec-cta">
+        <a href="/quote" class="btn btn-primary">Start a Decal Quote</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-ink); }
+  .page-hero-body { color: var(--color-smoke); max-width: 54ch; margin: 0; }
+
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: var(--text-sm); color: var(--color-smoke); }
+  .breadcrumb a { color: var(--color-smoke); transition: color var(--duration-fast); }
+  .breadcrumb a:hover { color: var(--color-cream); }
+  .breadcrumb span[aria-current] { color: var(--color-cream); }
+
+  .types-section { background-color: var(--color-cream); color: var(--color-ink); }
+  .types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .type-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(14,15,12,0.12);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .type-card h3 { margin: 0; }
+  .type-card p  { margin: 0; font-size: var(--text-sm); color: #5a6050; }
+
+  .spec-section { background-color: var(--color-ink); color: var(--color-cream); }
+  .spec-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: start;
+  }
+  .spec-list { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.5rem; margin: 0; }
+  .spec-list dt { font-weight: 600; font-size: var(--text-sm); white-space: nowrap; }
+  .spec-list dd { margin: 0; font-size: var(--text-sm); color: var(--color-smoke); }
+  .spec-cta { padding-top: 2.75rem; }
+
+  @media (max-width: 768px) {
+    .types-grid { grid-template-columns: 1fr 1fr; }
+    .spec-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 480px) {
+    .types-grid { grid-template-columns: 1fr; }
+  }
+</style>

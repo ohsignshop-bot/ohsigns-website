@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allWork = (await getCollection('work'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const categories = ['all', ...Array.from(new Set(allWork.map((e) => e.data.category)))];
+---
+
+<Layout
+  title="Our Work"
+  description="A portfolio of recent signs, decals, UV prints, and vehicle wraps from Oh! Signs."
+>
+  <section class="page-hero section-y">
+    <div class="container">
+      <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">Portfolio</p>
+      <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Our Work.</h1>
+      <p class="page-hero-body">
+        Recent projects across decals, UV printing, vehicle wraps, and signage.
+        Photos are coming — this is placeholder content for now.
+      </p>
+    </div>
+  </section>
+
+  <section class="gallery section-y">
+    <div class="container">
+      <!-- Category filter -->
+      <div class="filter-bar" role="group" aria-label="Filter by category">
+        {categories.map((cat) => (
+          <button
+            class="filter-btn"
+            data-category={cat}
+            aria-pressed={cat === 'all' ? 'true' : 'false'}
+          >
+            {cat === 'all' ? 'All' : cat.replace('-', ' ')}
+          </button>
+        ))}
+      </div>
+
+      <div class="work-grid" id="work-grid">
+        {allWork.map((entry) => (
+          <a
+            href={`/work/${entry.slug}`}
+            class="work-card"
+            data-category={entry.data.category}
+          >
+            <div class="work-card-img">
+              <img
+                src={entry.data.image}
+                alt={entry.data.imageAlt}
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="work-card-overlay">
+                <span class="text-label work-card-cat">{entry.data.category.replace('-', ' ')}</span>
+              </div>
+            </div>
+            <div class="work-card-body">
+              <h2 class="work-card-title">{entry.data.title}</h2>
+              {entry.data.client && (
+                <p class="work-card-client">{entry.data.client}</p>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-ink); }
+  .page-hero-body { color: var(--color-smoke); max-width: 52ch; margin: 0; }
+
+  .gallery { background-color: var(--color-ink); }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .filter-btn {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: 0.375rem 1rem;
+    border: 1px solid rgba(242, 234, 216, 0.2);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-smoke);
+    cursor: pointer;
+    transition: background var(--duration-fast), color var(--duration-fast), border-color var(--duration-fast);
+    text-transform: capitalize;
+  }
+  .filter-btn:hover,
+  .filter-btn[aria-pressed="true"] {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    border-color: var(--color-cream);
+  }
+
+  /* Work grid */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .work-card { display: block; color: var(--color-cream); }
+  .work-card[hidden] { display: none; }
+
+  .work-card-img {
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: rgba(242, 234, 216, 0.05);
+  }
+  .work-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+  .work-card:hover .work-card-img img { transform: scale(1.04); }
+  .work-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,15,12,0.6) 0%, transparent 55%);
+    display: flex;
+    align-items: flex-end;
+    padding: 0.875rem;
+  }
+  .work-card-cat {
+    background: rgba(14,15,12,0.65);
+    color: var(--color-cream);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(4px);
+    text-transform: capitalize;
+  }
+
+  .work-card-body { padding: 0.75rem 0 0; }
+  .work-card-title { margin: 0; font-size: 0.9375rem; font-weight: 500; }
+  .work-card-client { margin: 0.25rem 0 0; font-size: var(--text-sm); color: var(--color-smoke); }
+
+  @media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .work-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards   = document.querySelectorAll<HTMLAnchorElement>('.work-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.category!;
+
+      buttons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+
+      cards.forEach((card) => {
+        const matches = cat === 'all' || card.dataset.category === cat;
+        card.hidden = !matches;
+      });
+    });
+  });
+</script>

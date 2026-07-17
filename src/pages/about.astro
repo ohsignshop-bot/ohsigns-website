@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OrnamentFrame from '../components/OrnamentFrame.astro';
+---
+
+<Layout
+  title="About"
+  description="OH! Signs LLC — a small sign shop that makes things in-house and takes the work seriously."
+>
+  <section class="page-hero section-y">
+    <div class="container about-hero">
+      <div class="about-hero-content">
+        <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">About Us</p>
+        <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1.25rem;">We're OH! Signs.</h1>
+        <p class="about-lead">
+          A small sign shop. Everything is made here — no outsourced printing, no mystery vendors,
+          no three-week delays while your files travel across the country.
+        </p>
+      </div>
+      <div class="about-hero-frame" aria-hidden="true">
+        <OrnamentFrame>
+          <div class="about-frame-inner">
+            <p class="about-frame-quote">"Serious about the work,<br/>not ourselves."</p>
+          </div>
+        </OrnamentFrame>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-story section-cream section-y">
+    <div class="container about-story-inner">
+      <div class="about-story-content">
+        <h2 class="text-h2">The short version.</h2>
+        <p>
+          We started OH! Signs because we kept seeing the same problem: businesses paying too much
+          for mediocre work, waiting too long to get it, and being treated like a small fish in a
+          big print-shop pond.
+        </p>
+        <p>
+          We don't have a massive production floor. We have a tight team, good equipment, and a
+          habit of caring about the details more than we probably should. That combination tends
+          to produce better results faster than operations that treat your job as ticket #4,782.
+        </p>
+        <p>
+          If you've ever received a sign and thought "this isn't what I pictured" — that's the
+          problem we're here to fix.
+        </p>
+      </div>
+      <div class="about-story-values">
+        <h2 class="text-h2">How we work.</h2>
+        <dl class="values-list">
+          <dt>In-house production</dt>
+          <dd>We own our equipment and control our output. No middlemen, no blame-shifting.</dd>
+
+          <dt>Files reviewed before print</dt>
+          <dd>We check your art before it runs. Better to spend 5 minutes catching a problem than to reprint an entire order.</dd>
+
+          <dt>Honest turnaround times</dt>
+          <dd>We tell you what's realistic. Rush jobs happen — we'll tell you when we can and can't do one.</dd>
+
+          <dt>Clear pricing</dt>
+          <dd>Quoted price is the price. No hidden fees when the invoice arrives.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-cta section-y">
+    <div class="container">
+      <OrnamentFrame class="about-cta-frame">
+        <div class="about-cta-inner">
+          <h2 class="text-h2">Ready to work together?</h2>
+          <p>Start with a quote request, or just email us if you have questions.</p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <a href="/quote" class="btn btn-primary">Get a Quote</a>
+            <a href="mailto:hello@ohsigns.shop" class="btn btn-outline">hello@ohsigns.shop</a>
+          </div>
+        </div>
+      </OrnamentFrame>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-ink); }
+
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+  .about-lead { color: var(--color-smoke); font-size: clamp(1rem, 1.5vw, 1.125rem); max-width: 52ch; margin: 0; }
+  .about-hero-frame { flex-shrink: 0; color: var(--color-cream); }
+  .about-frame-inner { padding: 1rem; max-width: 260px; }
+  .about-frame-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.4;
+    margin: 0;
+    color: var(--color-cream);
+    opacity: 0.7;
+  }
+
+  .about-story { background-color: var(--color-cream); color: var(--color-ink); }
+  .about-story-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .about-story-content .text-h2 { margin-bottom: 1rem; }
+  .about-story-content p { color: #5a6050; margin: 0 0 1rem; max-width: 52ch; }
+
+  .about-story-values .text-h2 { margin-bottom: 1.25rem; }
+  .values-list { margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+  .values-list dt { font-weight: 700; font-size: var(--text-sm); margin-bottom: 0.25rem; }
+  .values-list dd { margin: 0; font-size: var(--text-sm); color: #5a6050; }
+
+  .about-cta { background-color: var(--color-ink); }
+  .about-cta-frame { max-width: 560px; color: var(--color-cream); }
+  .about-cta-inner { display: flex; flex-direction: column; gap: 0.75rem; }
+  .about-cta-inner .text-h2 { margin: 0; }
+  .about-cta-inner p { margin: 0; color: var(--color-smoke); }
+
+  @media (max-width: 768px) {
+    .about-hero  { grid-template-columns: 1fr; }
+    .about-hero-frame { display: none; }
+    .about-story-inner { grid-template-columns: 1fr; }
+  }
+</style>

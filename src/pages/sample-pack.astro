@@ -1,0 +1,227 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OrnamentFrame from '../components/OrnamentFrame.astro';
+---
+
+<Layout
+  title="Free Sample Pack"
+  description="Request a free material sample pack from Oh! Signs — vinyl finishes, UV substrates, laminate swatches."
+>
+  <section class="page-hero section-y">
+    <div class="container sample-hero">
+      <div class="sample-hero-content">
+        <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">Free Sample Pack</p>
+        <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">
+          Touch the material<br/>before you order 500 units.
+        </h1>
+        <p style="color: var(--color-smoke); max-width: 52ch; margin: 0 0 2rem;">
+          We'll send you a curated set of our most popular materials so you can feel the difference
+          between a glossy laminate and a soft-touch finish before you commit.
+        </p>
+        <a href="#sample-form" class="btn btn-primary">Request Your Sample Pack</a>
+      </div>
+      <div class="sample-hero-frame" aria-hidden="true">
+        <OrnamentFrame>
+          <div class="sample-frame-content">
+            <p class="sample-frame-free">Free</p>
+            <p class="sample-frame-big">Sample<br/>Pack</p>
+            <p class="sample-frame-ships">Ships nationwide</p>
+          </div>
+        </OrnamentFrame>
+      </div>
+    </div>
+  </section>
+
+  <section class="what-is-in-it section-cream section-y">
+    <div class="container">
+      <h2 class="text-h2" style="margin-bottom: 2rem;">What's in the pack.</h2>
+      <div class="pack-grid">
+        <div class="pack-item">
+          <h3 class="text-h3">Cut vinyl finishes</h3>
+          <p>Gloss, matte, brushed chrome, satin. The same materials we use on vehicle decals and window graphics.</p>
+        </div>
+        <div class="pack-item">
+          <h3 class="text-h3">UV print substrates</h3>
+          <p>Small printed swatches on acrylic, Dibond aluminium composite, and PVC foam board.</p>
+        </div>
+        <div class="pack-item">
+          <h3 class="text-h3">Laminate swatches</h3>
+          <p>Gloss, matte, and soft-touch overlaminates. Once you feel soft-touch you'll put it on everything.</p>
+        </div>
+        <div class="pack-item">
+          <h3 class="text-h3">Paper stock samples</h3>
+          <p>For stickers and labels — uncoated, silk-coated, and kraft paper options.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sample-form" class="sample-form-section section-y">
+    <div class="container">
+      <div class="sample-form-wrap">
+        <OrnamentFrame class="sample-form-frame">
+          <div class="sample-form-inner">
+            <h2 class="text-h2" style="margin-bottom: 0.5rem;">Request your free pack.</h2>
+            <p style="color: var(--color-smoke); margin-bottom: 1.5rem; font-size: var(--text-sm);">
+              No obligation, no sales call. Just materials.
+            </p>
+            <!-- React island for the form with mode="sample" -->
+            <!-- QuoteForm island is loaded separately via /quote.astro pattern;
+                 sample-pack uses a lightweight inline form here -->
+            <div id="sample-form-island"></div>
+            <form
+              class="sample-inline-form"
+              id="sf"
+              novalidate
+            >
+              <!-- Honeypot -->
+              <div style="display: none;" aria-hidden="true">
+                <label for="sf-website">Website</label>
+                <input type="text" id="sf-website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="sf-name">Name <span aria-hidden="true">*</span></label>
+                <input class="form-input" id="sf-name" name="customer_name" type="text" required autocomplete="name" placeholder="Jane Doe" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="sf-email">Email <span aria-hidden="true">*</span></label>
+                <input class="form-input" id="sf-email" name="email" type="email" required autocomplete="email" placeholder="jane@company.com" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="sf-address">Shipping Address <span aria-hidden="true">*</span></label>
+                <input class="form-input" id="sf-address" name="shipping_address" type="text" required placeholder="123 Main St, City, State ZIP" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="sf-note">Anything specific you're evaluating? <span style="color: var(--color-smoke);">(optional)</span></label>
+                <textarea class="form-textarea" id="sf-note" name="comments" placeholder="e.g. I'm looking at material options for 200 product labels"></textarea>
+              </div>
+
+              <div class="sf-status" id="sf-err" role="alert" aria-live="polite" hidden></div>
+              <div class="sf-success" id="sf-success" hidden>
+                <p>&#10003; Pack request received! We'll get it out within 1–2 business days.</p>
+              </div>
+
+              <button type="submit" class="btn btn-primary sf-submit" id="sf-btn">
+                Send My Address
+              </button>
+            </form>
+          </div>
+        </OrnamentFrame>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-ink); }
+  .sample-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .sample-hero-frame { flex-shrink: 0; color: var(--color-cream); }
+  .sample-frame-content {
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .sample-frame-free { margin: 0; font-size: var(--text-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-smoke); }
+  .sample-frame-big { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; margin: 0; }
+  .sample-frame-ships { margin: 0.5rem 0 0; font-size: var(--text-sm); color: var(--color-smoke); }
+
+  .what-is-in-it { background-color: var(--color-cream); color: var(--color-ink); }
+  .pack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .pack-item { padding: 1.75rem; border: 1px solid rgba(14,15,12,0.12); border-radius: var(--radius-md); }
+  .pack-item h3 { margin: 0 0 0.625rem; }
+  .pack-item p  { margin: 0; font-size: var(--text-sm); color: #5a6050; }
+
+  .sample-form-section { background-color: var(--color-ink); }
+  .sample-form-wrap { max-width: 560px; margin-inline: auto; }
+  .sample-form-frame { color: var(--color-cream); }
+  .sample-form-inner { display: flex; flex-direction: column; }
+
+  .sample-inline-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .sf-submit { align-self: flex-start; margin-top: 0.5rem; }
+  .sf-status {
+    padding: 0.75rem 1rem;
+    background: rgba(196,27,23,0.15);
+    border: 1px solid rgba(196,27,23,0.4);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: #ff8a87;
+  }
+  .sf-success {
+    padding: 0.75rem 1rem;
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: #86efac;
+  }
+  .sf-success p { margin: 0; }
+
+  @media (max-width: 768px) {
+    .sample-hero { grid-template-columns: 1fr; }
+    .sample-hero-frame { display: none; }
+    .pack-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const BMS_URL = import.meta.env.PUBLIC_BMS_REQUEST_URL || 'https://bms.ohsigns.shop/api/public/requests';
+
+  const form   = document.getElementById('sf') as HTMLFormElement;
+  const btn    = document.getElementById('sf-btn') as HTMLButtonElement;
+  const errEl  = document.getElementById('sf-err') as HTMLElement;
+  const succEl = document.getElementById('sf-success') as HTMLElement;
+  const loadTs = Date.now();
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Bot check
+    const honeypot = (form.elements.namedItem('website') as HTMLInputElement)?.value;
+    if (honeypot) return;
+    if (Date.now() - loadTs < 3000) return;
+
+    const data = new FormData(form);
+    const payload = {
+      customer_name: (data.get('customer_name') as string)?.trim(),
+      email: (data.get('email') as string)?.trim(),
+      comments: `SAMPLE PACK REQUEST\nShipping: ${(data.get('shipping_address') as string)?.trim()}\n\n${(data.get('comments') as string)?.trim()}`,
+    };
+
+    if (!payload.customer_name || !payload.email) {
+      errEl.textContent = 'Please fill in your name and email.';
+      errEl.hidden = false;
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    errEl.hidden = true;
+
+    try {
+      const res = await fetch(BMS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('Server error');
+
+      form.hidden = true;
+      succEl.hidden = false;
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Send My Address';
+      errEl.textContent = 'Something went wrong. Please email us at hello@ohsigns.shop.';
+      errEl.hidden = false;
+    }
+  });
+</script>

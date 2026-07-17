@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page Not Found" noIndex={true}>
+  <section class="not-found section-y">
+    <div class="container not-found-inner">
+      <p class="not-found-code text-label">404</p>
+      <h1 class="text-h1" style="color: var(--color-cream); margin: 0.5rem 0 1rem;">
+        That page doesn't exist.
+      </h1>
+      <p style="color: var(--color-smoke); max-width: 44ch; margin: 0 0 2rem;">
+        Either the link is broken, or it never existed in the first place.
+        Either way, you can find what you're looking for from the home page.
+      </p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="/" class="btn btn-primary">Go Home</a>
+        <a href="/services" class="btn btn-outline">Browse Services</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found { background-color: var(--color-ink); min-height: calc(100svh - 4rem); display: flex; align-items: center; }
+  .not-found-inner { max-width: 640px; }
+  .not-found-code {
+    color: var(--color-acid);
+    font-family: var(--font-display);
+    font-size: 4rem;
+    letter-spacing: -0.02em;
+    display: block;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+</style>

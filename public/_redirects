@@ -1,0 +1,34 @@
+# Shopify → Oh! Signs redirect rules
+# These capture the old Shopify URL patterns and send them to the right pages.
+
+# Old Shopify collections → /services
+/collections/*     /services      301
+/collections       /services      301
+
+# Old Shopify products → /quote (closest equivalent)
+/products/*        /quote         301
+/products          /quote         301
+
+# Old Shopify cart / checkout → /quote
+/cart              /quote         301
+/checkout          /quote         301
+/cart/*            /quote         301
+
+# Old Shopify pages
+/pages/about       /about         301
+/pages/contact-us  /contact       301
+/pages/contact     /contact       301
+/pages/faq         /contact       301
+
+# Old Shopify blog → home
+/blogs/*           /             301
+/blog/*            /             301
+
+# Old Shopify account pages → home (no customer accounts on new site)
+/account           /             301
+/account/*         /             301
+/login             /             301
+/register          /             301
+
+# Old Shopify policy pages → contact
+/policies/*        /contact       301

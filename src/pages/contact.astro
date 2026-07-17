@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact"
+  description="Get in touch with Oh! Signs — for questions, quotes, and everything in between."
+>
+  <section class="page-hero section-y">
+    <div class="container">
+      <p class="text-label" style="color: var(--color-smoke); margin-bottom: 0.75rem;">Contact</p>
+      <h1 class="text-h1" style="color: var(--color-cream); margin: 0 0 1rem;">Let's talk.</h1>
+      <p class="page-hero-body">
+        For quotes, use the <a href="/quote" style="color: var(--color-acid);">quote form</a> — it gives us exactly the info we need to respond fast.
+        For everything else, the email below works great.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-section section-cream section-y">
+    <div class="container contact-inner">
+      <div class="contact-info">
+        <h2 class="text-h2">Get in touch.</h2>
+
+        <div class="contact-method">
+          <p class="text-label contact-method-label">Email</p>
+          <a href="mailto:hello@ohsigns.shop" class="contact-link">hello@ohsigns.shop</a>
+          <p class="contact-method-note">Best for questions, proofing, and anything that needs a paper trail.</p>
+        </div>
+
+        <div class="contact-method">
+          <p class="text-label contact-method-label">Quote Request</p>
+          <a href="/quote" class="contact-link">ohsigns.shop/quote</a>
+          <p class="contact-method-note">Start here if you know what you need. We respond within one business day — usually faster.</p>
+        </div>
+
+        <div class="contact-method">
+          <p class="text-label contact-method-label">Response time</p>
+          <p class="contact-method-note" style="margin: 0;">Business days, usually within a few hours during shop hours. Nights and weekends — we're not robots.</p>
+        </div>
+      </div>
+
+      <div class="contact-faq">
+        <h2 class="text-h2">Common questions.</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">Do you have a minimum order?</summary>
+            <p class="faq-a">No minimum. One sticker, one sign — whatever you need. Pricing just scales with quantity.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">Can you work with my existing files?</summary>
+            <p class="faq-a">Yes. Send us what you have and we'll tell you if it's print-ready. If it needs work, we can fix it — we'll tell you upfront what that costs.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">Do you ship?</summary>
+            <p class="faq-a">Yes, we ship nationwide. Shipping cost is quoted separately based on order size and destination.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">How fast can you turn a job around?</summary>
+            <p class="faq-a">Most orders run 3–5 business days from approved art. Rush jobs are possible — ask and we'll tell you honestly whether we can do it.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">Do you do installation?</summary>
+            <p class="faq-a">It depends on the job and your location. Ask us — we'll either handle it or point you to someone reliable.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { background-color: var(--color-ink); }
+  .page-hero-body { color: var(--color-smoke); max-width: 52ch; margin: 0; }
+
+  .contact-section { background-color: var(--color-cream); color: var(--color-ink); }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+  .contact-info .text-h2 { margin: 0; }
+
+  .contact-method { display: flex; flex-direction: column; gap: 0.375rem; }
+  .contact-method-label { margin: 0; color: #5a6050; }
+  .contact-link {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: rgba(14,15,12,0.25);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--duration-fast);
+  }
+  .contact-link:hover { text-decoration-color: var(--color-ink); }
+  .contact-method-note { margin: 0; font-size: var(--text-sm); color: #5a6050; }
+
+  .contact-faq { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-faq .text-h2 { margin: 0; }
+
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid rgba(14,15,12,0.1); }
+  .faq-item:first-child { border-top: 1px solid rgba(14,15,12,0.1); }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after {
+    content: '+';
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-blood);
+    transition: transform var(--duration-fast);
+  }
+  .faq-item[open] .faq-q::after { transform: rotate(45deg); }
+  .faq-a { margin: 0 0 1rem; font-size: var(--text-sm); color: #5a6050; }
+
+  @media (max-width: 768px) {
+    .contact-inner { grid-template-columns: 1fr; }
+  }
+</style>
