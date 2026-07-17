@@ -6,20 +6,17 @@ Everything in this file needs a real photo or asset before the site goes live.
 
 ## Portfolio / work gallery
 
-Each entry in `src/content/work/` has a placeholder `image` path. Replace with real photos
-(minimum 1200×800px, JPG or WebP, optimised for web).
+Each entry in `src/content/work/` references a PNG in `public/work/`. Real photos are now in place.
+To swap a photo, replace the file in `public/work/` and update the `image` field in the `.md` to match.
 
-| File | image path | Description |
-|------|-----------|-------------|
-| `fleet-decals-metro-hvac.md` | `/work/metro-hvac.jpg` | Fleet van decal — any finished vehicle job works |
-| `uv-rigid-substrate-retail.md` | `/work/retail-uv-panel.jpg` | UV-printed panel in use |
-| `brand-identity-roast-co.md` | `/work/roast-co-brand.jpg` | Brand mockup or printed collateral |
-| `storefront-signage-listo-tacos.md` | `/work/listo-tacos.jpg` | Storefront / signage photo |
-| `vehicle-wrap-food-truck.md` | `/work/spice-route-wrap.jpg` | Vehicle wrap |
-| `cut-vinyl-wall-mural.md` | `/work/tech-office-mural.jpg` | Interior wall graphic |
-
-Place photos in `public/work/`. You can rename the files — just update the `image` field in the
-corresponding `.md` file to match.
+| Content file | Image file | Status |
+|---|---|---|
+| `fleet-decals-metro-hvac.md` | `public/work/fleet-decals.png` | ✓ Real photo |
+| `uv-rigid-substrate-retail.md` | `public/work/uv-retail-panel.png` | ✓ Real photo |
+| `brand-identity-roast-co.md` | `public/work/cafe-brand.png` | ✓ Real photo |
+| `storefront-signage-listo-tacos.md` | `public/work/storefront-window.png` | ✓ Real photo |
+| `vehicle-wrap-food-truck.md` | `public/work/spice-route-wrap.png` | ✓ Real photo |
+| `cut-vinyl-wall-mural.md` | `public/work/office-wall-graphic.png` | ✓ Real photo |
 
 ---
 

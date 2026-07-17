@@ -2,7 +2,7 @@
 title: UV Rigid Panel — Retail Window Display
 category: uv
 tags: [uv-print, rigid, retail]
-image: /work/retail-uv-panel.jpg
+image: /work/uv-retail-panel.png
 imageAlt: Large UV-printed aluminum composite panel displaying a bold seasonal promotion graphic in a shop window
 date: 2024-09-02
 featured: true
